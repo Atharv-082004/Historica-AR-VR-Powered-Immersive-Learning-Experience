@@ -123,6 +123,9 @@ const MonumentDisplay = ({
         autoRotateSpeed={0.5}
         minPolarAngle={Math.PI / 6}
         maxPolarAngle={Math.PI / 2}
+        minDistance={3}
+        maxDistance={12}
+        zoomSpeed={0.6}
       />
     </>
   );
