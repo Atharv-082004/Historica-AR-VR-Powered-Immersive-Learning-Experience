@@ -119,6 +119,11 @@ const MonumentDisplay = ({
         <HotspotMarker key={i} hotspot={h} onSelect={onHotspotSelect} />
       ))}
       <OrbitControls
+        ref={(controls) => {
+          if (controls) {
+            controls.addEventListener('start', () => { (controls as any).autoRotate = false; });
+          }
+        }}
         autoRotate
         autoRotateSpeed={0.5}
         minPolarAngle={Math.PI / 6}
@@ -126,6 +131,9 @@ const MonumentDisplay = ({
         minDistance={3}
         maxDistance={12}
         zoomSpeed={0.6}
+        enablePan
+        panSpeed={1.2}
+        screenSpacePanning
       />
     </>
   );
