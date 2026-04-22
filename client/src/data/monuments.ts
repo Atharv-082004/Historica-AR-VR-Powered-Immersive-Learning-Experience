@@ -174,9 +174,15 @@ export const monuments: Monument[] = [
     primaryModel: "/models/ajanta_ellora.glb",
     historicalModels: {
       past: "/models/ajanta_ellora_past.glb",
-      ancient: "/models/ajanta_ellora.glb"
+      ancient: "/models/ajanta_ellora_ancient.glb"
     },
     era: "ancient",
+    hotspots: [
+      { name: "Shikhara Tower", description: "The tall pyramidal central tower of the Kailasa Temple, carved monolithically from the cliff above.", position: [0, 1.6, 0] },
+      { name: "Carved Elephants", description: "Life-size elephants and lions sculpted in deep relief that appear to support the temple base.", position: [0.9, -0.7, 1.2] },
+      { name: "Mandapa Hall", description: "The pillared front hall used for assembly and ritual, also carved from solid rock.", position: [0, 0.2, 1.6] },
+      { name: "Wall Friezes", description: "Densely carved panels depicting Hindu deities, dancers and scenes from the Ramayana and Mahabharata.", position: [-1.4, 0.3, 0.4] }
+    ],
     facts: [
       "The Ajanta Caves contain paintings and sculptures considered to be masterpieces of Buddhist religious art",
       "The Ellora Caves demonstrate the religious harmony prevalent during this period through dedicated Hindu, Buddhist, and Jain cave temples",
