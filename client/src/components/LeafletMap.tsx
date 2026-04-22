@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
+import type { Marker as LeafletMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { monuments, Monument } from '../data/monuments';
 import { useLocation } from 'wouter';
@@ -41,18 +42,24 @@ const LeafletMap = () => {
     });
   }, [search, stateFilter, eraFilter, unescoOnly]);
 
-  const createCustomIcon = (isUNESCO: boolean = false) => {
+  const createCustomIcon = (isUNESCO: boolean = false, hovered: boolean = false) => {
+    const size: [number, number] = hovered ? [33, 54] : [25, 41];
+    const anchor: [number, number] = hovered ? [16, 54] : [12, 41];
     return new Icon({
       iconUrl: isUNESCO
         ? 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png'
         : 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
       shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
+      iconSize: size,
+      iconAnchor: anchor,
       popupAnchor: [1, -34],
-      shadowSize: [41, 41],
+      shadowSize: [size[1], size[1]],
+      className: hovered ? 'historica-marker-hover' : '',
     });
   };
+
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const markerRefs = useRef<Record<string, LeafletMarker | null>>({});
 
   const handleMarkerClick = (monumentId: string) => {
     audio.playHit();
@@ -76,10 +83,21 @@ const LeafletMap = () => {
           <Marker
             key={monument.id}
             position={[monument.coordinates[1], monument.coordinates[0]]}
-            icon={createCustomIcon(monument.UNESCO || false)}
-            eventHandlers={{ click: () => handleMarkerClick(monument.id) }}
+            icon={createCustomIcon(monument.UNESCO || false, hoveredId === monument.id)}
+            ref={(ref) => { markerRefs.current[monument.id] = ref; }}
+            eventHandlers={{
+              click: () => handleMarkerClick(monument.id),
+              mouseover: (e) => {
+                setHoveredId(monument.id);
+                e.target.openPopup();
+              },
+              mouseout: (e) => {
+                setHoveredId(prev => (prev === monument.id ? null : prev));
+                e.target.closePopup();
+              },
+            }}
           >
-            <Popup>
+            <Popup closeButton={false} autoPan={false}>
               <div className="text-center">
                 <h3 className="font-bold text-orange-800">{monument.name}</h3>
                 <p className="text-sm text-gray-600">{monument.city}, {monument.state}</p>
@@ -89,6 +107,7 @@ const LeafletMap = () => {
                     UNESCO Heritage
                   </span>
                 )}
+                <p className="text-[10px] mt-1 text-orange-600 italic">Click marker to explore</p>
               </div>
             </Popup>
           </Marker>
