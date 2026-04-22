@@ -6,6 +6,8 @@ import MonumentDetail from "./components/MonumentDetail";
 import ARView from "./components/ARView";
 import VRView from "./components/VRView";
 import TimeTravel from "./components/TimeTravel";
+import ComparePage from "./components/ComparePage";
+import QuizPage from "./components/QuizPage";
 import Navigation from "./components/Navigation";
 import WelcomePage from "./components/WelcomePage";
 // Removed useAppContext import as we're not using it in this component
@@ -255,6 +257,8 @@ function App() {
               <Route path="/monument/:id/ar" component={ARView} />
               <Route path="/monument/:id/vr" component={VRView} />
               <Route path="/monument/:id/timetravel" component={TimeTravel} />
+              <Route path="/compare" component={ComparePage} />
+              <Route path="/quiz" component={QuizPage} />
             </Switch>
           </main>
         </div>

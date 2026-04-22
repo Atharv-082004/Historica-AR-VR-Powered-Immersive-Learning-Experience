@@ -1,3 +1,9 @@
+export interface Hotspot {
+  name: string;
+  description: string;
+  position: [number, number, number];
+}
+
 export interface Monument {
   id: string;
   name: string;
@@ -16,6 +22,8 @@ export interface Monument {
   visitingHours: string;
   entryFee?: string;
   UNESCO?: boolean;
+  era?: "ancient" | "medieval" | "modern"; // For filtering
+  hotspots?: Hotspot[];
 }
 
 // India's major historical monuments
@@ -34,6 +42,12 @@ export const monuments: Monument[] = [
       past: "/models/taj_mahal.glb",
       ancient: "/models/taj_mahal.glb"
     },
+    era: "medieval",
+    hotspots: [
+      { name: "Main Dome", description: "The 73-metre-tall central onion dome flanked by four chhatris.", position: [0, 1.6, 0] },
+      { name: "Minarets", description: "Four 40-metre minarets, slightly tilted outward to protect the tomb in case of an earthquake.", position: [1.4, 0.4, 1.4] },
+      { name: "Charbagh Garden", description: "The Mughal-style four-part garden symbolises the four rivers of paradise.", position: [0, -0.8, 1.8] }
+    ],
     facts: [
       "The Taj Mahal's construction took about 22 years to complete",
       "Over 20,000 workers were employed for its construction",
@@ -55,9 +69,14 @@ export const monuments: Monument[] = [
     dynasty: "Mamluk Dynasty",
     primaryModel: "/models/qutub_minar_new.glb",
     historicalModels: {
-      past: "/models/qutub_minar_new.glb",
-      ancient: "/models/qutub_minar_new.glb"
+      past: "/models/qutub_minar.glb",
+      ancient: "/models/qutub_minar.glb"
     },
+    era: "medieval",
+    hotspots: [
+      { name: "Five Storeys", description: "Five distinct storeys, each marked by a projecting carved balcony.", position: [0, 1.5, 0.6] },
+      { name: "Quranic Inscriptions", description: "The first storey is covered in Arabic inscriptions from the Quran.", position: [0.5, 0.2, 0.5] }
+    ],
     facts: [
       "It is the tallest brick minaret in the world",
       "Construction was started by Qutub-ud-din Aibak and completed by his successor Iltutmish",
@@ -77,11 +96,12 @@ export const monuments: Monument[] = [
     description: "The Red Fort is a historic fort that served as the main residence of the emperors of the Mughal dynasty for nearly 200 years. Built in 1639 by Emperor Shah Jahan, it was the ceremonial and political center of the Mughal government. The massive red sandstone walls rise 33 meters above the surrounding area and encompass several impressive structures including the Diwan-i-Aam (Hall of Public Audience) and the Diwan-i-Khas (Hall of Private Audience).",
     yearBuilt: "1639-1648",
     dynasty: "Mughal Empire",
-    primaryModel: "/models/red_fort_past.glb",
+    primaryModel: "/models/red_fort_improved.glb",
     historicalModels: {
       past: "/models/red_fort_past.glb",
-      ancient: "/models/red_fort_past.glb"
+      ancient: "/models/red_fort.glb"
     },
+    era: "medieval",
     facts: [
       "The fort derives its name from its massive red sandstone walls",
       "It was the ceremonial and political center of the Mughal government",
@@ -106,6 +126,7 @@ export const monuments: Monument[] = [
       past: "/models/hawa_mahal_past.glb",
       ancient: "/models/hawa_mahal_ancient.glb"
     },
+    era: "medieval",
     facts: [
       "The palace has 953 small windows called jharokhas decorated with intricate latticework",
       "The unique five-story exterior is akin to a honeycomb with its 953 small windows",
@@ -127,9 +148,10 @@ export const monuments: Monument[] = [
     dynasty: "Eastern Ganga Dynasty",
     primaryModel: "/models/konark_sun_temple.glb",
     historicalModels: {
-      past: "/models/konark_sun_temple.glb", // We'll use the same model for now
-      ancient: "/models/konark_sun_temple.glb" // We'll use the same model for now
+      past: "/models/konark_sun_temple.glb",
+      ancient: "/models/konark_sun_temple.glb"
     },
+    era: "medieval",
     facts: [
       "The temple is designed in the form of a colossal chariot with 24 wheels, pulled by 7 horses",
       "The wheels of the temple are sundials which can be used to calculate time accurately",
@@ -154,6 +176,7 @@ export const monuments: Monument[] = [
       past: "/models/ajanta_ellora_past.glb",
       ancient: "/models/ajanta_ellora.glb"
     },
+    era: "ancient",
     facts: [
       "The Ajanta Caves contain paintings and sculptures considered to be masterpieces of Buddhist religious art",
       "The Ellora Caves demonstrate the religious harmony prevalent during this period through dedicated Hindu, Buddhist, and Jain cave temples",
@@ -178,6 +201,7 @@ export const monuments: Monument[] = [
       past: "/models/gol_gumbaz_past.glb",
       ancient: "/models/gol_gumbaz_ancient.glb"
     },
+    era: "medieval",
     facts: [
       "The dome of Gol Gumbaz is 44 meters in diameter, making it one of the largest single chamber spaces in the world",
       "The whispering gallery around the dome allows sounds to be heard across the diameter of the dome due to its acoustic properties",
@@ -200,8 +224,14 @@ export const monuments: Monument[] = [
     primaryModel: "/models/hampi.glb",
     historicalModels: {
       past: "/models/hampi.glb",
-      ancient: "/models/hampi.glb"
+      ancient: "/models/hampi_ancient.glb"
     },
+    era: "medieval",
+    hotspots: [
+      { name: "Stone Chariot", description: "The iconic Vittala Temple stone chariot, depicted on the Indian ₹50 note.", position: [0, 0.6, 0] },
+      { name: "Carved Wheels", description: "Each wheel was carved to actually rotate around its axle.", position: [0.9, -0.6, 0.6] },
+      { name: "Stone Elephants", description: "Two carved elephants pulling the chariot — originally horses, replaced later.", position: [0, -0.4, 1.2] }
+    ],
     facts: [
       "Hampi was the capital of the Vijayanagara Empire and was once one of the richest and largest cities in the world",
       "The iconic stone chariot at the Vittala Temple is depicted on the Indian ₹50 currency note",
@@ -226,6 +256,12 @@ export const monuments: Monument[] = [
       past: "/models/charminar.glb",
       ancient: "/models/charminar.glb"
     },
+    era: "medieval",
+    hotspots: [
+      { name: "Four Minarets", description: "Each of the four 56-metre minarets has four storeys with a tiered balcony.", position: [1.2, 1.2, 1.2] },
+      { name: "Grand Arch", description: "Four 11-metre-tall pointed arches face the cardinal directions.", position: [0, -0.4, 1.4] },
+      { name: "Mosque Above", description: "The upper floor houses Hyderabad's oldest still-active mosque.", position: [0, 0.8, 0] }
+    ],
     facts: [
       "The Charminar gets its name from its four (char) minarets (minar), which rise to a height of 56 metres",
       "It was built to commemorate the eradication of a deadly plague from the city",
@@ -250,6 +286,11 @@ export const monuments: Monument[] = [
       past: "/models/lotus_temple.glb",
       ancient: "/models/lotus_temple.glb"
     },
+    era: "modern",
+    hotspots: [
+      { name: "27 Marble Petals", description: "27 free-standing white marble petals in three concentric rings of nine.", position: [0, 1.2, 0] },
+      { name: "Reflecting Pools", description: "Nine surrounding reflecting pools mirror the petals and naturally cool the building.", position: [1.6, -0.8, 0] }
+    ],
     facts: [
       "The temple is composed of 27 free-standing marble-clad petals arranged in clusters of three to form nine sides",
       "It has won numerous architectural awards and has been featured in hundreds of newspaper and magazine articles",
@@ -274,6 +315,11 @@ export const monuments: Monument[] = [
       past: "/models/gateway_of_india.glb",
       ancient: "/models/gateway_of_india.glb"
     },
+    era: "modern",
+    hotspots: [
+      { name: "Central Arch", description: "26 metres tall and about 15 metres wide, the focal point of the monument.", position: [0, 0.2, 1.2] },
+      { name: "Corner Turrets", description: "Two octagonal turrets with ribbed domes flank the central arch.", position: [1.3, 1.1, 0.5] }
+    ],
     facts: [
       "The Gateway of India was built to commemorate the visit of King George V and Queen Mary to Mumbai in 1911",
       "It was designed by Scottish architect George Wittet in the Indo-Saracenic architectural style",
@@ -296,8 +342,14 @@ export const monuments: Monument[] = [
     primaryModel: "/models/golden_temple.glb",
     historicalModels: {
       past: "/models/golden_temple.glb",
-      ancient: "/models/golden_temple.glb"
+      ancient: "/models/golden_temple_ancient.glb"
     },
+    era: "medieval",
+    hotspots: [
+      { name: "Gilded Dome", description: "The central onion-shaped dome covered in roughly 750 kg of pure gold leaf.", position: [0, 1.4, 0] },
+      { name: "Causeway", description: "The Guru's Bridge — a marble causeway linking the temple to the surrounding parikrama.", position: [0, -0.6, 1.6] },
+      { name: "Sarovar", description: "The Amrit Sarovar (Pool of Nectar) surrounding the temple.", position: [1.8, -0.9, 0] }
+    ],
     facts: [
       "The upper floors of the temple are covered with approximately 750 kg of pure gold leaf",
       "The temple's langar (community kitchen) serves free vegetarian meals to up to 100,000 people daily, regardless of religion or background",

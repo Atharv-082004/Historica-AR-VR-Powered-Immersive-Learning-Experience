@@ -3,7 +3,9 @@ import { useRoute, useLocation } from "wouter";
 import { monuments } from "../data/monuments";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
+import { OrbitControls, useGLTF, Environment, Html } from "@react-three/drei";
+import type { Hotspot } from "../data/monuments";
+import { toast } from "sonner";
 // Removed useAppContext import as we're using local state
 import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
@@ -13,71 +15,114 @@ import { useAudio } from "../lib/stores/useAudio";
 import { useMonumentStore } from "../lib/stores/useMonumentStore";
 import MonumentSatelliteView from "./MonumentSatelliteView";
 
-const MonumentDisplay = ({ modelPath }: { modelPath: string }) => {
+type TimeOfDay = "dawn" | "day" | "sunset" | "night";
+
+const TOD_PRESETS: Record<TimeOfDay, { env: any; ambient: number; dirIntensity: number; dirColor: string; bg: string | null }> = {
+  dawn: { env: "dawn", ambient: 0.5, dirIntensity: 1.2, dirColor: "#ffd9a8", bg: "#f6c79a" },
+  day: { env: "park", ambient: 0.8, dirIntensity: 1.6, dirColor: "#ffffff", bg: "#bce3ff" },
+  sunset: { env: "sunset", ambient: 0.55, dirIntensity: 1.4, dirColor: "#ffb070", bg: "#f3a266" },
+  night: { env: "night", ambient: 0.18, dirIntensity: 0.35, dirColor: "#9bb6ff", bg: "#0c1226" },
+};
+
+const HotspotMarker = ({
+  hotspot,
+  onSelect,
+}: {
+  hotspot: Hotspot;
+  onSelect: (h: Hotspot) => void;
+}) => {
+  const [hover, setHover] = useState(false);
+  return (
+    <group position={hotspot.position}>
+      <mesh
+        onClick={(e) => { e.stopPropagation(); onSelect(hotspot); }}
+        onPointerOver={(e) => { e.stopPropagation(); setHover(true); document.body.style.cursor = "pointer"; }}
+        onPointerOut={() => { setHover(false); document.body.style.cursor = "default"; }}
+      >
+        <sphereGeometry args={[0.09, 16, 16]} />
+        <meshStandardMaterial color={hover ? "#ffd24a" : "#ff8a00"} emissive={hover ? "#ff8a00" : "#ff5a00"} emissiveIntensity={0.7} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[0.14, 16, 16]} />
+        <meshBasicMaterial color="#ffb84a" transparent opacity={0.25} />
+      </mesh>
+      {hover && (
+        <Html center distanceFactor={6} style={{ pointerEvents: "none" }}>
+          <div className="px-2 py-1 rounded bg-black/80 text-white text-xs whitespace-nowrap shadow-lg">
+            {hotspot.name}
+          </div>
+        </Html>
+      )}
+    </group>
+  );
+};
+
+const MonumentDisplay = ({
+  modelPath,
+  timeOfDay,
+  hotspots,
+  onHotspotSelect,
+}: {
+  modelPath: string;
+  timeOfDay: TimeOfDay;
+  hotspots?: Hotspot[];
+  onHotspotSelect: (h: Hotspot) => void;
+}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
-  // Load model with react-three-fiber's useGLTF
   const { scene } = useGLTF(modelPath);
-  
+  const tod = TOD_PRESETS[timeOfDay];
+
   useEffect(() => {
-    // Check if model has loaded successfully
     try {
       if (scene) {
         setLoading(false);
-        console.log(`Model loaded: ${modelPath}`);
       } else {
         throw new Error("Failed to load model");
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error loading model";
-      setError(errorMessage);
+      setError(err instanceof Error ? err.message : "Unknown error loading model");
       setLoading(false);
-      console.error("Model loading error:", err);
     }
   }, [modelPath, scene]);
-  
-  if (loading) {
+
+  const lighting = (
+    <>
+      {tod.bg && <color attach="background" args={[tod.bg]} />}
+      <ambientLight intensity={tod.ambient} />
+      <directionalLight position={[10, 10, 5]} intensity={tod.dirIntensity} color={tod.dirColor} castShadow />
+      {timeOfDay === "night" && (
+        <pointLight position={[0, 4, 4]} intensity={1.2} color="#ffd27a" distance={20} />
+      )}
+      <Environment preset={tod.env} />
+    </>
+  );
+
+  if (loading || error || !scene) {
     return (
       <>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} />
+        {lighting}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="grey" />
+          <meshStandardMaterial color={error ? "red" : "grey"} />
         </mesh>
-        <Environment preset="sunset" />
         <OrbitControls />
       </>
     );
   }
-  
-  if (error || !scene) {
-    return (
-      <>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1.5} />
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[2, 2, 2]} />
-          <meshStandardMaterial color="red" />
-        </mesh>
-        <Environment preset="sunset" />
-        <OrbitControls />
-      </>
-    );
-  }
-  
+
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} castShadow />
+      {lighting}
       <primitive object={scene} position={[0, -1, 0]} scale={1.5} />
-      <Environment preset="sunset" />
-      <OrbitControls 
-        autoRotate 
-        autoRotateSpeed={0.5} 
-        minPolarAngle={Math.PI / 6} 
-        maxPolarAngle={Math.PI / 2} 
+      {hotspots?.map((h, i) => (
+        <HotspotMarker key={i} hotspot={h} onSelect={onHotspotSelect} />
+      ))}
+      <OrbitControls
+        autoRotate
+        autoRotateSpeed={0.5}
+        minPolarAngle={Math.PI / 6}
+        maxPolarAngle={Math.PI / 2}
       />
     </>
   );
@@ -91,6 +136,8 @@ const MonumentDetail = () => {
   // Temporarily replace context with local state
   const [selectedMonument, setSelectedMonument] = useState<any>(null);
   const [activeTab, setActiveTab] = useState("overview");
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>("sunset");
+  const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
   const audio = useAudio();
   const { incrementVisitCount, getVisitCount } = useMonumentStore();
 
@@ -124,6 +171,28 @@ const MonumentDetail = () => {
   const handleBackToMap = () => {
     audio.playHit();
     setLocation("/");
+  };
+
+  const handleShare = async () => {
+    if (!selectedMonument) return;
+    const url = `${window.location.origin}/monument/${selectedMonument.id}`;
+    const shareData = {
+      title: `Historica · ${selectedMonument.name}`,
+      text: `Explore ${selectedMonument.name} in ${selectedMonument.city} on Historica`,
+      url,
+    };
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+        toast.success("Link copied to clipboard");
+      } else {
+        window.prompt("Copy this link:", url);
+      }
+    } catch {
+      // User cancelled share – ignore
+    }
   };
 
   if (!selectedMonument) return null;
@@ -186,8 +255,53 @@ const MonumentDetail = () => {
         </div>
 
         <Canvas shadows camera={{ position: [0, 2, 5], fov: 45 }} className="z-10 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg overflow-hidden">
-          <MonumentDisplay modelPath={selectedMonument.primaryModel} />
+          <MonumentDisplay
+            modelPath={selectedMonument.primaryModel}
+            timeOfDay={timeOfDay}
+            hotspots={selectedMonument.hotspots}
+            onHotspotSelect={(h) => { audio.playHit(); setActiveHotspot(h); }}
+          />
         </Canvas>
+
+        {/* Time-of-day controls */}
+        <div className="absolute top-20 right-6 z-20 flex flex-col gap-1 bg-white/85 backdrop-blur-md border border-amber-200 rounded-lg p-1 shadow-md">
+          {(["dawn", "day", "sunset", "night"] as TimeOfDay[]).map(t => (
+            <button
+              key={t}
+              onClick={() => setTimeOfDay(t)}
+              className={`text-xs px-2 py-1 rounded capitalize transition-colors ${
+                timeOfDay === t
+                  ? "bg-gradient-to-br from-amber-500 to-orange-600 text-white"
+                  : "text-amber-800 hover:bg-amber-100"
+              }`}
+              title={`Switch lighting to ${t}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {/* Hotspot info panel */}
+        {activeHotspot && (
+          <div className="absolute bottom-20 left-6 right-6 md:right-auto md:max-w-sm z-20 bg-white/95 backdrop-blur-md border border-amber-300 rounded-lg p-4 shadow-xl">
+            <div className="flex items-start justify-between gap-3 mb-1">
+              <h4 className="font-bold text-amber-900">{activeHotspot.name}</h4>
+              <button
+                onClick={() => setActiveHotspot(null)}
+                className="text-orange-700 hover:text-orange-900 text-lg leading-none"
+                aria-label="Close"
+              >×</button>
+            </div>
+            <p className="text-sm text-orange-800">{activeHotspot.description}</p>
+          </div>
+        )}
+
+        {/* Hotspot hint */}
+        {selectedMonument.hotspots && selectedMonument.hotspots.length > 0 && !activeHotspot && (
+          <div className="absolute top-20 left-6 z-20 bg-white/85 backdrop-blur-md border border-amber-200 rounded-md px-3 py-1.5 shadow-md text-xs text-amber-800">
+            Tip: click the glowing dots to learn more
+          </div>
+        )}
         
         <div className="absolute bottom-6 left-6 flex flex-wrap gap-2 z-20">
           <Badge variant="secondary" className="bg-white/80 backdrop-blur-sm text-orange-800 hover:bg-white/90 border-orange-200 shadow-md px-3 py-1.5">
@@ -232,14 +346,28 @@ const MonumentDetail = () => {
                   {selectedMonument.city}, {selectedMonument.state}
                 </CardDescription>
               </div>
-              <Button 
-                variant="outline" 
-                size="icon" 
-                onClick={handleBackToMap}
-                className="rounded-full h-10 w-10 bg-white hover:bg-orange-50 border-orange-200 text-orange-700"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a9 9 0 1 0 9 9H3a9 9 0 0 0 9 -9v9a9 9 0 0 0 9 -9A9 9 0 0 0 12 3"/></svg>
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleShare}
+                  className="rounded-full h-10 w-10 bg-white hover:bg-orange-50 border-orange-200 text-orange-700"
+                  title="Share this monument"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                  </svg>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleBackToMap}
+                  className="rounded-full h-10 w-10 bg-white hover:bg-orange-50 border-orange-200 text-orange-700"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a9 9 0 1 0 9 9H3a9 9 0 0 0 9 -9v9a9 9 0 0 0 9 -9A9 9 0 0 0 12 3"/></svg>
+                </Button>
+              </div>
             </div>
           </CardHeader>
           
