@@ -54,7 +54,7 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const port = 5700;
+  const port = Number(process.env.PORT) || 5000;
 
   server.listen(port, () => {
     log(`serving on port ${port}`);
