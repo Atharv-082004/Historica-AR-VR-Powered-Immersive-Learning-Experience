@@ -19,7 +19,7 @@ const ScenePreview = ({ url }: { url: string }) => (
     <Suspense fallback={null}>
       <Model url={url} />
     </Suspense>
-    <OrbitControls autoRotate autoRotateSpeed={0.6} minPolarAngle={Math.PI / 6} maxPolarAngle={Math.PI / 2} />
+    <OrbitControls enablePan enableZoom enableRotate minDistance={2} maxDistance={12} />
   </Canvas>
 );
 
