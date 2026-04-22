@@ -236,4 +236,28 @@ export const monuments: Monument[] = [
     entryFee: "₹250 for foreign tourists, ₹25 for Indian citizens",
     UNESCO: false
   },
+  {
+    id: "lotus-temple",
+    name: "Lotus Temple",
+    city: "New Delhi",
+    state: "Delhi",
+    coordinates: [77.2588, 28.5535],
+    description: "The Lotus Temple, located in New Delhi, is a Bahá'í House of Worship that was dedicated in December 1986. Notable for its flowerlike shape, it has become a prominent attraction in the city. Like all Bahá'í Houses of Worship, the Lotus Temple is open to all, regardless of religion or any other distinction. The building is composed of 27 free-standing marble-clad petals arranged in clusters of three to form nine sides, with nine doors opening onto a central hall capable of holding up to 2,500 people. Designed by Iranian architect Fariborz Sahba, the temple is surrounded by nine reflecting pools that beautifully mirror its petals.",
+    yearBuilt: "1980-1986",
+    dynasty: "Modern (Bahá'í Faith)",
+    primaryModel: "/models/lotus_temple.glb",
+    historicalModels: {
+      past: "/models/lotus_temple.glb",
+      ancient: "/models/lotus_temple.glb"
+    },
+    facts: [
+      "The temple is composed of 27 free-standing marble-clad petals arranged in clusters of three to form nine sides",
+      "It has won numerous architectural awards and has been featured in hundreds of newspaper and magazine articles",
+      "The temple is open to people of all religions and is one of the most visited buildings in the world",
+      "The structure is surrounded by nine reflecting pools that mirror its lotus-petal design"
+    ],
+    visitingHours: "9:00 AM to 5:30 PM (Closed on Mondays)",
+    entryFee: "Free entry for all visitors",
+    UNESCO: false
+  },
 ];
