@@ -26,6 +26,8 @@ const AVAILABLE_MODEL_PATHS = new Set([
   "/models/red_fort_improved.glb",
   "/models/red_fort_past.glb",
   "/models/taj_mahal.glb",
+  "/models/hampi.glb",
+  "/models/charminar.glb",
 ]);
 
 const resolveModelUrl = (url: string) => {

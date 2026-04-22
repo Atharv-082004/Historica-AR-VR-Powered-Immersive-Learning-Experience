@@ -188,4 +188,52 @@ export const monuments: Monument[] = [
     entryFee: "₹300 for foreign tourists, ₹25 for Indian citizens",
     UNESCO: false
   },
+  {
+    id: "hampi",
+    name: "Hampi",
+    city: "Hampi",
+    state: "Karnataka",
+    coordinates: [76.4600, 15.3350],
+    description: "Hampi is an ancient village in the southern Indian state of Karnataka, dotted with numerous ruined temple complexes from the Vijayanagara Empire. On the south bank of the river Tungabhadra, it contains the iconic Vittala Temple complex with its stone chariot and musical pillars, the Virupaksha Temple still used for worship, and a vast landscape of boulder-strewn hills and royal enclosures. Hampi was the capital of one of the greatest Hindu empires in Indian history during the 14th to 16th centuries.",
+    yearBuilt: "14th-16th century CE",
+    dynasty: "Vijayanagara Empire",
+    primaryModel: "/models/hampi.glb",
+    historicalModels: {
+      past: "/models/hampi.glb",
+      ancient: "/models/hampi.glb"
+    },
+    facts: [
+      "Hampi was the capital of the Vijayanagara Empire and was once one of the richest and largest cities in the world",
+      "The iconic stone chariot at the Vittala Temple is depicted on the Indian ₹50 currency note",
+      "The Vittala Temple's musical pillars produce different musical notes when tapped",
+      "The entire ruins of Hampi are a UNESCO World Heritage Site, spread across an area of more than 4,100 hectares"
+    ],
+    visitingHours: "6:00 AM to 6:00 PM (All days)",
+    entryFee: "₹600 for foreign tourists, ₹40 for Indian citizens",
+    UNESCO: true
+  },
+  {
+    id: "charminar",
+    name: "Charminar",
+    city: "Hyderabad",
+    state: "Telangana",
+    coordinates: [78.4747, 17.3616],
+    description: "The Charminar is a monument and mosque located in Hyderabad, Telangana, India. Constructed in 1591 by Muhammad Quli Qutb Shah, the fifth ruler of the Qutb Shahi dynasty, the iconic structure features four grand arches facing the four cardinal directions, with four ornate minarets at each corner soaring 56 metres above the ground. Built from granite and lime mortar, the Charminar is the most recognised symbol of Hyderabad and stands at the heart of the bustling old city, surrounded by the famous Laad Bazaar.",
+    yearBuilt: "1591",
+    dynasty: "Qutb Shahi Dynasty",
+    primaryModel: "/models/charminar.glb",
+    historicalModels: {
+      past: "/models/charminar.glb",
+      ancient: "/models/charminar.glb"
+    },
+    facts: [
+      "The Charminar gets its name from its four (char) minarets (minar), which rise to a height of 56 metres",
+      "It was built to commemorate the eradication of a deadly plague from the city",
+      "The monument is built from granite, limestone, mortar and pulverised marble",
+      "A small mosque on the upper floor is the oldest in Hyderabad and is still in use today"
+    ],
+    visitingHours: "9:00 AM to 5:30 PM (All days)",
+    entryFee: "₹250 for foreign tourists, ₹25 for Indian citizens",
+    UNESCO: false
+  },
 ];
