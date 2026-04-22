@@ -260,4 +260,52 @@ export const monuments: Monument[] = [
     entryFee: "Free entry for all visitors",
     UNESCO: false
   },
+  {
+    id: "gateway-of-india",
+    name: "Gateway of India",
+    city: "Mumbai",
+    state: "Maharashtra",
+    coordinates: [72.8347, 18.9220],
+    description: "The Gateway of India is an arch-monument built in the early 20th century in the city of Mumbai, India. It was erected to commemorate the landing of King-Emperor George V, the first British monarch to visit India, in December 1911 at Strand Road near Wellington Fountain. Designed by architect George Wittet in the Indo-Saracenic style and completed in 1924, the monument is built from yellow basalt and reinforced concrete and stands 26 metres tall. Overlooking the Arabian Sea and the Mumbai Harbour, it has become one of the most iconic symbols of the city, often called the 'Taj Mahal of Mumbai'.",
+    yearBuilt: "1913-1924",
+    dynasty: "British Raj",
+    primaryModel: "/models/gateway_of_india.glb",
+    historicalModels: {
+      past: "/models/gateway_of_india.glb",
+      ancient: "/models/gateway_of_india.glb"
+    },
+    facts: [
+      "The Gateway of India was built to commemorate the visit of King George V and Queen Mary to Mumbai in 1911",
+      "It was designed by Scottish architect George Wittet in the Indo-Saracenic architectural style",
+      "The monument stands 26 metres (85 feet) tall, with a central arch about 15 metres in diameter",
+      "It served as the ceremonial entrance for British Viceroys and was the symbolic 'last gateway' from which the final British troops left India in 1948"
+    ],
+    visitingHours: "Open 24 hours (All days)",
+    entryFee: "Free entry for all visitors",
+    UNESCO: false
+  },
+  {
+    id: "golden-temple",
+    name: "Golden Temple",
+    city: "Amritsar",
+    state: "Punjab",
+    coordinates: [74.8765, 31.6200],
+    description: "The Golden Temple, also known as Sri Harmandir Sahib, is the holiest gurdwara and the most important pilgrimage site of Sikhism. Located in the city of Amritsar, Punjab, the temple sits on a square platform in the middle of the Amrit Sarovar (Pool of Nectar), connected to the surrounding marble causeway by a narrow bridge. The upper floors of the temple are covered with approximately 750 kg of pure gold leaf, giving it the distinctive shining golden appearance from which it gets its popular name. Built by Guru Arjan, the fifth Sikh Guru, in the late 16th century, it features a unique blend of Hindu and Islamic architectural styles and welcomes visitors of all faiths.",
+    yearBuilt: "1581-1604",
+    dynasty: "Sikh Empire",
+    primaryModel: "/models/golden_temple.glb",
+    historicalModels: {
+      past: "/models/golden_temple.glb",
+      ancient: "/models/golden_temple.glb"
+    },
+    facts: [
+      "The upper floors of the temple are covered with approximately 750 kg of pure gold leaf",
+      "The temple's langar (community kitchen) serves free vegetarian meals to up to 100,000 people daily, regardless of religion or background",
+      "It has four entrances on each side, symbolising openness to people from all directions and walks of life",
+      "The foundation stone was laid by the Muslim Sufi saint Mian Mir, reflecting the temple's message of religious harmony"
+    ],
+    visitingHours: "Open 24 hours (All days)",
+    entryFee: "Free entry for all visitors",
+    UNESCO: false
+  },
 ];

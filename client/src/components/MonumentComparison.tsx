@@ -29,6 +29,8 @@ const AVAILABLE_MODEL_PATHS = new Set([
   "/models/hampi.glb",
   "/models/charminar.glb",
   "/models/lotus_temple.glb",
+  "/models/gateway_of_india.glb",
+  "/models/golden_temple.glb",
 ]);
 
 const resolveModelUrl = (url: string) => {
