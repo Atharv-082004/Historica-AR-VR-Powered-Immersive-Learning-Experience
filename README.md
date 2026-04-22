@@ -55,7 +55,6 @@ http://localhost:5500
 - `/`: Monument map
 - `/monument/:id`: Monument detail
 - `/monument/:id/timetravel`: Time travel scene
-- `/monument/:id/compare`: Timeline comparison
 - `/monument/:id/ar`: Simulated AR view
 - `/monument/:id/vr`: Simulated VR view
 

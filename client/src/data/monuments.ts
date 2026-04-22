@@ -141,30 +141,6 @@ export const monuments: Monument[] = [
     UNESCO: true
   },
   {
-    id: "hampi",
-    name: "Hampi",
-    city: "Hampi",
-    state: "Karnataka", 
-    coordinates: [76.4700, 15.3350],
-    description: "Hampi is an awe-inspiring ancient village in Karnataka that transports visitors to the glorious past of the Vijayanagara Empire (1336-1646 CE). This UNESCO World Heritage Site features a breathtaking landscape of massive boulders balanced precariously amidst lush palm groves, interspersed with over 1,600 surviving remains of temples, palaces, and other structures. Once the capital of one of the greatest Hindu kingdoms and among the richest and largest cities in the world, Hampi's architectural marvels include the iconic Virupaksha Temple, the magnificent Vittala Temple with its famous stone chariot and musical pillars, and the elegant Lotus Mahal.",
-    yearBuilt: "1336-1646 CE",
-    dynasty: "Vijayanagara Empire",
-    primaryModel: "/models/konark_sun_temple.glb",
-    historicalModels: {
-      past: "/models/konark_sun_temple.glb",
-      ancient: "/models/konark_sun_temple.glb"
-    },
-    facts: [
-      "Hampi was the second-largest medieval-era city after Beijing",
-      "It is a UNESCO World Heritage Site since 1986",
-      "The site contains over 1,600 surviving remains of the last great Hindu kingdom in South India",
-      "The iconic stone chariot at the Vittala Temple is featured on the Indian ₹50 note"
-    ],
-    visitingHours: "6:00 AM to 6:00 PM (All days)",
-    entryFee: "₹600 for foreign tourists, ₹40 for Indian citizens",
-    UNESCO: true
-  },
-  {
     id: "ajanta-ellora",
     name: "Ajanta & Ellora Caves",
     city: "Aurangabad",
@@ -210,30 +186,6 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "6:00 AM to 6:00 PM (All days)",
     entryFee: "₹300 for foreign tourists, ₹25 for Indian citizens",
-    UNESCO: false
-  },
-  {
-    id: "charminar",
-    name: "Charminar",
-    city: "Hyderabad",
-    state: "Telangana",
-    coordinates: [78.4747, 17.3616],
-    description: "Charminar is an iconic 16th-century monument and mosque in the heart of Hyderabad. Built in 1591 by Muhammad Quli Qutb Shah, it marks the founding of Hyderabad and is known for its four grand minarets and Indo-Islamic architectural style.",
-    yearBuilt: "1591",
-    dynasty: "Qutb Shahi Dynasty",
-    primaryModel: "/models/qutub_minar.glb",
-    historicalModels: {
-      past: "/models/qutub_minar_new.glb",
-      ancient: "/models/qutub_minar.glb"
-    },
-    facts: [
-      "The monument has four minarets, each about 48.7 meters tall",
-      "Charminar was built at the center of Hyderabad's original city plan",
-      "Its upper floor houses a functioning mosque",
-      "The surrounding Laad Bazaar is famous for traditional bangles and pearls"
-    ],
-    visitingHours: "9:30 AM to 5:30 PM (All days)",
-    entryFee: "₹250 for foreign tourists, ₹25 for Indian citizens",
     UNESCO: false
   },
 ];

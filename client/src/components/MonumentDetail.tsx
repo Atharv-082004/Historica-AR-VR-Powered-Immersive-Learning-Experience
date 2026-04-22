@@ -121,11 +121,6 @@ const MonumentDetail = () => {
     setLocation(`/monument/${safeParams.id}/timetravel`);
   };
 
-  const handleComparisonView = () => {
-    audio.playSuccess();
-    setLocation(`/monument/${safeParams.id}/compare`);
-  };
-
   const handleBackToMap = () => {
     audio.playHit();
     setLocation("/");
@@ -532,8 +527,8 @@ const MonumentDetail = () => {
           </CardContent>
           
           <CardFooter className="flex flex-col md:flex-row gap-4 border-t border-amber-100 pt-6 pb-4">
-            <div className="w-full md:w-auto flex flex-col gap-4">
-              <h3 className="font-semibold text-amber-900 flex items-center text-sm mb-0 md:mb-2">
+            <div className="w-full max-w-5xl mx-auto flex flex-col gap-4">
+              <h3 className="font-semibold text-amber-900 flex items-center justify-center text-sm mb-0 md:mb-2 text-center w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-amber-600">
                   <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
@@ -581,8 +576,8 @@ const MonumentDetail = () => {
                     </svg>
                   </div>
                   <div className="flex flex-col items-start relative z-10">
-                    <span className="text-xs opacity-80">Experience In</span>
-                    <span className="text-lg font-bold">Virtual Reality</span>
+                    <span className="text-xs opacity-80">Explore In</span>
+                    <span className="text-lg font-bold">Interactive 3D View</span>
                   </div>
                 </Button>
               </div>
@@ -616,32 +611,6 @@ const MonumentDetail = () => {
                 </div>
               </Button>
               
-              <Button
-                onClick={handleComparisonView}
-                className="group relative overflow-hidden bg-gradient-to-br from-violet-50 to-purple-100 border-purple-200 hover:border-purple-300 hover:from-violet-100 hover:to-purple-200 text-purple-800 px-5 py-4 h-auto w-full rounded-xl shadow-md hover:shadow-lg transition-all duration-300 mt-4"
-              >
-                {/* Comparison ripple effect */}
-                <div className="absolute inset-0 flex justify-center items-center overflow-hidden">
-                  <div className="w-16 h-16 rounded-full border-4 border-purple-400/30 absolute group-hover:scale-[4] transition-transform duration-1000 opacity-0 group-hover:opacity-40"></div>
-                  <div className="w-12 h-12 rounded-full border-4 border-purple-400/30 absolute group-hover:scale-[3] transition-transform duration-700 delay-100 opacity-0 group-hover:opacity-40"></div>
-                </div>
-                
-                {/* Icon with animated split */}
-                <div className="relative z-10 flex items-center justify-center">
-                  <div className="relative mr-3">
-                    <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-600">
-                        <path d="M7 22V2m10 20V2M2 12h20M2 7h5m10 0h5M2 17h5m10 0h5"/>
-                      </svg>
-                    </div>
-                    <div className="absolute inset-0 border-2 border-purple-400/60 rounded-full animate-pulse"></div>
-                  </div>
-                  <div className="flex flex-col items-start">
-                    <span className="text-xs opacity-80">Compare Across</span>
-                    <span className="text-lg font-bold">Time Periods</span>
-                  </div>
-                </div>
-              </Button>
             </div>
           </CardFooter>
         </Card>
