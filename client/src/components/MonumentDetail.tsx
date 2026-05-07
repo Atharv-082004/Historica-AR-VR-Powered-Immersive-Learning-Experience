@@ -103,10 +103,22 @@ const MonumentDisplay = ({
     return (
       <>
         {lighting}
-        <mesh position={[0, 0, 0]}>
-          <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color={error ? "red" : "grey"} />
-        </mesh>
+        <Html center>
+          <div className="flex flex-col items-center gap-3 select-none">
+            {error ? (
+              <div className="text-red-400 text-sm font-medium bg-black/50 px-4 py-2 rounded-lg">
+                Failed to load model
+              </div>
+            ) : (
+              <>
+                <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+                <div className="text-amber-200 text-sm font-medium bg-black/50 px-4 py-2 rounded-lg whitespace-nowrap">
+                  Loading monument…
+                </div>
+              </>
+            )}
+          </div>
+        </Html>
         <OrbitControls />
       </>
     );

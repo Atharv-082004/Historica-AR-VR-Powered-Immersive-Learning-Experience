@@ -10,13 +10,18 @@ import ComparePage from "./components/ComparePage";
 import QuizPage from "./components/QuizPage";
 import Navigation from "./components/Navigation";
 import WelcomePage from "./components/WelcomePage";
-// Removed useAppContext import as we're not using it in this component
 import { AppProvider } from "./context/AppContext";
-import { KeyboardControls } from "@react-three/drei";
+import { KeyboardControls, useGLTF } from "@react-three/drei";
 import { useAudio } from "./lib/stores/useAudio";
 import "@fontsource/inter";
 import { Toaster } from "sonner";
 import { Progress } from "./components/ui/progress";
+import { monuments } from "./data/monuments";
+
+// Kick off background preloading of all primary monument models immediately
+monuments.forEach(m => {
+  useGLTF.preload(m.primaryModel);
+});
 
 // Define control keys for navigation
 const controls = [

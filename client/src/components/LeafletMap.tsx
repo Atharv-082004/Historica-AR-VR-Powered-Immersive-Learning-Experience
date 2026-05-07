@@ -92,6 +92,16 @@ const LeafletMap = () => {
     setLocation(`/monument/${monumentId}`);
   };
 
+  const handleMarkerHover = (monumentId: string) => {
+    const m = monuments.find(x => x.id === monumentId);
+    if (m) {
+      // Start downloading the GLB in the background so it's cached when user navigates
+      import("@react-three/drei").then(({ useGLTF }) => {
+        useGLTF.preload(m.primaryModel);
+      });
+    }
+  };
+
   return (
     <div className="h-full w-full relative z-10">
       <MapContainer
@@ -112,6 +122,7 @@ const LeafletMap = () => {
               click: () => handleMarkerClick(monument.id),
               mouseover: (e) => {
                 setHoveredId(monument.id);
+                handleMarkerHover(monument.id);
                 e.target.openPopup();
               },
               mouseout: (e) => {

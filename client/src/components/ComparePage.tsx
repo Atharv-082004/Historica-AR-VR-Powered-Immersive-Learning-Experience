@@ -1,7 +1,7 @@
 import { Suspense, useState } from "react";
 import { useLocation } from "wouter";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment } from "@react-three/drei";
+import { OrbitControls, useGLTF, Environment, Html } from "@react-three/drei";
 import { monuments } from "../data/monuments";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -19,7 +19,16 @@ const ScenePreview = ({ url }: { url: string }) => (
     <ambientLight intensity={0.6} />
     <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow />
     <Environment preset="sunset" />
-    <Suspense fallback={null}>
+    <Suspense fallback={
+      <Html center>
+        <div className="flex flex-col items-center gap-2 select-none">
+          <div className="w-8 h-8 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+          <div className="text-amber-200 text-xs font-medium bg-black/50 px-3 py-1.5 rounded-lg whitespace-nowrap">
+            Loading…
+          </div>
+        </div>
+      </Html>
+    }>
       <Model url={url} />
     </Suspense>
     <OrbitControls
