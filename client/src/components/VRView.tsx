@@ -8,8 +8,7 @@ import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useModelLoader } from "../hooks/useModelLoader";
 import { Environment, OrbitControls, Html, Text } from "@react-three/drei";
-import { XR, VRButton, Controllers, Hands, useXR, Interactive } from "@react-three/xr";
-import { toast } from "sonner";
+import { VRButton } from "three/addons/webxr/VRButton.js";
 
 const VR_MODEL_OVERRIDES: Record<string, { targetSize?: number; lift?: number }> = {
   "taj-mahal": { targetSize: 4.8, lift: 0.02 },
@@ -25,55 +24,47 @@ type VRLayout = {
 };
 
 const VRCameraRig = ({ layout }: { layout: VRLayout }) => {
-  const { camera } = useThree();
-  const { isPresenting } = useXR();
-
+  const { camera, gl } = useThree();
   useEffect(() => {
-    if (!isPresenting) {
+    if (!gl.xr.isPresenting) {
       camera.position.set(...layout.cameraPosition);
       camera.lookAt(...layout.target);
       camera.updateProjectionMatrix();
     }
-  }, [camera, layout, isPresenting]);
-
+  }, [camera, layout, gl]);
   return null;
 };
 
-const HotspotMarker = ({
-  position,
-  label,
-}: {
-  position: [number, number, number];
-  label: string;
-}) => {
-  const [hovered, setHovered] = useState(false);
-  const [active, setActive] = useState(false);
+const VRControllers = () => {
+  const { gl, scene } = useThree();
+  useEffect(() => {
+    const controllers: THREE.XRTargetRaySpace[] = [];
+    const lines: THREE.Line[] = [];
 
-  return (
-    <Interactive
-      onSelect={() => setActive(v => !v)}
-      onHover={() => setHovered(true)}
-      onBlur={() => setHovered(false)}
-    >
-      <group position={position}>
-        <mesh>
-          <sphereGeometry args={[0.08, 16, 16]} />
-          <meshStandardMaterial
-            color={hovered ? "#f59e0b" : "#fbbf24"}
-            emissive={hovered ? "#f59e0b" : "#92400e"}
-            emissiveIntensity={hovered ? 1.2 : 0.6}
-          />
-        </mesh>
-        {active && (
-          <Html distanceFactor={5} position={[0, 0.25, 0]} center>
-            <div className="bg-black/80 text-amber-200 text-xs px-3 py-1.5 rounded-lg whitespace-nowrap border border-amber-400/40 pointer-events-none">
-              {label}
-            </div>
-          </Html>
-        )}
-      </group>
-    </Interactive>
-  );
+    for (let i = 0; i < 2; i++) {
+      const controller = gl.xr.getController(i);
+      scene.add(controller);
+      controllers.push(controller);
+
+      // Amber ray line
+      const geometry = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0),
+        new THREE.Vector3(0, 0, -3),
+      ]);
+      const material = new THREE.LineBasicMaterial({ color: "#f59e0b" });
+      const line = new THREE.Line(geometry, material);
+      controller.add(line);
+      lines.push(line);
+    }
+
+    return () => {
+      controllers.forEach((c, i) => {
+        c.remove(lines[i]);
+        scene.remove(c);
+      });
+    };
+  }, [gl, scene]);
+  return null;
 };
 
 const VRFloorGrid = ({ floorY }: { floorY: number }) => (
@@ -82,10 +73,38 @@ const VRFloorGrid = ({ floorY }: { floorY: number }) => (
       <circleGeometry args={[6, 64]} />
       <meshStandardMaterial color="#cfd5db" roughness={0.95} metalness={0.02} />
     </mesh>
-    {/* Subtle grid lines for spatial orientation */}
     <gridHelper args={[10, 10, "#9ca3af", "#d1d5db"]} position={[0, 0.001, 0]} />
   </group>
 );
+
+const HotspotMarker = ({
+  position,
+  label,
+}: {
+  position: [number, number, number];
+  label: string;
+}) => {
+  const [active, setActive] = useState(false);
+  return (
+    <group position={position} onClick={() => setActive(v => !v)}>
+      <mesh>
+        <sphereGeometry args={[0.08, 16, 16]} />
+        <meshStandardMaterial
+          color="#fbbf24"
+          emissive="#92400e"
+          emissiveIntensity={0.6}
+        />
+      </mesh>
+      {active && (
+        <Html distanceFactor={5} position={[0, 0.25, 0]} center>
+          <div className="bg-black/80 text-amber-200 text-xs px-3 py-1.5 rounded-lg whitespace-nowrap border border-amber-400/40 pointer-events-none">
+            {label}
+          </div>
+        </Html>
+      )}
+    </group>
+  );
+};
 
 const VRScene = ({
   monument,
@@ -98,7 +117,7 @@ const VRScene = ({
 }) => {
   const model = useModelLoader(monument.primaryModel);
   const modelGroupRef = useRef<THREE.Group>(null);
-  const { isPresenting } = useXR();
+  const { gl } = useThree();
 
   const sceneLayout = useMemo(() => {
     if (!model?.scene) return null;
@@ -126,8 +145,7 @@ const VRScene = ({
 
     const maxDimension = Math.max(size.x, size.y, size.z) || 1;
     const targetMaxDimension = override.targetSize ?? 3.2;
-    const unclampedScale = targetMaxDimension / maxDimension;
-    const scaleFactor = Math.min(8, Math.max(0.05, unclampedScale));
+    const scaleFactor = Math.min(8, Math.max(0.05, targetMaxDimension / maxDimension));
     const lift = override.lift ?? 0.03;
 
     cloned.scale.setScalar(scaleFactor);
@@ -167,7 +185,7 @@ const VRScene = ({
   }, [sceneLayout, onLayoutChange]);
 
   useFrame((_state, delta) => {
-    if (isExploring && !isPresenting && modelGroupRef.current) {
+    if (isExploring && !gl.xr.isPresenting && modelGroupRef.current) {
       modelGroupRef.current.rotation.y += delta * 0.22;
     }
   });
@@ -194,7 +212,6 @@ const VRScene = ({
 
       <group ref={modelGroupRef}>
         <primitive object={sceneLayout.scene} />
-        {/* VR-interactive hotspot markers */}
         {monument.hotspots?.map((h, i) => (
           <HotspotMarker
             key={i}
@@ -207,20 +224,26 @@ const VRScene = ({
       <VRFloorGrid floorY={sceneLayout.layout.floorY} />
       <Environment preset="city" />
 
-      {/* In-headset monument label */}
-      {isPresenting && (
-        <Text
-          position={[0, sceneLayout.layout.floorY + 0.3, -2.5]}
-          fontSize={0.18}
-          color="#1f2937"
-          anchorX="center"
-          anchorY="middle"
-        >
-          {monument.name}
-        </Text>
-      )}
+      <Text
+        position={[0, sceneLayout.layout.floorY + 0.3, -2.5]}
+        fontSize={0.18}
+        color="#1f2937"
+        anchorX="center"
+        anchorY="middle"
+      >
+        {monument.name}
+      </Text>
     </>
   );
+};
+
+const VRButtonInjector = () => {
+  const { gl } = useThree();
+  useEffect(() => {
+    gl.xr.enabled = true;
+    return () => { gl.xr.enabled = false; };
+  }, [gl]);
+  return null;
 };
 
 const VRView = () => {
@@ -229,6 +252,7 @@ const VRView = () => {
   const { setSelectedMonument, selectedMonument } = useAppContext();
   const audio = useAudio();
   const [isExploring, setIsExploring] = useState(false);
+  const vrButtonContainerRef = useRef<HTMLDivElement>(null);
   const [layout, setLayout] = useState<VRLayout>({
     target: [0, 0.85, 0],
     cameraPosition: [1.8, 1.9, 4.9],
@@ -240,12 +264,22 @@ const VRView = () => {
   useEffect(() => {
     if (!match) return;
     const monument = monuments.find((m) => m.id === params.id);
-    if (monument) {
-      setSelectedMonument(monument);
-    } else {
-      setLocation("/");
-    }
+    if (monument) setSelectedMonument(monument);
+    else setLocation("/");
   }, [match, params?.id, setLocation, setSelectedMonument]);
+
+  // Inject Three.js VRButton into our container div
+  useEffect(() => {
+    const container = vrButtonContainerRef.current;
+    if (!container) return;
+    const canvas = document.querySelector("canvas");
+    if (!canvas) return;
+    const btn = VRButton.createButton(canvas as unknown as THREE.WebGLRenderer);
+    btn.style.cssText = "";
+    btn.className = "px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg text-sm transition-colors cursor-pointer border-0";
+    container.appendChild(btn);
+    return () => { btn.remove(); };
+  }, [selectedMonument]);
 
   const handleBack = () => {
     audio.playHit();
@@ -258,16 +292,6 @@ const VRView = () => {
 
   return (
     <div className="w-full h-full relative overflow-hidden bg-[#dce4eb]">
-      {/* VRButton rendered outside Canvas — teleports user into headset */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3 items-center">
-        <VRButton
-          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg text-sm transition-colors"
-          sessionInit={{
-            optionalFeatures: ["local-floor", "bounded-floor", "hand-tracking", "layers"],
-          }}
-        />
-      </div>
-
       {/* Back button */}
       <div className="absolute top-4 left-4 z-20">
         <Button variant="secondary" onClick={handleBack}>
@@ -276,6 +300,14 @@ const VRView = () => {
           </svg>
           Back
         </Button>
+      </div>
+
+      {/* Status badge */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+        <div className="bg-black/70 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
+          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+          {selectedMonument.name} — WebXR VR Ready
+        </div>
       </div>
 
       {/* Desktop controls */}
@@ -288,53 +320,44 @@ const VRView = () => {
         </Button>
       </div>
 
-      {/* Info banner */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
-        <div className="bg-black/70 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-          {selectedMonument.name} — WebXR VR Ready
-        </div>
-      </div>
-
       <Canvas
         shadows
         camera={{ position: [1.8, 1.9, 4.9], fov: 38 }}
-        gl={{
-          antialias: true,
-          outputColorSpace: THREE.SRGBColorSpace,
-          xr: { enabled: true } as any,
-        }}
+        gl={{ antialias: true, outputColorSpace: THREE.SRGBColorSpace }}
       >
-        <XR>
-          <Controllers rayMaterial={{ color: "#f59e0b" }} />
-          <Hands />
-          <VRCameraRig layout={layout} />
-          <VRScene
-            monument={selectedMonument}
-            isExploring={isExploring}
-            onLayoutChange={handleLayoutChange}
-          />
-          <OrbitControls
-            makeDefault
-            target={layout.target}
-            minDistance={layout.minDistance}
-            maxDistance={layout.maxDistance}
-            enablePan={isExploring}
-            enableDamping
-            dampingFactor={0.09}
-            zoomSpeed={0.7}
-            rotateSpeed={0.75}
-            minPolarAngle={Math.PI / 8}
-            maxPolarAngle={Math.PI / 2.05}
-          />
-        </XR>
+        <VRButtonInjector />
+        <VRControllers />
+        <VRCameraRig layout={layout} />
+        <VRScene
+          monument={selectedMonument}
+          isExploring={isExploring}
+          onLayoutChange={handleLayoutChange}
+        />
+        <OrbitControls
+          makeDefault
+          target={layout.target}
+          minDistance={layout.minDistance}
+          maxDistance={layout.maxDistance}
+          enablePan={isExploring}
+          enableDamping
+          dampingFactor={0.09}
+          zoomSpeed={0.7}
+          rotateSpeed={0.75}
+          minPolarAngle={Math.PI / 8}
+          maxPolarAngle={Math.PI / 2.05}
+        />
       </Canvas>
 
+      {/* VR Enter button container — populated by Three.js VRButton */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3 items-center">
+        <div ref={vrButtonContainerRef} />
+      </div>
+
       {/* Feature legend */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-4 text-white/70 text-xs">
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" /> Tap hotspots in VR</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400" /> Hand tracking</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400" /> Controller ray</span>
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-4 text-white/70 text-xs select-none">
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" />Tap hotspots</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400" />WebXR ready</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400" />Controller ray</span>
       </div>
     </div>
   );
