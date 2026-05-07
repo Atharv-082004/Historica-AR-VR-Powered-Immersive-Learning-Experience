@@ -1,21 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useRoute, useLocation } from "wouter";
 import { monuments, Monument } from "../data/monuments";
-import { motion } from "framer-motion";
 import { useAppContext } from "../context/AppContext";
 import { Button } from "./ui/button";
 import { useAudio } from "../lib/stores/useAudio";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useModelLoader } from "../hooks/useModelLoader";
-import { Environment, OrbitControls } from "@react-three/drei";
+import { Environment, OrbitControls, Html, Text } from "@react-three/drei";
+import { XR, VRButton, Controllers, Hands, useXR, Interactive } from "@react-three/xr";
 import { toast } from "sonner";
-
-const vrToastStyle = {
-  background: "rgba(17, 24, 39, 0.96)",
-  color: "#f9fafb",
-  border: "1px solid rgba(255, 255, 255, 0.14)",
-};
 
 const VR_MODEL_OVERRIDES: Record<string, { targetSize?: number; lift?: number }> = {
   "taj-mahal": { targetSize: 4.8, lift: 0.02 },
@@ -32,15 +26,66 @@ type VRLayout = {
 
 const VRCameraRig = ({ layout }: { layout: VRLayout }) => {
   const { camera } = useThree();
+  const { isPresenting } = useXR();
 
   useEffect(() => {
-    camera.position.set(...layout.cameraPosition);
-    camera.lookAt(...layout.target);
-    camera.updateProjectionMatrix();
-  }, [camera, layout]);
+    if (!isPresenting) {
+      camera.position.set(...layout.cameraPosition);
+      camera.lookAt(...layout.target);
+      camera.updateProjectionMatrix();
+    }
+  }, [camera, layout, isPresenting]);
 
   return null;
 };
+
+const HotspotMarker = ({
+  position,
+  label,
+}: {
+  position: [number, number, number];
+  label: string;
+}) => {
+  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(false);
+
+  return (
+    <Interactive
+      onSelect={() => setActive(v => !v)}
+      onHover={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+    >
+      <group position={position}>
+        <mesh>
+          <sphereGeometry args={[0.08, 16, 16]} />
+          <meshStandardMaterial
+            color={hovered ? "#f59e0b" : "#fbbf24"}
+            emissive={hovered ? "#f59e0b" : "#92400e"}
+            emissiveIntensity={hovered ? 1.2 : 0.6}
+          />
+        </mesh>
+        {active && (
+          <Html distanceFactor={5} position={[0, 0.25, 0]} center>
+            <div className="bg-black/80 text-amber-200 text-xs px-3 py-1.5 rounded-lg whitespace-nowrap border border-amber-400/40 pointer-events-none">
+              {label}
+            </div>
+          </Html>
+        )}
+      </group>
+    </Interactive>
+  );
+};
+
+const VRFloorGrid = ({ floorY }: { floorY: number }) => (
+  <group position={[0, floorY, 0]}>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      <circleGeometry args={[6, 64]} />
+      <meshStandardMaterial color="#cfd5db" roughness={0.95} metalness={0.02} />
+    </mesh>
+    {/* Subtle grid lines for spatial orientation */}
+    <gridHelper args={[10, 10, "#9ca3af", "#d1d5db"]} position={[0, 0.001, 0]} />
+  </group>
+);
 
 const VRScene = ({
   monument,
@@ -53,11 +98,11 @@ const VRScene = ({
 }) => {
   const model = useModelLoader(monument.primaryModel);
   const modelGroupRef = useRef<THREE.Group>(null);
+  const { isPresenting } = useXR();
 
   const sceneLayout = useMemo(() => {
     if (!model?.scene) return null;
     const override = VR_MODEL_OVERRIDES[monument.id] ?? {};
-
     const cloned = model.scene.clone(true);
     const box = new THREE.Box3().setFromObject(cloned);
 
@@ -118,18 +163,27 @@ const VRScene = ({
   }, [model, monument.id]);
 
   useEffect(() => {
-    if (sceneLayout) {
-      onLayoutChange(sceneLayout.layout);
-    }
+    if (sceneLayout) onLayoutChange(sceneLayout.layout);
   }, [sceneLayout, onLayoutChange]);
 
   useFrame((_state, delta) => {
-    if (isExploring && modelGroupRef.current) {
+    if (isExploring && !isPresenting && modelGroupRef.current) {
       modelGroupRef.current.rotation.y += delta * 0.22;
     }
   });
 
-  if (!model || !sceneLayout) return null;
+  if (!model || !sceneLayout) {
+    return (
+      <Html center>
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+          <div className="text-amber-200 text-sm bg-black/60 px-4 py-2 rounded-lg whitespace-nowrap">
+            Loading monument…
+          </div>
+        </div>
+      </Html>
+    );
+  }
 
   return (
     <>
@@ -140,14 +194,31 @@ const VRScene = ({
 
       <group ref={modelGroupRef}>
         <primitive object={sceneLayout.scene} />
+        {/* VR-interactive hotspot markers */}
+        {monument.hotspots?.map((h, i) => (
+          <HotspotMarker
+            key={i}
+            position={h.position as [number, number, number]}
+            label={h.name}
+          />
+        ))}
       </group>
 
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, sceneLayout.layout.floorY, 0]} receiveShadow>
-        <circleGeometry args={[5.2, 64]} />
-        <meshStandardMaterial color="#cfd5db" roughness={0.95} metalness={0.02} />
-      </mesh>
-
+      <VRFloorGrid floorY={sceneLayout.layout.floorY} />
       <Environment preset="city" />
+
+      {/* In-headset monument label */}
+      {isPresenting && (
+        <Text
+          position={[0, sceneLayout.layout.floorY + 0.3, -2.5]}
+          fontSize={0.18}
+          color="#1f2937"
+          anchorX="center"
+          anchorY="middle"
+        >
+          {monument.name}
+        </Text>
+      )}
     </>
   );
 };
@@ -168,7 +239,6 @@ const VRView = () => {
 
   useEffect(() => {
     if (!match) return;
-
     const monument = monuments.find((m) => m.id === params.id);
     if (monument) {
       setSelectedMonument(monument);
@@ -179,77 +249,93 @@ const VRView = () => {
 
   const handleBack = () => {
     audio.playHit();
-    if (selectedMonument) {
-      setLocation(`/monument/${selectedMonument.id}`);
-    } else {
-      setLocation("/");
-    }
+    setLocation(selectedMonument ? `/monument/${selectedMonument.id}` : "/");
   };
 
-  const handleToggleExploration = () => {
-    setIsExploring((prev) => {
-      const next = !prev;
-      toast.info(next ? "Exploration mode enabled" : "Exploration mode disabled", {
-        style: vrToastStyle,
-      });
-      return next;
-    });
-  };
+  const handleLayoutChange = useCallback((l: VRLayout) => setLayout(l), []);
 
   if (!selectedMonument) return null;
 
   return (
-    <div className="w-full h-full relative overflow-hidden">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative w-full h-full">
-        <Canvas
-          shadows
-          camera={{ position: [1.8, 1.9, 4.9], fov: 38 }}
-          gl={{
-            antialias: true,
-            outputColorSpace: THREE.SRGBColorSpace,
+    <div className="w-full h-full relative overflow-hidden bg-[#dce4eb]">
+      {/* VRButton rendered outside Canvas — teleports user into headset */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3 items-center">
+        <VRButton
+          className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-lg text-sm transition-colors"
+          sessionInit={{
+            optionalFeatures: ["local-floor", "bounded-floor", "hand-tracking", "layers"],
           }}
+        />
+      </div>
+
+      {/* Back button */}
+      <div className="absolute top-4 left-4 z-20">
+        <Button variant="secondary" onClick={handleBack}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
+          </svg>
+          Back
+        </Button>
+      </div>
+
+      {/* Desktop controls */}
+      <div className="absolute top-4 right-4 z-20">
+        <Button
+          className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg shadow-md text-sm"
+          onClick={() => setIsExploring(v => !v)}
         >
+          {isExploring ? "Lock Camera" : "Free Explore"}
+        </Button>
+      </div>
+
+      {/* Info banner */}
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+        <div className="bg-black/70 text-white text-xs px-4 py-2 rounded-full flex items-center gap-2 shadow-lg">
+          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+          {selectedMonument.name} — WebXR VR Ready
+        </div>
+      </div>
+
+      <Canvas
+        shadows
+        camera={{ position: [1.8, 1.9, 4.9], fov: 38 }}
+        gl={{
+          antialias: true,
+          outputColorSpace: THREE.SRGBColorSpace,
+          xr: { enabled: true } as any,
+        }}
+      >
+        <XR>
+          <Controllers rayMaterial={{ color: "#f59e0b" }} />
+          <Hands />
           <VRCameraRig layout={layout} />
-          <VRScene monument={selectedMonument} isExploring={isExploring} onLayoutChange={setLayout} />
+          <VRScene
+            monument={selectedMonument}
+            isExploring={isExploring}
+            onLayoutChange={handleLayoutChange}
+          />
           <OrbitControls
             makeDefault
             target={layout.target}
-            minDistance={isExploring ? Math.max(0.9, layout.minDistance * 0.8) : layout.minDistance}
-            maxDistance={isExploring ? Math.max(layout.maxDistance, layout.minDistance + 5) : layout.maxDistance}
+            minDistance={layout.minDistance}
+            maxDistance={layout.maxDistance}
             enablePan={isExploring}
-            autoRotate={false}
             enableDamping
             dampingFactor={0.09}
             zoomSpeed={0.7}
-            panSpeed={0.75}
             rotateSpeed={0.75}
-            minPolarAngle={Math.PI / 4.2}
-            maxPolarAngle={Math.PI / 2.12}
+            minPolarAngle={Math.PI / 8}
+            maxPolarAngle={Math.PI / 2.05}
           />
-        </Canvas>
+        </XR>
+      </Canvas>
 
-        <div className="absolute top-4 left-4 z-10">
-          <Button variant="secondary" onClick={handleBack}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-              <path d="m12 19-7-7 7-7" /><path d="M19 12H5" />
-            </svg>
-            Back
-          </Button>
-        </div>
-
-        <div className="absolute top-4 right-28 z-10 flex gap-2">
-          <Button className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-md shadow-md" onClick={handleToggleExploration}>
-            {isExploring ? "Lock Camera" : "Free Explore"}
-          </Button>
-        </div>
-
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-background/90 p-3 rounded-md z-10 text-center max-w-md shadow-md">
-          <h3 className="font-semibold">{selectedMonument.name} - Interactive 3D View</h3>
-          <p className="text-sm">
-            Browser-based monument exploration. Drag to orbit, scroll to zoom, and use Free Explore to pan around the scene.
-          </p>
-        </div>
-      </motion.div>
+      {/* Feature legend */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-4 text-white/70 text-xs">
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" /> Tap hotspots in VR</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400" /> Hand tracking</span>
+        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400" /> Controller ray</span>
+      </div>
     </div>
   );
 };
