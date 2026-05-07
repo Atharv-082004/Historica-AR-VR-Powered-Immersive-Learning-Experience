@@ -223,16 +223,6 @@ const VRScene = ({
 
       <VRFloorGrid floorY={sceneLayout.layout.floorY} />
       <Environment preset="city" />
-
-      <Text
-        position={[0, sceneLayout.layout.floorY + 0.3, -2.5]}
-        fontSize={0.18}
-        color="#1f2937"
-        anchorX="center"
-        anchorY="middle"
-      >
-        {monument.name}
-      </Text>
     </>
   );
 };
@@ -348,16 +338,14 @@ const VRView = () => {
         />
       </Canvas>
 
-      {/* VR Enter button container — populated by Three.js VRButton */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3 items-center">
+      {/* Bottom panel: legend stacked above VR button — no overlap */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3">
+        <div className="flex gap-4 text-white/70 text-xs select-none bg-black/40 px-4 py-1.5 rounded-full">
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" />Tap hotspots</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400" />WebXR ready</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400" />Controller ray</span>
+        </div>
         <div ref={vrButtonContainerRef} />
-      </div>
-
-      {/* Feature legend */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-20 flex gap-4 text-white/70 text-xs select-none">
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-400" />Tap hotspots</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-indigo-400" />WebXR ready</span>
-        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400" />Controller ray</span>
       </div>
     </div>
   );

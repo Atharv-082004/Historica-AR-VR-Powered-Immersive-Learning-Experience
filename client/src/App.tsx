@@ -39,7 +39,7 @@ function App() {
   const [isHomeRoute] = useRoute("/");
   const [isARRoute] = useRoute("/monument/:id/ar");
   const [isVRRoute] = useRoute("/monument/:id/vr");
-  const showGlobalNavigation = !isARRoute;
+  const showGlobalNavigation = !isARRoute && !isVRRoute;
   // Remove context usage from the main component - we'll use it only in child components
   const audio = useAudio();
 
