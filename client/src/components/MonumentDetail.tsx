@@ -115,7 +115,7 @@ const MonumentDisplay = ({
   return (
     <>
       {lighting}
-      <primitive object={scene} position={[0, -1, 0]} scale={1.5} />
+      <primitive object={scene} position={[0, 0, 0]} scale={1.5} />
       {hotspots?.map((h, i) => (
         <HotspotMarker key={i} hotspot={h} onSelect={onHotspotSelect} />
       ))}

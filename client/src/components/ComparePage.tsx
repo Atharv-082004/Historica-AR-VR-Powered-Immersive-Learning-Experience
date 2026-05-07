@@ -11,7 +11,7 @@ import AutoFitCamera from "./AutoFitCamera";
 
 const Model = ({ url }: { url: string }) => {
   const { scene } = useGLTF(url);
-  return <primitive object={scene} position={[0, -1, 0]} scale={1.5} />;
+  return <primitive object={scene} position={[0, 0, 0]} scale={1.5} />;
 };
 
 const ScenePreview = ({ url }: { url: string }) => (
