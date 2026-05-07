@@ -1,11 +1,36 @@
 import { useMemo, useRef, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import type { Marker as LeafletMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { monuments, Monument } from '../data/monuments';
 import { useLocation } from 'wouter';
 import { useAudio } from '../lib/stores/useAudio';
+
+const TILE_LAYERS = {
+  street: {
+    label: "Street",
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+    attribution: "Tiles &copy; Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012",
+  },
+  satellite: {
+    label: "Satellite",
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    attribution: "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
+  },
+  terrain: {
+    label: "Terrain",
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
+    attribution: "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community",
+  },
+} as const;
+
+type TileKey = keyof typeof TILE_LAYERS;
+
+const TileLayerSwitcher = ({ active }: { active: TileKey }) => {
+  const layer = TILE_LAYERS[active];
+  return <TileLayer attribution={layer.attribution} url={layer.url} />;
+};
 
 const ALL = "All";
 
@@ -16,6 +41,7 @@ const LeafletMap = () => {
   const [stateFilter, setStateFilter] = useState<string>(ALL);
   const [eraFilter, setEraFilter] = useState<string>(ALL);
   const [unescoOnly, setUnescoOnly] = useState(false);
+  const [tileLayer, setTileLayer] = useState<TileKey>("street");
 
   const states = useMemo(
     () => [ALL, ...Array.from(new Set(monuments.map(m => m.state))).sort()],
@@ -74,10 +100,7 @@ const LeafletMap = () => {
         style={{ height: '100%', width: '100%', borderRadius: '0.5rem' }}
         attributionControl={true}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayerSwitcher active={tileLayer} />
 
         {filtered.map(monument => (
           <Marker
@@ -159,11 +182,27 @@ const LeafletMap = () => {
         </p>
       </div>
 
+      {/* Map layer switcher */}
+      <div className="absolute bottom-8 right-4 z-[1000] flex flex-col gap-1">
+        {(Object.keys(TILE_LAYERS) as TileKey[]).map(key => (
+          <button
+            key={key}
+            onClick={() => setTileLayer(key)}
+            className={`px-3 py-1.5 text-xs font-semibold rounded-md shadow border transition-all ${
+              tileLayer === key
+                ? "bg-amber-500 text-white border-amber-600"
+                : "bg-white/95 text-orange-800 border-orange-200 hover:bg-amber-50"
+            }`}
+          >
+            {key === "street" ? "🗺 Street" : key === "satellite" ? "🛰 Satellite" : "🏔 Terrain"}
+          </button>
+        ))}
+      </div>
+
       {/* Information overlay */}
-      <div className="absolute bottom-4 right-4 z-[1000] bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-orange-200 max-w-xs">
-        <h3 className="font-medium text-orange-800 text-sm mb-1">Interactive Map</h3>
-        <p className="text-xs text-orange-700/80">
-          Click on markers to explore India's historical monuments. Gold markers represent UNESCO World Heritage sites.
+      <div className="absolute bottom-4 right-4 z-[1000] bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow border border-orange-200">
+        <p className="text-[10px] text-orange-700/80">
+          Gold = UNESCO · Click marker to explore
         </p>
       </div>
     </div>
