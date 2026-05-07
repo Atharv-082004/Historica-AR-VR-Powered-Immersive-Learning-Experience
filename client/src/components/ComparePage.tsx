@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { MapPin, Calendar, Crown, Clock, Ticket, Globe, Landmark, Star, ChevronDown, ChevronUp } from "lucide-react";
+import AutoFitCamera from "./AutoFitCamera";
 
 const Model = ({ url }: { url: string }) => {
   const { scene } = useGLTF(url);
@@ -22,16 +23,18 @@ const ScenePreview = ({ url }: { url: string }) => (
       <Model url={url} />
     </Suspense>
     <OrbitControls
+      makeDefault
       enablePan
       enableZoom
       enableRotate
-      minDistance={4}
-      maxDistance={10}
       zoomSpeed={0.4}
       minPolarAngle={Math.PI / 8}
       maxPolarAngle={Math.PI / 2}
+      minDistance={2}
+      maxDistance={20}
       target={[0, 0, 0]}
     />
+    <AutoFitCamera margin={1.8} />
   </Canvas>
 );
 

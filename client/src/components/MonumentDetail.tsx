@@ -4,6 +4,7 @@ import { monuments } from "../data/monuments";
 import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Environment, Html } from "@react-three/drei";
+import AutoFitCamera from "./AutoFitCamera";
 import type { Hotspot } from "../data/monuments";
 import { toast } from "sonner";
 // Removed useAppContext import as we're using local state
@@ -119,6 +120,7 @@ const MonumentDisplay = ({
         <HotspotMarker key={i} hotspot={h} onSelect={onHotspotSelect} />
       ))}
       <OrbitControls
+        makeDefault
         ref={(controls) => {
           if (controls) {
             controls.addEventListener('start', () => { (controls as any).autoRotate = false; });
@@ -128,14 +130,15 @@ const MonumentDisplay = ({
         autoRotateSpeed={0.5}
         minPolarAngle={Math.PI / 8}
         maxPolarAngle={Math.PI / 2}
-        minDistance={4}
-        maxDistance={10}
         zoomSpeed={0.4}
         enablePan
         panSpeed={1.0}
         screenSpacePanning
+        minDistance={2}
+        maxDistance={20}
         target={[0, 0, 0]}
       />
+      <AutoFitCamera margin={2.0} />
     </>
   );
 };
