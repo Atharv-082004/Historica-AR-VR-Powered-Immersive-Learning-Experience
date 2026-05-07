@@ -126,14 +126,15 @@ const MonumentDisplay = ({
         }}
         autoRotate
         autoRotateSpeed={0.5}
-        minPolarAngle={Math.PI / 6}
+        minPolarAngle={Math.PI / 8}
         maxPolarAngle={Math.PI / 2}
-        minDistance={3}
-        maxDistance={12}
-        zoomSpeed={0.6}
+        minDistance={4}
+        maxDistance={10}
+        zoomSpeed={0.4}
         enablePan
-        panSpeed={1.2}
+        panSpeed={1.0}
         screenSpacePanning
+        target={[0, 0, 0]}
       />
     </>
   );
@@ -265,7 +266,7 @@ const MonumentDetail = () => {
           </div>
         </div>
 
-        <Canvas shadows camera={{ position: [0, 2, 5], fov: 45 }} className="z-10 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg overflow-hidden">
+        <Canvas shadows camera={{ position: [0, 1.5, 6], fov: 40 }} className="z-10 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg overflow-hidden">
           <MonumentDisplay
             modelPath={selectedMonument.primaryModel}
             timeOfDay={timeOfDay}

@@ -14,14 +14,24 @@ const Model = ({ url }: { url: string }) => {
 };
 
 const ScenePreview = ({ url }: { url: string }) => (
-  <Canvas shadows camera={{ position: [0, 2, 5], fov: 45 }}>
+  <Canvas shadows camera={{ position: [0, 1.5, 6], fov: 40 }}>
     <ambientLight intensity={0.6} />
     <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow />
     <Environment preset="sunset" />
     <Suspense fallback={null}>
       <Model url={url} />
     </Suspense>
-    <OrbitControls enablePan enableZoom enableRotate minDistance={2} maxDistance={12} />
+    <OrbitControls
+      enablePan
+      enableZoom
+      enableRotate
+      minDistance={4}
+      maxDistance={10}
+      zoomSpeed={0.4}
+      minPolarAngle={Math.PI / 8}
+      maxPolarAngle={Math.PI / 2}
+      target={[0, 0, 0]}
+    />
   </Canvas>
 );
 
