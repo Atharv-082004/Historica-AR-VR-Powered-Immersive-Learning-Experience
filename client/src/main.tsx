@@ -4,6 +4,7 @@ import "./index.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { StrictMode } from "react";
+import "./i18n/i18n";
 
 // Register service worker for PWA / offline support
 if ("serviceWorker" in navigator) {

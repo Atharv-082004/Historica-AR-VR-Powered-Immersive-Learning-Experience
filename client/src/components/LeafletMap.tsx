@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import { monuments, Monument } from '../data/monuments';
 import { useLocation } from 'wouter';
 import { useAudio } from '../lib/stores/useAudio';
+import OnThisDay from './OnThisDay';
 
 const TILE_LAYERS = {
   street: {
@@ -104,6 +105,7 @@ const LeafletMap = () => {
 
   return (
     <div className="h-full w-full relative z-10">
+      <OnThisDay />
       <MapContainer
         center={[20.5937, 78.9629]}
         zoom={5}
