@@ -203,7 +203,8 @@ const MonumentDisplay = ({
 };
 
 const MonumentDetail = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isHindi = i18n.language === "hi";
   const [, setLocation] = useLocation();
   const [match, params] = useRoute<{ id: string }>("/monument/:id");
   const safeParams = params || { id: "" };
@@ -229,7 +230,7 @@ const MonumentDetail = () => {
   }, [match, safeParams.id]);
 
   const audioTourText = selectedMonument
-    ? `${selectedMonument.name}. Located in ${selectedMonument.city}, ${selectedMonument.state}. ${selectedMonument.description} ${selectedMonument.facts?.join(". ") || ""}`
+    ? `${selectedMonument.name}. ${selectedMonument.city}, ${selectedMonument.state}. ${selectedMonument.description} ${selectedMonument.facts?.join(". ") || ""}`
     : "";
   const { isPlaying: audioPlaying, isSupported: audioSupported, toggle: toggleAudio } = useAudioTour({
     text: audioTourText,
@@ -281,6 +282,13 @@ const MonumentDetail = () => {
 
   const visitCount = getVisitCount(selectedMonument.id);
   const weatherType = getMonumentWeather(selectedMonument.state || "");
+
+  const displayDescription = (isHindi && selectedMonument.descriptionHi) ? selectedMonument.descriptionHi : selectedMonument.description;
+  const displayFacts = (isHindi && selectedMonument.factsHi) ? selectedMonument.factsHi : selectedMonument.facts;
+  const displayVisitingHours = (isHindi && selectedMonument.visitingHoursHi) ? selectedMonument.visitingHoursHi : selectedMonument.visitingHours;
+  const displayEntryFee = (isHindi && selectedMonument.entryFeeHi) ? selectedMonument.entryFeeHi : (selectedMonument.entryFee || t("common.free"));
+  const displayDynasty = (isHindi && selectedMonument.dynastyHi) ? selectedMonument.dynastyHi : selectedMonument.dynasty;
+  const weatherLabel = weatherType !== "none" ? t(`weather.${weatherType}` as any, weatherType) : "";
 
   return (
     <div className="flex flex-col md:flex-row h-full w-full bg-gradient-to-tr from-amber-50 via-orange-50 to-amber-100">
@@ -388,7 +396,7 @@ const MonumentDetail = () => {
           </div>
         )}
         
-        <div className="absolute bottom-6 left-6 flex flex-wrap gap-2 z-20">
+        <div className="absolute bottom-[4.5rem] left-6 flex flex-wrap gap-2 z-20">
           <Badge variant="secondary" className="bg-white/80 backdrop-blur-sm text-orange-800 hover:bg-white/90 border-orange-200 shadow-md px-3 py-1.5">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
               <path d="M3 11l18-5v12L3 14v-3z"></path>
@@ -406,12 +414,12 @@ const MonumentDetail = () => {
           )}
           {weatherType !== "none" && (
             <Badge variant="secondary" className="bg-white/80 backdrop-blur-sm text-blue-700 border-blue-200 shadow-md px-3 py-1.5">
-              {weatherType === "rain" ? "🌧" : weatherType === "dust" ? "🌪" : weatherType === "fog" ? "🌫" : "🌫"} {weatherType}
+              {weatherType === "rain" ? "🌧" : weatherType === "dust" ? "🌪" : weatherType === "fog" ? "🌫" : "🌫"} {weatherLabel}
             </Badge>
           )}
         </div>
 
-        {/* Audio tour + first-person controls */}
+        {/* Audio tour + first-person controls — separate row above badges */}
         <div className="absolute bottom-6 right-6 flex gap-2 z-20">
           {audioSupported && (
             <button
@@ -548,7 +556,7 @@ const MonumentDetail = () => {
               
               <TabsContent value="overview" className="space-y-6">
                 <div className="bg-white/70 backdrop-blur-sm border border-amber-100 rounded-xl p-4 shadow-sm">
-                  <p className="text-orange-900 leading-relaxed">{selectedMonument.description}</p>
+                  <p className="text-orange-900 leading-relaxed">{displayDescription}</p>
                 </div>
                 
                 <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-5 rounded-xl border border-amber-200 shadow-md">
@@ -568,7 +576,7 @@ const MonumentDetail = () => {
                   </div>
                   
                   <div className="space-y-3">
-                    {selectedMonument.facts.map((fact: string, index: number) => (
+                    {displayFacts.map((fact: string, index: number) => (
                       <div key={index} className="flex items-start bg-white/60 p-3 rounded-lg border border-amber-100">
                         <div className="w-6 h-6 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0 mt-0.5">
                           <span className="text-xs font-bold">{index + 1}</span>
@@ -621,7 +629,7 @@ const MonumentDetail = () => {
                       </div>
                       <h3 className="font-semibold text-amber-900">{t("monument.dynasty")}</h3>
                     </div>
-                    <p className="text-orange-800 font-medium pl-10">{selectedMonument.dynasty}</p>
+                    <p className="text-orange-800 font-medium pl-10">{displayDynasty}</p>
                   </div>
                 </div>
                 
@@ -637,7 +645,7 @@ const MonumentDetail = () => {
                   
                   <div className="bg-white/60 backdrop-blur-sm p-4 rounded-lg border border-amber-100">
                     <p className="text-orange-800 leading-relaxed">
-                      {selectedMonument.description}
+                      {displayDescription}
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -710,7 +718,7 @@ const MonumentDetail = () => {
                       </div>
                       <h3 className="font-semibold text-amber-900">{t("monument.visitingHours")}</h3>
                     </div>
-                    <p className="text-orange-800 font-medium pl-10">{selectedMonument.visitingHours}</p>
+                    <p className="text-orange-800 font-medium pl-10">{displayVisitingHours}</p>
                   </div>
                   
                   <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-4 rounded-lg border border-amber-200 shadow-sm">
@@ -724,7 +732,7 @@ const MonumentDetail = () => {
                       </div>
                       <h3 className="font-semibold text-amber-900">{t("monument.entryFee")}</h3>
                     </div>
-                    <p className="text-orange-800 font-medium pl-10">{selectedMonument.entryFee || t("common.free")}</p>
+                    <p className="text-orange-800 font-medium pl-10">{displayEntryFee}</p>
                   </div>
                 </div>
                 

@@ -127,6 +127,12 @@ const hi = {
     open: "खोलें",
     free: "निःशुल्क",
   },
+  weather: {
+    rain: "वर्षा",
+    dust: "धूल भरी आँधी",
+    fog: "कोहरा",
+    haze: "धुंध",
+  },
 };
 
 export default hi;

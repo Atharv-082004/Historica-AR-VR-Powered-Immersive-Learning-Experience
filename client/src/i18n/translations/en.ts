@@ -127,6 +127,12 @@ const en = {
     open: "Open",
     free: "Free",
   },
+  weather: {
+    rain: "Rain",
+    dust: "Dust Storm",
+    fog: "Fog",
+    haze: "Haze",
+  },
 };
 
 export default en;
