@@ -173,6 +173,19 @@ const en = {
     fog: "Fog",
     haze: "Haze",
   },
+  nearby: {
+    title: "Nearby Monuments",
+    planTrip: "Plan a Trip",
+    away: "away",
+  },
+  accessibility: {
+    title: "Accessibility",
+    highContrast: "High Contrast",
+    largeText: "Larger Text",
+    textOnly: "Text-Only 3D",
+    on: "On",
+    off: "Off",
+  },
 };
 
 export default en;

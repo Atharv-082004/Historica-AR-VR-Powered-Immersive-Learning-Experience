@@ -11,6 +11,7 @@ import { Slider } from "./ui/slider";
 import { useAudio } from "../lib/stores/useAudio";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { useTranslation } from "react-i18next";
+import i18n from "../i18n/i18n";
 
 const MonumentModel = ({ 
   modelPath, 
@@ -379,100 +380,29 @@ const TimeTravel = () => {
               </h4>
               
               <div className="relative border-l-2 border-amber-300 pl-6 pb-2 space-y-6">
-                {/* Timeline items */}
-                <div className="relative">
-                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-500"></div>
-                  <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">
-                      {selectedMonument.id === "taj-mahal" ? "1631" : 
-                       selectedMonument.id === "qutub-minar" ? "1199" : 
-                       selectedMonument.id === "konark-sun-temple" ? "1250" :
-                       selectedMonument.id === "red-fort" ? "1639" :
-                       selectedMonument.id === "hawa-mahal" ? "1799" : 
-                       t("timetravel.ancientTimes")}
-                    </span>
-                    <p className="text-orange-800">
-                      {selectedMonument.id === "taj-mahal" ? "Construction began under Emperor Shah Jahan" : 
-                       selectedMonument.id === "qutub-minar" ? "Construction began by Qutb ud-Din Aibak" : 
-                       selectedMonument.id === "konark-sun-temple" ? "Construction began under King Narasimhadeva I" :
-                       selectedMonument.id === "red-fort" ? "Construction began by Emperor Shah Jahan" :
-                       selectedMonument.id === "hawa-mahal" ? "Built by Maharaja Sawai Pratap Singh" : 
-                       t("timetravel.foundationLaid")}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-400"></div>
-                  <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">
-                      {selectedMonument.id === "taj-mahal" ? "1643" : 
-                       selectedMonument.id === "qutub-minar" ? "1220" : 
-                       selectedMonument.id === "konark-sun-temple" ? "1255" :
-                       selectedMonument.id === "red-fort" ? "1648" :
-                       selectedMonument.id === "hawa-mahal" ? "1800s" : 
-                       t("timetravel.middlePeriod")}
-                    </span>
-                    <p className="text-orange-800">
-                      {selectedMonument.id === "taj-mahal" ? "Main structure completed" : 
-                       selectedMonument.id === "qutub-minar" ? "Completed by Iltutmish, successor of Qutb-ud-Din" : 
-                       selectedMonument.id === "konark-sun-temple" ? "Temple construction completed" :
-                       selectedMonument.id === "red-fort" ? "Construction completed and royal court moved in" :
-                       selectedMonument.id === "hawa-mahal" ? "Became a key cultural icon in Jaipur" : 
-                       t("timetravel.majorExpansions")}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-300"></div>
-                  <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">
-                      {selectedMonument.id === "taj-mahal" ? "1908" : 
-                       selectedMonument.id === "qutub-minar" ? "1920s" : 
-                       selectedMonument.id === "konark-sun-temple" ? "1902" :
-                       selectedMonument.id === "red-fort" ? "1857-1947" :
-                       selectedMonument.id === "hawa-mahal" ? "1876" : 
-                       t("timetravel.colonialPeriod")}
-                    </span>
-                    <p className="text-orange-800">
-                      {selectedMonument.id === "taj-mahal" ? "Major restoration work by British Viceroy Lord Curzon" : 
-                       selectedMonument.id === "qutub-minar" ? "Repairs conducted under British colonial rule" : 
-                       selectedMonument.id === "konark-sun-temple" ? "Early conservation efforts initiated" :
-                       selectedMonument.id === "red-fort" ? "British occupation after the Indian Rebellion" :
-                       selectedMonument.id === "hawa-mahal" ? "Restoration efforts during Maharaja Ram Singh's reign" : 
-                       t("timetravel.preservationEfforts")}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-200"></div>
-                  <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">
-                      {selectedMonument.id === "taj-mahal" ? "1983" : 
-                       selectedMonument.id === "qutub-minar" ? "1993" : 
-                       selectedMonument.id === "konark-sun-temple" ? "1984" :
-                       selectedMonument.id === "red-fort" ? "2007" :
-                       selectedMonument.id === "hawa-mahal" ? "2005" : 
-                       t("timetravel.modernEra")}
-                    </span>
-                    <p className="text-orange-800">
-                      {selectedMonument.id === "taj-mahal" ? "Designated as a UNESCO World Heritage Site" : 
-                       selectedMonument.id === "qutub-minar" ? "Added to UNESCO World Heritage list" : 
-                       selectedMonument.id === "konark-sun-temple" ? "UNESCO World Heritage designation" :
-                       selectedMonument.id === "red-fort" ? "Declared a UNESCO World Heritage Site" :
-                       selectedMonument.id === "hawa-mahal" ? "Major renovation and conservation project" : 
-                       t("timetravel.culturalLandmark")}
-                    </p>
-                  </div>
-                </div>
-                <div className="relative">
-                  <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-100"></div>
-                  <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">{t("timetravel.presentDay")}</span>
-                    <p className="text-orange-800">
-                      {t("timetravel.ongoingConservation")}
-                    </p>
-                  </div>
-                </div>
+                {(selectedMonument.timeline && selectedMonument.timeline.length > 0
+                  ? selectedMonument.timeline
+                  : [
+                      { year: t("timetravel.ancientTimes"), event: t("timetravel.foundationLaid"), eventHi: undefined },
+                      { year: t("timetravel.middlePeriod"), event: t("timetravel.majorExpansions"), eventHi: undefined },
+                      { year: t("timetravel.colonialPeriod"), event: t("timetravel.preservationEfforts"), eventHi: undefined },
+                      { year: t("timetravel.modernEra"), event: t("timetravel.culturalLandmark"), eventHi: undefined },
+                      { year: t("timetravel.presentDay"), event: t("timetravel.ongoingConservation"), eventHi: undefined },
+                    ]
+                ).map((entry, i) => {
+                  const dots = ["bg-amber-500", "bg-amber-400", "bg-amber-300", "bg-amber-200", "bg-amber-100"];
+                  return (
+                    <div key={i} className="relative">
+                      <div className={`absolute -left-[25px] top-0 w-4 h-4 rounded-full ${dots[Math.min(i, dots.length - 1)]}`}></div>
+                      <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
+                        <span className="text-sm font-semibold text-amber-700 inline-block mb-1">{entry.year}</span>
+                        <p className="text-orange-800">
+                          {i18n.language === "hi" && entry.eventHi ? entry.eventHi : entry.event}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

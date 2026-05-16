@@ -18,6 +18,7 @@ import { WeatherEffects, getMonumentWeather } from "./WeatherEffects";
 import { useAudioTour } from "../hooks/useAudioTour";
 import { usePassport } from "../lib/stores/usePassport";
 import { useTranslation } from "react-i18next";
+import NearbyMonuments from "./NearbyMonuments";
 
 type TimeOfDay = "day" | "sunset" | "night";
 
@@ -725,6 +726,8 @@ const MonumentDetail = () => {
                     </div>
                   </div>
                 </div>
+
+                <NearbyMonuments current={selectedMonument} />
               </TabsContent>
             </Tabs>
           </CardContent>

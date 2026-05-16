@@ -173,6 +173,19 @@ const hi = {
     fog: "कोहरा",
     haze: "धुंध",
   },
+  nearby: {
+    title: "आसपास के स्मारक",
+    planTrip: "यात्रा की योजना",
+    away: "दूर",
+  },
+  accessibility: {
+    title: "अभिगम्यता",
+    highContrast: "उच्च कंट्रास्ट",
+    largeText: "बड़ा टेक्स्ट",
+    textOnly: "केवल-टेक्स्ट 3D",
+    on: "चालू",
+    off: "बंद",
+  },
 };
 
 export default hi;

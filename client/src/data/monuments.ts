@@ -4,6 +4,12 @@ export interface Hotspot {
   position: [number, number, number];
 }
 
+export interface TimelineEntry {
+  year: string;
+  event: string;
+  eventHi?: string;
+}
+
 export interface Monument {
   id: string;
   name: string;
@@ -28,6 +34,7 @@ export interface Monument {
   bestMonths?: number[]; // 0-based indices: 0=Jan … 11=Dec
   bestTimeDesc?: string;
   bestTimeDescHi?: string;
+  timeline?: TimelineEntry[];
   entryFee?: string;
   entryFeeHi?: string;
   UNESCO?: boolean;
@@ -73,6 +80,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "Winter mornings offer the most magical views — cool mist at sunrise and soft golden afternoon light. Avoid April–June (extreme heat, 45°C+) and the peak monsoon crowds of July–August.",
     bestTimeDescHi: "सर्दियों की सुबह सबसे जादुई नज़ारा देती है — सूर्योदय पर ठंडी धुंध और शाम की सुनहरी रोशनी। अप्रैल–जून (45°C+ तीव्र गर्मी) और जुलाई–अगस्त की चरम भीड़ से बचें।",
+    timeline: [
+      { year: "1631", event: "Construction begins; Shah Jahan commissions the mausoleum in memory of Mumtaz Mahal", eventHi: "सम्राट शाहजहाँ ने मुमताज महल की याद में मकबरे का निर्माण शुरू करवाया" },
+      { year: "1643", event: "Main mausoleum structure completed after 12 years of construction", eventHi: "12 वर्षों के बाद मुख्य मकबरे का ढाँचा पूर्ण हुआ" },
+      { year: "1653", event: "Full complex — gardens, mosque, and great gate — finally completed", eventHi: "बगीचे, मस्जिद और मुख्य द्वार सहित पूरा परिसर पूर्ण हुआ" },
+      { year: "1908", event: "Major restoration by British Viceroy Lord Curzon revives the monument", eventHi: "ब्रिटिश वायसरॉय लॉर्ड कर्ज़न द्वारा बड़ा जीर्णोद्धार कार्य" },
+      { year: "1983", event: "Designated a UNESCO World Heritage Site", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" },
+    ],
     entryFee: "₹1,100 for foreign tourists, ₹50 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹1,100, भारतीय नागरिकों के लिए ₹50",
     UNESCO: true
@@ -113,6 +127,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "Delhi's winters (October to March) are ideal — pleasant days and cool evenings perfect for exploring the complex. Summer temperatures can exceed 45°C and the monsoon makes outdoor exploration uncomfortable.",
     bestTimeDescHi: "दिल्ली की सर्दियाँ (अक्तूबर से मार्च) आदर्श हैं — सुहावने दिन और ठंडी शामें परिसर की सैर के लिए बेहतरीन। गर्मियों में तापमान 45°C से अधिक हो सकता है और मानसून में बाहरी सैर असहज हो जाती है।",
+    timeline: [
+      { year: "1199", event: "Construction begins under Qutb-ud-Din Aibak of the Delhi Sultanate", eventHi: "दिल्ली सल्तनत के कुतुब-उद-दीन ऐबक के अधीन निर्माण शुरू" },
+      { year: "1220", event: "Completed by Iltutmish, successor of Qutb-ud-Din Aibak", eventHi: "ऐबक के उत्तराधिकारी इल्तुतमिश द्वारा निर्माण पूर्ण" },
+      { year: "1368", event: "Fifth storey added by Firuz Shah Tughlaq after lightning destroys the top", eventHi: "बिजली गिरने के बाद फ़िरोज़ शाह तुगलक ने पाँचवीं मंजिल जोड़ी" },
+      { year: "1920s", event: "Repairs undertaken under British colonial authority", eventHi: "ब्रिटिश औपनिवेशिक प्रशासन के अधीन मरम्मत कार्य" },
+      { year: "1993", event: "Designated a UNESCO World Heritage Site", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" },
+    ],
     entryFee: "₹600 for foreign tourists, ₹35 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹600, भारतीय नागरिकों के लिए ₹35",
     UNESCO: true
@@ -149,6 +170,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "October to March is ideal for exploring the Red Fort's expansive grounds. Independence Day (15 August) brings a special flag-hoisting ceremony, but visits in summer heat and monsoon humidity are tiring.",
     bestTimeDescHi: "अक्तूबर से मार्च लाल किले के विशाल परिसर की सैर के लिए आदर्श है। स्वतंत्रता दिवस (15 अगस्त) पर विशेष झंडारोहण समारोह होता है, लेकिन गर्मी और मानसून की उमस में यात्रा थकाऊ हो सकती है।",
+    timeline: [
+      { year: "1639", event: "Emperor Shah Jahan orders construction of his new capital at Delhi", eventHi: "सम्राट शाहजहाँ ने दिल्ली में अपनी नई राजधानी के निर्माण का आदेश दिया" },
+      { year: "1648", event: "Construction completed; Mughal court moves from Agra into the fort", eventHi: "निर्माण पूर्ण; मुगल दरबार आगरा से किले में आया" },
+      { year: "1857", event: "British forces capture the fort after the Indian Rebellion; last Mughal emperor tried here", eventHi: "1857 के विद्रोह के बाद ब्रिटिश सेना का कब्जा; अंतिम मुगल सम्राट पर यहीं मुकदमा चला" },
+      { year: "1947", event: "Indian flag raised here for the first time on Independence Day by Nehru", eventHi: "स्वतंत्रता दिवस पर नेहरू द्वारा पहली बार यहाँ तिरंगा फहराया गया" },
+      { year: "2007", event: "Declared a UNESCO World Heritage Site", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" },
+    ],
     entryFee: "₹600 for foreign tourists, ₹35 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹600, भारतीय नागरिकों के लिए ₹35",
     UNESCO: true
@@ -185,6 +213,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "Rajasthan winters are perfect — sunny days, cool nights, and vivid bazaars fill Jaipur's streets. Summers are brutal (up to 48°C); the monsoon brings some relief but also high humidity that fades the palace's vibrant pink facade.",
     bestTimeDescHi: "राजस्थान की सर्दियाँ एकदम सही हैं — धूप भरे दिन, ठंडी रातें और जयपुर की रंग-बिरंगी बाज़ारें। गर्मी क्रूर होती है (48°C तक); मानसून कुछ राहत देता है लेकिन महल की गुलाबी दीवारों की चमक फीकी पड़ जाती है।",
+    timeline: [
+      { year: "1799", event: "Built by Maharaja Sawai Pratap Singh of Jaipur", eventHi: "जयपुर के महाराजा सवाई प्रताप सिंह द्वारा निर्मित" },
+      { year: "1800s", event: "Becomes a treasured icon of Jaipur's Pink City identity", eventHi: "जयपुर के पिंक सिटी की एक प्रिय पहचान बनी" },
+      { year: "1876", event: "Jaipur painted pink to welcome the Prince of Wales, cementing the 'Pink City' name", eventHi: "वेल्स के राजकुमार के स्वागत में जयपुर को गुलाबी रंगा, 'पिंक सिटी' नाम पक्का हुआ" },
+      { year: "2005", event: "Major restoration and conservation project undertaken by Rajasthan government", eventHi: "राजस्थान सरकार द्वारा बड़े पैमाने पर जीर्णोद्धार व संरक्षण परियोजना" },
+      { year: "Present", event: "One of the most photographed monuments in Rajasthan, welcoming millions annually", eventHi: "राजस्थान के सर्वाधिक फोटो खिंचे जाने वाले स्मारकों में से एक, प्रतिवर्ष लाखों पर्यटकों का स्वागत" },
+    ],
     entryFee: "₹200 for foreign tourists, ₹50 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹200, भारतीय नागरिकों के लिए ₹50",
     UNESCO: false
@@ -221,6 +256,13 @@ export const monuments: Monument[] = [
     bestMonths: [10, 11, 0, 1],
     bestTimeDesc: "November to February is ideal — Odisha's coastal climate is comfortable and visibility is excellent. The Konark Dance Festival in December is a spectacular bonus. Avoid June–September when heavy monsoon rains lash the coast.",
     bestTimeDescHi: "नवंबर से फ़रवरी आदर्श समय है — ओडिशा का तटीय मौसम सुहावना रहता है और दृश्यता उत्कृष्ट होती है। दिसंबर में कोणार्क नृत्य महोत्सव एक अतिरिक्त आकर्षण है। जून–सितंबर में भारी मानसूनी बारिश से बचें।",
+    timeline: [
+      { year: "1250 CE", event: "Construction begins under King Narasimhadeva I of the Eastern Ganga dynasty", eventHi: "पूर्वी गंग वंश के राजा नरसिंहदेव प्रथम के अधीन निर्माण शुरू" },
+      { year: "1255 CE", event: "Temple construction completed; becomes a major pilgrimage and trading hub", eventHi: "मंदिर निर्माण पूर्ण; एक प्रमुख तीर्थ और व्यापार केंद्र बना" },
+      { year: "~1568", event: "Mughal incursions; temple falls into neglect and structural sand-filling begins", eventHi: "मुगल आक्रमणों के बाद मंदिर उपेक्षित; रेत से भराई शुरू" },
+      { year: "1902", event: "Archaeological Survey of India initiates first systematic conservation work", eventHi: "भारतीय पुरातत्व सर्वेक्षण ने पहला व्यवस्थित संरक्षण कार्य शुरू किया" },
+      { year: "1984", event: "Designated a UNESCO World Heritage Site", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" },
+    ],
     entryFee: "₹600 for foreign tourists, ₹40 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹600, भारतीय नागरिकों के लिए ₹40",
     UNESCO: true
@@ -263,6 +305,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "October to March is perfect for exploring the caves. The post-monsoon months (October–November) are especially beautiful as the surrounding Sahyadri hills turn lush green. Avoid the hot, humid summer — cave interiors become stifling.",
     bestTimeDescHi: "अक्तूबर से मार्च गुफाओं की सैर के लिए आदर्श है। मानसून के बाद के महीने (अक्तूबर–नवंबर) विशेष रूप से सुंदर होते हैं जब सह्याद्रि पहाड़ियाँ हरी-भरी हो जाती हैं। गर्म, उमस भरी गर्मी से बचें — गुफाओं के अंदर भी बहुत गर्मी होती है।",
+    timeline: [
+      { year: "2nd Century BCE", event: "Buddhist monks begin carving the Ajanta Caves in a horseshoe-shaped cliff", eventHi: "बौद्ध भिक्षुओं ने घोड़े की नाल आकार की चट्टान में अजंता गुफाएँ उकेरनी शुरू कीं" },
+      { year: "6th–10th Century CE", event: "Ellora Caves carved spanning Buddhist, Hindu, and Jain traditions", eventHi: "एलोरा में बौद्ध, हिंदू और जैन परंपराओं की गुफाएँ उकेरी गईं" },
+      { year: "~1100 CE", event: "Caves abandoned; forgotten for centuries as trade routes shifted", eventHi: "गुफाएँ छोड़ दी गईं; व्यापार मार्ग बदलने से सदियों तक भुला दी गईं" },
+      { year: "1819", event: "British officer John Smith rediscovers the Ajanta Caves during a tiger hunt", eventHi: "ब्रिटिश अधिकारी जॉन स्मिथ ने बाघ के शिकार के दौरान अजंता गुफाएँ पुनः खोजीं" },
+      { year: "1983 / 1984", event: "Ajanta and Ellora both designated UNESCO World Heritage Sites", eventHi: "अजंता और एलोरा दोनों को यूनेस्को विश्व धरोहर स्थल घोषित किया गया" },
+    ],
     entryFee: "₹600 for foreign tourists, ₹40 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹600, भारतीय नागरिकों के लिए ₹40",
     UNESCO: true
@@ -299,6 +348,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1],
     bestTimeDesc: "October to February brings cool, dry weather ideal for the Deccan Plateau. The famous whispering gallery is best experienced in the calm, clear air of early winter mornings. March–May is scorching, and the monsoon can be humid.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी में दक्कन पठार पर ठंडा, शुष्क मौसम रहता है। प्रसिद्ध व्हिस्परिंग गैलरी का अनुभव सर्दियों की शांत, स्वच्छ सुबह में सबसे अच्छा होता है। मार्च–मई में झुलसाने वाली गर्मी, और मानसून में उमस होती है।",
+    timeline: [
+      { year: "1626", event: "Construction begins under Muhammad Adil Shah of the Adil Shahi dynasty", eventHi: "आदिल शाही वंश के मुहम्मद आदिल शाह के अधीन निर्माण शुरू" },
+      { year: "1656", event: "Gol Gumbaz completed; Muhammad Adil Shah interred within the dome", eventHi: "गोल गुम्बज़ पूर्ण; मुहम्मद आदिल शाह को गुंबद के भीतर दफनाया गया" },
+      { year: "1760", event: "Adil Shahi dynasty falls; monument enters a period of neglect", eventHi: "आदिल शाही वंश का पतन; स्मारक में उपेक्षा का दौर शुरू" },
+      { year: "1881", event: "Archaeological Survey of India takes over and begins conservation", eventHi: "भारतीय पुरातत्व सर्वेक्षण ने देखरेख संभाली और संरक्षण शुरू किया" },
+      { year: "1999", event: "Listed as a nationally protected monument of India", eventHi: "भारत के राष्ट्रीय महत्व के संरक्षित स्मारक के रूप में सूचीबद्ध" },
+    ],
     entryFee: "₹300 for foreign tourists, ₹25 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹300, भारतीय नागरिकों के लिए ₹25",
     UNESCO: false
@@ -340,6 +396,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1],
     bestTimeDesc: "October to February is ideal — the vast open ruins are best explored in cool weather. March–May becomes scorching across the boulder-strewn landscape, and the monsoon (June–September) makes rocky terrain slippery.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी आदर्श है — विशाल खुले खंडहरों को ठंडे मौसम में सबसे अच्छे से देखा जा सकता है। मार्च–मई में पत्थरों से भरे परिदृश्य पर चिलचिलाती गर्मी होती है, और मानसून (जून–सितंबर) में चट्टानी भूमि फिसलन भरी हो जाती है।",
+    timeline: [
+      { year: "1336", event: "Vijayanagara Empire founded; Hampi established as the imperial capital", eventHi: "विजयनगर साम्राज्य की स्थापना; हम्पी को शाही राजधानी बनाया गया" },
+      { year: "1400s", event: "City grows into one of the world's largest and wealthiest urban centres", eventHi: "शहर दुनिया के सबसे बड़े और धनी नगरों में गिना जाने लगा" },
+      { year: "1510", event: "Vittala Temple complex construction commences under Krishna Deva Raya", eventHi: "कृष्णदेव राय के शासन में विट्ठल मंदिर परिसर का निर्माण शुरू" },
+      { year: "1565", event: "Battle of Talikota — city sacked and burned; never rebuilt", eventHi: "तालीकोटा की लड़ाई — शहर लूटा और जलाया गया; दोबारा कभी न बना" },
+      { year: "1986", event: "Designated a UNESCO World Heritage Site", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" },
+    ],
     entryFee: "₹600 for foreign tourists, ₹40 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹600, भारतीय नागरिकों के लिए ₹40",
     UNESCO: true
@@ -381,6 +444,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1],
     bestTimeDesc: "October to February is ideal for Hyderabad — mild, dry weather and uncrowded streets. Visit at dusk when the Charminar is dramatically lit. If you're lucky to be there during Ramzan, the evening bazaars around it are electric.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी हैदराबाद के लिए आदर्श है — हल्का, शुष्क मौसम और कम भीड़। सूर्यास्त के समय जाएं जब चारमीनार नाटकीय रूप से रोशन होता है। रमज़ान में जाने का मौका मिले तो आसपास के शाम के बाज़ार देखने लायक होते हैं।",
+    timeline: [
+      { year: "1591", event: "Sultan Muhammad Quli Qutb Shah builds Charminar to mark Hyderabad's founding", eventHi: "सुल्तान मुहम्मद क़ुली क़ुतुब शाह ने हैदराबाद की स्थापना के उपलक्ष्य में चारमीनार बनवाया" },
+      { year: "1687", event: "Aurangzeb captures Hyderabad; Charminar becomes part of Mughal Empire", eventHi: "औरंगज़ेब ने हैदराबाद पर कब्जा किया; चारमीनार मुगल साम्राज्य का हिस्सा बना" },
+      { year: "1724", event: "Nizam dynasty establishes independent control over Hyderabad", eventHi: "निज़ाम वंश ने हैदराबाद पर स्वतंत्र नियंत्रण स्थापित किया" },
+      { year: "1957", event: "Archaeological Survey of India undertakes major restoration work", eventHi: "भारतीय पुरातत्व सर्वेक्षण ने बड़ा जीर्णोद्धार कार्य किया" },
+      { year: "Present", event: "One of India's most recognised landmarks; surrounded by vibrant bazaars", eventHi: "भारत के सबसे पहचाने जाने वाले स्मारकों में से एक; चारों ओर जीवंत बाज़ार" },
+    ],
     entryFee: "₹250 for foreign tourists, ₹25 for Indian citizens",
     entryFeeHi: "विदेशी पर्यटकों के लिए ₹250, भारतीय नागरिकों के लिए ₹25",
     UNESCO: false
@@ -421,6 +491,13 @@ export const monuments: Monument[] = [
     bestMonths: [9, 10, 11, 0, 1, 2],
     bestTimeDesc: "October to March is best — Delhi's cool winters let you linger in the serene gardens and reflecting pools. Winter sunlight creates a beautiful warm glow on the white marble petals. Arrive early on weekdays to beat the crowds at this hugely popular landmark.",
     bestTimeDescHi: "अक्तूबर से मार्च सबसे अच्छा समय है — दिल्ली की ठंडी सर्दियाँ शांत बगीचों और परावर्तक तालाबों में समय बिताने देती हैं। सर्दियों की धूप सफेद संगमरमर की पंखुड़ियों पर एक सुंदर गर्म चमक पैदा करती है। सप्ताह के दिनों में जल्दी पहुंचें।",
+    timeline: [
+      { year: "1953", event: "National Spiritual Assembly of India acquires the land in New Delhi", eventHi: "भारत की राष्ट्रीय आध्यात्मिक सभा ने नई दिल्ली में भूमि अर्जित की" },
+      { year: "1976", event: "International design competition held; Iranian architect Fariborz Sahba selected", eventHi: "अंतर्राष्ट्रीय वास्तुकला प्रतियोगिता आयोजित; ईरानी वास्तुकार फ़रीबोर्ज़ सहबा चयनित" },
+      { year: "1980", event: "Foundation stone laid; construction of the 27 marble petals commences", eventHi: "नींव का पत्थर रखा गया; 27 संगमरमर पंखुड़ियों का निर्माण शुरू" },
+      { year: "1986", event: "Temple dedicated and opened to all — welcomes people of all faiths", eventHi: "मंदिर समर्पित एवं सभी धर्मों के लोगों के लिए खोला गया" },
+      { year: "2001", event: "Receives Good Design Award; among the world's most visited buildings", eventHi: "गुड डिज़ाइन अवॉर्ड; दुनिया की सर्वाधिक देखी जाने वाली इमारतों में शुमार" },
+    ],
     entryFee: "Free entry for all visitors",
     entryFeeHi: "सभी आगंतुकों के लिए निःशुल्क प्रवेश",
     UNESCO: false
@@ -461,6 +538,13 @@ export const monuments: Monument[] = [
     bestMonths: [10, 11, 0, 1],
     bestTimeDesc: "November to February offers Mumbai's most pleasant weather for a leisurely harbour visit. The Gateway looks spectacular against monsoon skies (June–September), but the rain can be heavy. The Elephanta Island ferry runs year-round — pair your visit for a full day out.",
     bestTimeDescHi: "नवंबर से फ़रवरी मुंबई का सबसे सुहावना मौसम होता है जो बंदरगाह की सुकूनभरी यात्रा के लिए आदर्श है। मानसून (जून–सितंबर) में गेटवे बारिश के खिलाफ शानदार दिखता है, लेकिन बारिश भारी हो सकती है। एलीफेंटा द्वीप की फेरी साल भर चलती है।",
+    timeline: [
+      { year: "1911", event: "King George V and Queen Mary visit Bombay; foundation stone laid", eventHi: "किंग जॉर्ज पंचम और क्वीन मैरी की बंबई यात्रा; नींव का पत्थर रखा" },
+      { year: "1913", event: "Construction begins under Scottish architect George Wittet", eventHi: "स्कॉटिश वास्तुकार जॉर्ज विटेट के निर्देशन में निर्माण शुरू" },
+      { year: "1924", event: "Gateway of India officially inaugurated by Viceroy Rufus Isaacs", eventHi: "वायसरॉय रूफस आइज़ैक्स द्वारा गेटवे ऑफ इंडिया का आधिकारिक उद्घाटन" },
+      { year: "1948", event: "Last British troops march through and leave India through the Gateway", eventHi: "अंतिम ब्रिटिश सैनिक यहाँ से मार्च करके भारत छोड़ गए" },
+      { year: "Present", event: "Iconic symbol of Mumbai; departure point for Elephanta Island ferries", eventHi: "मुंबई का प्रतिष्ठित प्रतीक; एलीफेंटा द्वीप की नौकाओं का प्रस्थान बिंदु" },
+    ],
     entryFee: "Free entry for all visitors",
     entryFeeHi: "सभी आगंतुकों के लिए निःशुल्क प्रवेश",
     UNESCO: false
@@ -502,6 +586,13 @@ export const monuments: Monument[] = [
     bestMonths: [1, 2, 3, 9, 10],
     bestTimeDesc: "February to April (spring) and October to November (autumn) are ideal — pleasant temperatures and major festivals like Baisakhi (April) and Diwali (October). December–January is bitterly cold but deeply spiritual; the Sarovar in morning mist is unforgettable.",
     bestTimeDescHi: "फ़रवरी से अप्रैल (वसंत) और अक्तूबर से नवंबर (शरद) आदर्श हैं — सुहावना मौसम और बैसाखी (अप्रैल) व दीवाली (अक्तूबर) जैसे प्रमुख त्योहार। दिसंबर–जनवरी बेहद ठंडा लेकिन आध्यात्मिक दृष्टि से गहरा अनुभव देने वाला है; सुबह की धुंध में सरोवर का नज़ारा अविस्मरणीय होता है।",
+    timeline: [
+      { year: "1581", event: "Guru Ram Das founds Amritsar and begins excavating the sacred Sarovar", eventHi: "गुरु राम दास ने अमृतसर शहर की स्थापना की और पवित्र सरोवर खोदना शुरू किया" },
+      { year: "1604", event: "Guru Arjan completes the temple and enshrines the Adi Granth within", eventHi: "गुरु अर्जन ने मंदिर पूर्ण किया और आदि ग्रंथ स्थापित किया" },
+      { year: "1762", event: "Ahmed Shah Durrani destroys the temple; Sikh warriors rebuild it within months", eventHi: "अहमद शाह दुर्रानी ने मंदिर ध्वस्त किया; सिख योद्धाओं ने महीनों में पुनर्निर्माण किया" },
+      { year: "1830", event: "Maharaja Ranjit Singh overlays the upper floors with 750 kg of pure gold leaf", eventHi: "महाराजा रणजीत सिंह ने ऊपरी मंजिलों पर 750 किलो शुद्ध सोने की पत्तियाँ चढ़वाईं" },
+      { year: "Present", event: "Serves ~100,000 free meals daily and welcomes people of all faiths", eventHi: "प्रतिदिन ~1,00,000 लोगों को निःशुल्क भोजन और सभी आस्थाओं का स्वागत" },
+    ],
     entryFee: "Free entry for all visitors",
     entryFeeHi: "सभी आगंतुकों के लिए निःशुल्क प्रवेश",
     UNESCO: false

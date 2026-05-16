@@ -13,6 +13,7 @@ import WelcomePage from "./components/WelcomePage";
 import { AppProvider } from "./context/AppContext";
 import { KeyboardControls, useGLTF } from "@react-three/drei";
 import { useAudio } from "./lib/stores/useAudio";
+import { useAccessibility } from "./lib/stores/useAccessibility";
 import "@fontsource/inter";
 import { Toaster } from "sonner";
 import { Progress } from "./components/ui/progress";
@@ -40,8 +41,16 @@ function App() {
   const [isARRoute] = useRoute("/monument/:id/ar");
   const [isVRRoute] = useRoute("/monument/:id/vr");
   const showGlobalNavigation = !isARRoute && !isVRRoute;
-  // Remove context usage from the main component - we'll use it only in child components
   const audio = useAudio();
+  const { highContrast, largeText } = useAccessibility();
+
+  useEffect(() => {
+    document.documentElement.dataset.hc = highContrast ? "1" : "0";
+  }, [highContrast]);
+
+  useEffect(() => {
+    document.documentElement.dataset.lt = largeText ? "1" : "0";
+  }, [largeText]);
 
   useEffect(() => {
     // Load background sound

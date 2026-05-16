@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import { useAudio } from "../lib/stores/useAudio";
+import { useAccessibility } from "../lib/stores/useAccessibility";
 import { useTranslation } from "react-i18next";
 import i18n from "../i18n/i18n";
 import GlobalSearch from "./GlobalSearch";
@@ -19,6 +20,8 @@ const Navigation = () => {
   const [langOpen, setLangOpen] = useState(false);
 
   const toggleMute = () => audio.toggleMute();
+  const { highContrast, largeText, textOnly3D, toggleHighContrast, toggleLargeText, toggleTextOnly3D } = useAccessibility();
+  const [accessOpen, setAccessOpen] = useState(false);
 
   const navigateTo = (path: string) => {
     if (path !== location) { audio.playHit(); setLocation(path); }
@@ -63,6 +66,35 @@ const Navigation = () => {
           <span className="hidden sm:inline">{t("nav.search")}</span>
           <kbd className="hidden md:inline text-xs bg-slate-700 border border-slate-600 rounded px-1 ml-1">⌘K</kbd>
         </Button>
+
+        {/* Accessibility toggle */}
+        <div className="relative">
+          <Button variant="outline" size="icon" onClick={() => setAccessOpen(v => !v)}
+            className="bg-slate-900/90 backdrop-blur-md border-slate-700 text-white hover:bg-slate-800"
+            title={t("accessibility.title")}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>
+            </svg>
+          </Button>
+          {accessOpen && (
+            <div className="absolute right-0 top-11 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-50 p-3 min-w-[200px]" onClick={e => e.stopPropagation()}>
+              <p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-2 px-1">{t("accessibility.title")}</p>
+              {[
+                { label: t("accessibility.highContrast"), active: highContrast, toggle: toggleHighContrast },
+                { label: t("accessibility.largeText"), active: largeText, toggle: toggleLargeText },
+                { label: t("accessibility.textOnly"), active: textOnly3D, toggle: toggleTextOnly3D },
+              ].map(({ label, active, toggle }) => (
+                <button key={label} onClick={toggle}
+                  className="w-full flex items-center justify-between px-2 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm">
+                  <span className="text-slate-200">{label}</span>
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${active ? "bg-amber-500 text-white" : "bg-slate-700 text-slate-400"}`}>
+                    {active ? t("accessibility.on") : t("accessibility.off")}
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Language switcher */}
         <div className="relative">
