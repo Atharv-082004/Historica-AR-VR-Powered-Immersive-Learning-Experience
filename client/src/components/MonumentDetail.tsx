@@ -702,14 +702,14 @@ const MonumentDetail = () => {
                         return (
                           <div 
                             key={month} 
-                            className={`text-center py-2 px-1 rounded ${isRecommended 
+                            className={`text-center py-2 px-1 rounded flex flex-col items-center justify-center ${isRecommended 
                               ? 'bg-gradient-to-br from-green-50 to-emerald-100 text-emerald-800 border border-emerald-200' 
                               : 'bg-gray-50 text-gray-500 border border-gray-200'}`}
                           >
-                            {month}
+                            <span className="text-[10px] leading-tight font-medium">{month}</span>
                             {isRecommended && (
                               <div className="mt-1 flex justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                   <path d="M20 6 9 17l-5-5"/>
                                 </svg>
                               </div>
