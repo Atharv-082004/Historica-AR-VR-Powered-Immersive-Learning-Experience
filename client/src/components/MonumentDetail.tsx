@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useRoute, useLocation } from "wouter";
 import { monuments } from "../data/monuments";
 import { motion } from "framer-motion";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, useGLTF, Environment, Html, PointerLockControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF, Environment, Html } from "@react-three/drei";
 import AutoFitCamera from "./AutoFitCamera";
 import type { Hotspot } from "../data/monuments";
 import { toast } from "sonner";
@@ -18,47 +18,13 @@ import { WeatherEffects, getMonumentWeather } from "./WeatherEffects";
 import { useAudioTour } from "../hooks/useAudioTour";
 import { usePassport } from "../lib/stores/usePassport";
 import { useTranslation } from "react-i18next";
-import * as THREE from "three";
 
-type TimeOfDay = "dawn" | "day" | "sunset" | "night";
+type TimeOfDay = "day" | "sunset" | "night";
 
 const TOD_PRESETS: Record<TimeOfDay, { env: any; ambient: number; dirIntensity: number; dirColor: string; bg: string | null; sunPos: [number,number,number] }> = {
-  dawn:   { env: "dawn",   ambient: 0.5,  dirIntensity: 1.2,  dirColor: "#ffd9a8", bg: "#f6c79a", sunPos: [-8,  2,  0] },
   day:    { env: "park",   ambient: 0.8,  dirIntensity: 1.6,  dirColor: "#ffffff", bg: "#bce3ff", sunPos: [2,  15,  5] },
   sunset: { env: "sunset", ambient: 0.55, dirIntensity: 1.4,  dirColor: "#ffb070", bg: "#f3a266", sunPos: [8,   3,  0] },
   night:  { env: "night",  ambient: 0.18, dirIntensity: 0.25, dirColor: "#9bb6ff", bg: "#0c1226", sunPos: [0,  -5,  5] },
-};
-
-// First-person WASD movement controller
-const FirstPersonController = () => {
-  const { camera } = useThree();
-  const keys = useRef<Record<string, boolean>>({});
-
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => { keys.current[e.code] = true; };
-    const up = (e: KeyboardEvent) => { keys.current[e.code] = false; };
-    window.addEventListener("keydown", down);
-    window.addEventListener("keyup", up);
-    return () => { window.removeEventListener("keydown", down); window.removeEventListener("keyup", up); };
-  }, []);
-
-  useFrame((_, delta) => {
-    const speed = 3 * delta;
-    const dir = new THREE.Vector3();
-    camera.getWorldDirection(dir);
-    dir.y = 0;
-    dir.normalize();
-    const right = new THREE.Vector3().crossVectors(dir, new THREE.Vector3(0,1,0)).normalize();
-
-    if (keys.current["KeyW"] || keys.current["ArrowUp"])    camera.position.addScaledVector(dir, speed);
-    if (keys.current["KeyS"] || keys.current["ArrowDown"])  camera.position.addScaledVector(dir, -speed);
-    if (keys.current["KeyA"] || keys.current["ArrowLeft"])  camera.position.addScaledVector(right, -speed);
-    if (keys.current["KeyD"] || keys.current["ArrowRight"]) camera.position.addScaledVector(right, speed);
-    if (keys.current["KeyQ"]) camera.position.y -= speed * 0.6;
-    if (keys.current["KeyE"]) camera.position.y += speed * 0.6;
-    camera.position.y = Math.max(0.5, camera.position.y);
-  });
-  return null;
 };
 
 const HotspotMarker = ({
@@ -100,14 +66,12 @@ const MonumentDisplay = ({
   hotspots,
   onHotspotSelect,
   weatherType,
-  firstPerson,
 }: {
   modelPath: string;
   timeOfDay: TimeOfDay;
   hotspots?: Hotspot[];
   onHotspotSelect: (h: Hotspot) => void;
   weatherType?: import("./WeatherEffects").WeatherType;
-  firstPerson?: boolean;
 }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -171,33 +135,24 @@ const MonumentDisplay = ({
       {hotspots?.map((h, i) => (
         <HotspotMarker key={i} hotspot={h} onSelect={onHotspotSelect} />
       ))}
-      {firstPerson ? (
-        <>
-          <PointerLockControls />
-          <FirstPersonController />
-        </>
-      ) : (
-        <>
-          <OrbitControls
-            makeDefault
-            ref={(controls) => {
-              if (controls) controls.addEventListener("start", () => { (controls as any).autoRotate = false; });
-            }}
-            autoRotate
-            autoRotateSpeed={0.5}
-            minPolarAngle={Math.PI / 8}
-            maxPolarAngle={Math.PI / 2}
-            zoomSpeed={0.4}
-            enablePan
-            panSpeed={1.0}
-            screenSpacePanning
-            minDistance={2}
-            maxDistance={20}
-            target={[0, 0, 0]}
-          />
-          <AutoFitCamera margin={2.0} />
-        </>
-      )}
+      <OrbitControls
+        makeDefault
+        ref={(controls) => {
+          if (controls) controls.addEventListener("start", () => { (controls as any).autoRotate = false; });
+        }}
+        autoRotate
+        autoRotateSpeed={0.5}
+        minPolarAngle={Math.PI / 8}
+        maxPolarAngle={Math.PI / 2}
+        zoomSpeed={0.4}
+        enablePan
+        panSpeed={1.0}
+        screenSpacePanning
+        minDistance={2}
+        maxDistance={20}
+        target={[0, 0, 0]}
+      />
+      <AutoFitCamera margin={2.0} />
     </>
   );
 };
@@ -212,7 +167,6 @@ const MonumentDetail = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>("sunset");
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
-  const [firstPerson, setFirstPerson] = useState(false);
   const audio = useAudio();
   const { incrementVisitCount, getVisitCount } = useMonumentStore();
   const { markVisited } = usePassport();
@@ -345,20 +299,19 @@ const MonumentDetail = () => {
           </div>
         </div>
 
-        <Canvas shadows camera={{ position: [0, 1.5, 6], fov: firstPerson ? 70 : 40 }} className="z-10 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg overflow-hidden">
+        <Canvas shadows camera={{ position: [0, 1.5, 6], fov: 40 }} className="z-10 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg overflow-hidden">
           <MonumentDisplay
             modelPath={selectedMonument.primaryModel}
             timeOfDay={timeOfDay}
             hotspots={selectedMonument.hotspots}
             onHotspotSelect={(h) => { audio.playHit(); setActiveHotspot(h); }}
             weatherType={weatherType}
-            firstPerson={firstPerson}
           />
         </Canvas>
 
         {/* Time-of-day controls — right side, below nav on mobile */}
         <div className="absolute top-[7.5rem] md:top-[4rem] right-3 z-20 flex flex-col gap-1 bg-white/85 backdrop-blur-md border border-amber-200 rounded-lg p-1 shadow-md">
-          {(["dawn", "day", "sunset", "night"] as TimeOfDay[]).map(tod => (
+          {(["day", "sunset", "night"] as TimeOfDay[]).map(tod => (
             <button
               key={tod}
               onClick={() => setTimeOfDay(tod)}
@@ -419,9 +372,9 @@ const MonumentDetail = () => {
           )}
         </div>
 
-        {/* Audio tour + first-person controls — separate row above badges */}
-        <div className="absolute bottom-6 right-6 flex gap-2 z-20">
-          {audioSupported && (
+        {/* Audio tour */}
+        {audioSupported && (
+          <div className="absolute bottom-6 right-6 z-20">
             <button
               onClick={toggleAudio}
               title={audioPlaying ? t("monument.audioStop") : t("monument.audioTour")}
@@ -443,27 +396,6 @@ const MonumentDetail = () => {
                 </>
               )}
             </button>
-          )}
-          <button
-            onClick={() => setFirstPerson(fp => !fp)}
-            title={firstPerson ? t("monument.orbitMode") : t("monument.firstPerson")}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md backdrop-blur-sm border transition-colors ${
-              firstPerson
-                ? "bg-indigo-600 text-white border-indigo-700"
-                : "bg-white/85 text-indigo-700 border-indigo-200 hover:bg-indigo-50"
-            }`}
-          >
-            {firstPerson ? (
-              <>🌀 {t("monument.orbitMode")}</>
-            ) : (
-              <>🚶 {t("monument.firstPerson")}</>
-            )}
-          </button>
-        </div>
-
-        {firstPerson && (
-          <div className="absolute top-[7.5rem] md:top-[4rem] left-3 z-20 bg-indigo-900/80 text-indigo-100 text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm border border-indigo-600/40 max-w-[calc(100%-5rem)]">
-            {t("monument.fpControls")}
           </div>
         )}
       </motion.div>
