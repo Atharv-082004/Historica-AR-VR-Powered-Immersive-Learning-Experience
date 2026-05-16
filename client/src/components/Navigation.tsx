@@ -67,7 +67,7 @@ const Navigation = () => {
         {/* Language switcher */}
         <div className="relative">
           <Button variant="outline" size="icon" onClick={() => setLangOpen(v => !v)}
-            className="bg-background/80 backdrop-blur-sm text-xs font-bold">
+            className="bg-white/85 backdrop-blur-md border-border text-xs font-bold">
             {currentLang === "hi" ? "हि" : "EN"}
           </Button>
           {langOpen && (
