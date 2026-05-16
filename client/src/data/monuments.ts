@@ -237,7 +237,7 @@ export const monuments: Monument[] = [
     dynasty: "Eastern Ganga Dynasty",
     dynastyHi: "पूर्वी गंग वंश",
     primaryModel: "/models/konark_sun_temple.glb",
-    historicalModels: { past: "/models/konark_sun_temple.glb", ancient: "/models/konark_sun_temple.glb" },
+    historicalModels: { past: "/models/konark_sun_temple.glb", ancient: "/models/konark_ancient.glb" },
     era: "medieval",
     facts: [
       "The temple is designed in the form of a colossal chariot with 24 wheels, pulled by 7 horses",
@@ -610,7 +610,7 @@ export const monuments: Monument[] = [
     dynasty: "Kingdom of Mysore (Wadiyar)",
     dynastyHi: "मैसूर राज्य (वाडियार)",
     primaryModel: "/models/mysore_palace.glb",
-    historicalModels: { past: "/models/mysore_palace.glb", ancient: "/models/hampi.glb" },
+    historicalModels: { past: "/models/mysore_palace.glb", ancient: "/models/mysore_palace_ancient.glb" },
     era: "modern",
     hotspots: [
       { name: "Kalyana Mandapa", description: "The Royal Wedding Hall with a stunning stained-glass ceiling imported from Scotland and a mosaic floor with intricate geometric patterns.", position: [0, 0.3, 1.2] },
@@ -658,7 +658,7 @@ export const monuments: Monument[] = [
     dynasty: "Nayak Kingdom",
     dynastyHi: "नायक राज्य",
     primaryModel: "/models/meenakshi_temple.glb",
-    historicalModels: { past: "/models/meenakshi_temple.glb", ancient: "/models/hampi_ancient.glb" },
+    historicalModels: { past: "/models/meenakshi_temple.glb", ancient: "/models/meenakshi_ancient.glb" },
     era: "medieval",
     hotspots: [
       { name: "Rajagopuram", description: "The towering 52-metre south gateway adorned with 1,511 painted stone sculptures of deities — the visual crown of the entire temple complex.", position: [0, 1.5, 0.5] },
@@ -706,7 +706,7 @@ export const monuments: Monument[] = [
     dynasty: "Chandela Dynasty",
     dynastyHi: "चंदेल वंश",
     primaryModel: "/models/khajuraho_temples.glb",
-    historicalModels: { past: "/models/khajuraho_temples.glb", ancient: "/models/hampi_ancient.glb" },
+    historicalModels: { past: "/models/khajuraho_temples.glb", ancient: "/models/khajuraho_ancient.glb" },
     era: "medieval",
     hotspots: [
       { name: "Kandariya Mahadev Temple", description: "The largest and most ornate temple, dedicated to Shiva, soaring 30 metres — considered the pinnacle of Chandela artistic achievement.", position: [0, 1.2, 0.5] },
@@ -898,7 +898,7 @@ export const monuments: Monument[] = [
     dynasty: "Kachwaha Rajput",
     dynastyHi: "कछवाहा राजपूत",
     primaryModel: "/models/amber_fort.glb",
-    historicalModels: { past: "/models/amber_fort.glb", ancient: "/models/hampi.glb" },
+    historicalModels: { past: "/models/amber_fort.glb", ancient: "/models/amber_fort_ancient.glb" },
     era: "medieval",
     hotspots: [
       { name: "Sheesh Mahal", description: "The Palace of Mirrors — every inch of walls and ceiling is covered with tiny mirror inlays that, when a single candle is lit, replicate a sky full of 4,000 stars.", position: [0, 0.8, 1.0] },
@@ -946,7 +946,7 @@ export const monuments: Monument[] = [
     dynasty: "Pallava Dynasty",
     dynastyHi: "पल्लव वंश",
     primaryModel: "/models/mahabalipuram.glb",
-    historicalModels: { past: "/models/mahabalipuram.glb", ancient: "/models/hampi_ancient.glb" },
+    historicalModels: { past: "/models/mahabalipuram.glb", ancient: "/models/mahabalipuram_ancient.glb" },
     era: "ancient",
     hotspots: [
       { name: "Shore Temple Shrine", description: "The three-storied stone temple facing the sea, dedicated to both Shiva and Vishnu — one of the oldest structural temples of South India, battered by the Bay of Bengal for 1,300+ years.", position: [0, 1.0, 0.5] },

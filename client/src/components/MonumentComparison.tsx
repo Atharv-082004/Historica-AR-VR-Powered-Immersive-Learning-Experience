@@ -42,6 +42,12 @@ const AVAILABLE_MODEL_PATHS = new Set([
   "/models/victoria_memorial.glb",
   "/models/amber_fort.glb",
   "/models/mahabalipuram.glb",
+  "/models/amber_fort_ancient.glb",
+  "/models/mysore_palace_ancient.glb",
+  "/models/meenakshi_ancient.glb",
+  "/models/mahabalipuram_ancient.glb",
+  "/models/konark_ancient.glb",
+  "/models/khajuraho_ancient.glb",
 ]);
 
 const resolveModelUrl = (url: string) => {
