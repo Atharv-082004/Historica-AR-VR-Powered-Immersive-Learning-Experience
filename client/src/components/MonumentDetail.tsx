@@ -356,25 +356,26 @@ const MonumentDetail = () => {
         {/* Bottom bar — badges left, audio right, all on one line */}
         <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between gap-2 z-20">
           <div className="flex flex-wrap gap-2 min-w-0">
-            <Badge variant="secondary" className="bg-white/80 backdrop-blur-sm text-orange-800 hover:bg-white/90 border-orange-200 shadow-md px-3 py-1.5">
+            <button
+              onClick={() => setActiveTab("visit")}
+              className="inline-flex items-center bg-white/80 backdrop-blur-sm text-orange-800 hover:bg-orange-50 border border-orange-200 shadow-md px-3 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
                 <path d="M3 11l18-5v12L3 14v-3z"></path>
                 <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"></path>
               </svg>
               {t("monument.visits")}: {visitCount}
-            </Badge>
+            </button>
             {selectedMonument.UNESCO && (
-              <Badge variant="outline" className="bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 border-amber-300 shadow-md px-3 py-1.5">
+              <button
+                onClick={() => setActiveTab("overview")}
+                className="inline-flex items-center bg-gradient-to-r from-amber-100 to-amber-200 text-amber-800 hover:from-amber-200 hover:to-amber-300 border border-amber-300 shadow-md px-3 py-1.5 rounded-full text-xs font-medium transition-colors cursor-pointer"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
                   <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
                 </svg>
                 {t("monument.unesco")}
-              </Badge>
-            )}
-            {weatherType !== "none" && (
-              <Badge variant="secondary" className="bg-white/80 backdrop-blur-sm text-blue-700 border-blue-200 shadow-md px-3 py-1.5">
-                {weatherType === "rain" ? "🌧" : weatherType === "dust" ? "🌪" : weatherType === "fog" ? "🌫" : "🌫"} {weatherLabel}
-              </Badge>
+              </button>
             )}
           </div>
           {audioSupported && (
