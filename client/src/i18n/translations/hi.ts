@@ -65,6 +65,13 @@ const hi = {
     loadingModel: "स्मारक लोड हो रहा है…",
     modelError: "मॉडल लोड नहीं हो सका",
     switchLighting: "प्रकाश बदलें",
+    experienceOptions: "अनुभव विकल्प",
+    experienceIn: "अनुभव करें",
+    augmentedReality: "संवर्धित वास्तविकता",
+    exploreIn: "अन्वेषण करें",
+    interactive3D: "इंटरैक्टिव 3D दृश्य",
+    exploreThrough: "इसके ज़रिए देखें",
+    timeTravelBtn: "टाइम ट्रेवल",
   },
   quiz: {
     title: "विरासत प्रश्नोत्तरी",

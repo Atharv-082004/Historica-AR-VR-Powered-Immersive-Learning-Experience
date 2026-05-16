@@ -65,6 +65,13 @@ const en = {
     loadingModel: "Loading monument…",
     modelError: "Failed to load model",
     switchLighting: "Switch lighting to",
+    experienceOptions: "Experience Options",
+    experienceIn: "Experience In",
+    augmentedReality: "Augmented Reality",
+    exploreIn: "Explore In",
+    interactive3D: "Interactive 3D View",
+    exploreThrough: "Explore Through",
+    timeTravelBtn: "Time Travel",
   },
   quiz: {
     title: "Heritage Quiz",

@@ -803,7 +803,7 @@ const MonumentDetail = () => {
                   <path d="M8 18v-1"></path>
                   <path d="M16 18v-3"></path>
                 </svg>
-                Experience Options
+                {t("monument.experienceOptions")}
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
@@ -823,8 +823,8 @@ const MonumentDetail = () => {
                     </svg>
                   </div>
                   <div className="flex flex-col items-start relative z-10">
-                    <span className="text-xs opacity-80">Experience In</span>
-                    <span className="text-lg font-bold">Augmented Reality</span>
+                    <span className="text-xs opacity-80">{t("monument.experienceIn")}</span>
+                    <span className="text-lg font-bold">{t("monument.augmentedReality")}</span>
                   </div>
                 </Button>
                 
@@ -843,8 +843,8 @@ const MonumentDetail = () => {
                     </svg>
                   </div>
                   <div className="flex flex-col items-start relative z-10">
-                    <span className="text-xs opacity-80">Explore In</span>
-                    <span className="text-lg font-bold">Interactive 3D View</span>
+                    <span className="text-xs opacity-80">{t("monument.exploreIn")}</span>
+                    <span className="text-lg font-bold">{t("monument.interactive3D")}</span>
                   </div>
                 </Button>
               </div>
@@ -872,8 +872,8 @@ const MonumentDetail = () => {
                     <div className="absolute inset-0 border-2 border-amber-400/60 rounded-full animate-ping"></div>
                   </div>
                   <div className="flex flex-col items-start">
-                    <span className="text-xs opacity-80">Explore Through</span>
-                    <span className="text-lg font-bold">Time Travel</span>
+                    <span className="text-xs opacity-80">{t("monument.exploreThrough")}</span>
+                    <span className="text-lg font-bold">{t("monument.timeTravelBtn")}</span>
                   </div>
                 </div>
               </Button>
