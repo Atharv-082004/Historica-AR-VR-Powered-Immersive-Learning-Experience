@@ -10,6 +10,7 @@ import { Button } from "./ui/button";
 import { Slider } from "./ui/slider";
 import { useAudio } from "../lib/stores/useAudio";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { useTranslation } from "react-i18next";
 
 const MonumentModel = ({ 
   modelPath, 
@@ -93,21 +94,6 @@ const MonumentModel = ({
   );
 };
 
-// Time periods with their descriptions
-const periodInfo = {
-  present: {
-    title: "Present Day",
-    description: "The monument as it stands today, after centuries of preservation and restoration efforts."
-  },
-  past: {
-    title: "Early 20th Century",
-    description: "The monument during the British colonial period, showing signs of aging and different surrounding environment."
-  },
-  ancient: {
-    title: "Original Construction",
-    description: "The monument as it would have looked when newly constructed, with its original colors and pristine condition."
-  }
-};
 
 const TimeTravel = () => {
   const [, setLocation] = useLocation();
@@ -116,6 +102,13 @@ const TimeTravel = () => {
   const [sliderValue, setSliderValue] = useState(100); // 0 = ancient, 50 = past, 100 = present
   const [isTransitioning, setIsTransitioning] = useState(false);
   const audio = useAudio();
+  const { t } = useTranslation();
+
+  const periodInfo = {
+    present: { title: t("timetravel.presentDayTitle"), description: t("timetravel.presentDesc") },
+    past:    { title: t("timetravel.pastTitle"),       description: t("timetravel.pastDesc") },
+    ancient: { title: t("timetravel.ancientTitle"),    description: t("timetravel.ancientDesc") },
+  };
 
   useEffect(() => {
     if (!match) return;
@@ -192,14 +185,14 @@ const TimeTravel = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
             <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
           </svg>
-          Back to Monument
+          {t("timetravel.backToMonument")}
         </Button>
         <h1 className="text-xl md:text-2xl font-bold text-white flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-amber-200">
             <circle cx="12" cy="12" r="10"></circle>
             <polygon points="12 6 12 12 16 10"></polygon>
           </svg>
-          Time Travel: {selectedMonument.name}
+          {t("timetravel.pageTitle")}: {selectedMonument.name}
         </h1>
         <div className="w-[150px]"></div> {/* Spacer for alignment */}
       </div>
@@ -260,7 +253,7 @@ const TimeTravel = () => {
                   <path d="M13 2a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                   <path d="M7 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                 </svg>
-                Ancient
+                {t("timetravel.ancient")}
               </TabsTrigger>
               <TabsTrigger 
                 value="past"
@@ -274,7 +267,7 @@ const TimeTravel = () => {
                   <path d="M14 12v3"></path>
                   <path d="M14 5v8"></path>
                 </svg>
-                Past Century
+                {t("timetravel.pastCentury")}
               </TabsTrigger>
               <TabsTrigger 
                 value="present"
@@ -285,7 +278,7 @@ const TimeTravel = () => {
                   <circle cx="9" cy="9" r="2"></circle>
                   <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>
                 </svg>
-                Present
+                {t("timetravel.present")}
               </TabsTrigger>
             </TabsList>
           </Tabs>
@@ -300,7 +293,7 @@ const TimeTravel = () => {
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-amber-900">{periodInfo[timePeriod].title}</h2>
-                <p className="text-sm text-amber-700">{timePeriod === "ancient" ? selectedMonument.yearBuilt : timePeriod === "past" ? "Early 20th Century" : "Modern Day"}</p>
+                <p className="text-sm text-amber-700">{timePeriod === "ancient" ? selectedMonument.yearBuilt : timePeriod === "past" ? t("timetravel.earlyTwentieth") : t("timetravel.modernDay")}</p>
               </div>
             </div>
             
@@ -310,9 +303,9 @@ const TimeTravel = () => {
             
             <div className="relative mt-8 mb-2">
               <div className="absolute -top-6 left-0 right-0 flex justify-between text-sm">
-                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'ancient' ? 'text-amber-600 font-bold scale-110' : ''}`}>Ancient</span>
-                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'past' ? 'text-amber-600 font-bold scale-110' : ''}`}>Past Century</span>
-                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'present' ? 'text-amber-600 font-bold scale-110' : ''}`}>Present Day</span>
+                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'ancient' ? 'text-amber-600 font-bold scale-110' : ''}`}>{t("timetravel.ancient")}</span>
+                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'past' ? 'text-amber-600 font-bold scale-110' : ''}`}>{t("timetravel.pastCentury")}</span>
+                <span className={`text-amber-800 font-medium transition-all duration-300 ${timePeriod === 'present' ? 'text-amber-600 font-bold scale-110' : ''}`}>{t("timetravel.presentDayTitle")}</span>
               </div>
               <Slider
                 value={[sliderValue]}
@@ -335,21 +328,21 @@ const TimeTravel = () => {
                   onClick={() => handleSliderChange([0])} 
                   className={`px-4 py-2 text-sm font-medium ${timePeriod === 'ancient' ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white' : 'bg-white text-amber-800 hover:bg-amber-50'}`}
                 >
-                  Ancient
+                  {t("timetravel.ancient")}
                 </button>
                 <div className="w-px bg-amber-200"></div>
                 <button 
                   onClick={() => handleSliderChange([50])} 
                   className={`px-4 py-2 text-sm font-medium ${timePeriod === 'past' ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white' : 'bg-white text-amber-800 hover:bg-amber-50'}`}
                 >
-                  Past Century
+                  {t("timetravel.pastCentury")}
                 </button>
                 <div className="w-px bg-amber-200"></div>
                 <button 
                   onClick={() => handleSliderChange([100])} 
                   className={`px-4 py-2 text-sm font-medium ${timePeriod === 'present' ? 'bg-gradient-to-br from-amber-500 to-orange-600 text-white' : 'bg-white text-amber-800 hover:bg-amber-50'}`}
                 >
-                  Present
+                  {t("timetravel.present")}
                 </button>
               </div>
             </div>
@@ -363,23 +356,16 @@ const TimeTravel = () => {
                   <path d="M12 8v4l2 2"/>
                 </svg>
               </div>
-              <h3 className="font-semibold text-lg text-amber-900">Historical Context</h3>
+              <h3 className="font-semibold text-lg text-amber-900">{t("timetravel.historicalContext")}</h3>
             </div>
 
             <div className="bg-white/70 backdrop-blur-sm border border-amber-100 rounded-xl p-4 shadow-sm">
               <p className="text-orange-900 leading-relaxed">
-                {timePeriod === "present" ? (
-                  `Today, ${selectedMonument.name} stands as a testament to India's rich architectural heritage, 
-                  attracting millions of visitors annually. Modern conservation efforts ensure its preservation for future generations.`
-                ) : timePeriod === "past" ? (
-                  `In the early 20th century, ${selectedMonument.name} had already endured centuries of 
-                  weather and political changes. During the British colonial period, some restoration work began, 
-                  though not always with historically accurate methods.`
-                ) : (
-                  `When first built during the ${selectedMonument.dynasty} period (${selectedMonument.yearBuilt}), 
-                  ${selectedMonument.name} would have featured vibrant colors and pristine materials. 
-                  The surrounding landscape was carefully designed to complement the structure.`
-                )}
+                {timePeriod === "present"
+                  ? t("timetravel.presentDesc")
+                  : timePeriod === "past"
+                  ? t("timetravel.pastDesc")
+                  : t("timetravel.ancientDesc")}
               </p>
             </div>
             
@@ -389,7 +375,7 @@ const TimeTravel = () => {
                   <path d="M3 3v18h18"></path>
                   <path d="m19 9-5 5-4-4-3 3"></path>
                 </svg>
-                Key Historical Timeline
+                {t("timetravel.keyTimeline")}
               </h4>
               
               <div className="relative border-l-2 border-amber-300 pl-6 pb-2 space-y-6">
@@ -403,7 +389,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "1250" :
                        selectedMonument.id === "red-fort" ? "1639" :
                        selectedMonument.id === "hawa-mahal" ? "1799" : 
-                       "Ancient Times"}
+                       t("timetravel.ancientTimes")}
                     </span>
                     <p className="text-orange-800">
                       {selectedMonument.id === "taj-mahal" ? "Construction began under Emperor Shah Jahan" : 
@@ -411,7 +397,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "Construction began under King Narasimhadeva I" :
                        selectedMonument.id === "red-fort" ? "Construction began by Emperor Shah Jahan" :
                        selectedMonument.id === "hawa-mahal" ? "Built by Maharaja Sawai Pratap Singh" : 
-                       "Original foundation laid"}
+                       t("timetravel.foundationLaid")}
                     </p>
                   </div>
                 </div>
@@ -424,7 +410,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "1255" :
                        selectedMonument.id === "red-fort" ? "1648" :
                        selectedMonument.id === "hawa-mahal" ? "1800s" : 
-                       "Middle Period"}
+                       t("timetravel.middlePeriod")}
                     </span>
                     <p className="text-orange-800">
                       {selectedMonument.id === "taj-mahal" ? "Main structure completed" : 
@@ -432,7 +418,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "Temple construction completed" :
                        selectedMonument.id === "red-fort" ? "Construction completed and royal court moved in" :
                        selectedMonument.id === "hawa-mahal" ? "Became a key cultural icon in Jaipur" : 
-                       "Major expansions made to the structure"}
+                       t("timetravel.majorExpansions")}
                     </p>
                   </div>
                 </div>
@@ -445,7 +431,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "1902" :
                        selectedMonument.id === "red-fort" ? "1857-1947" :
                        selectedMonument.id === "hawa-mahal" ? "1876" : 
-                       "Colonial Period"}
+                       t("timetravel.colonialPeriod")}
                     </span>
                     <p className="text-orange-800">
                       {selectedMonument.id === "taj-mahal" ? "Major restoration work by British Viceroy Lord Curzon" : 
@@ -453,7 +439,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "Early conservation efforts initiated" :
                        selectedMonument.id === "red-fort" ? "British occupation after the Indian Rebellion" :
                        selectedMonument.id === "hawa-mahal" ? "Restoration efforts during Maharaja Ram Singh's reign" : 
-                       "Preservation efforts under colonial administration"}
+                       t("timetravel.preservationEfforts")}
                     </p>
                   </div>
                 </div>
@@ -466,7 +452,7 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "1984" :
                        selectedMonument.id === "red-fort" ? "2007" :
                        selectedMonument.id === "hawa-mahal" ? "2005" : 
-                       "Modern Era"}
+                       t("timetravel.modernEra")}
                     </span>
                     <p className="text-orange-800">
                       {selectedMonument.id === "taj-mahal" ? "Designated as a UNESCO World Heritage Site" : 
@@ -474,16 +460,16 @@ const TimeTravel = () => {
                        selectedMonument.id === "konark-sun-temple" ? "UNESCO World Heritage designation" :
                        selectedMonument.id === "red-fort" ? "Declared a UNESCO World Heritage Site" :
                        selectedMonument.id === "hawa-mahal" ? "Major renovation and conservation project" : 
-                       "Recognized as a significant cultural landmark"}
+                       t("timetravel.culturalLandmark")}
                     </p>
                   </div>
                 </div>
                 <div className="relative">
                   <div className="absolute -left-[25px] top-0 w-4 h-4 rounded-full bg-amber-100"></div>
                   <div className="bg-white/60 p-3 rounded-lg border border-amber-100">
-                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">Present Day</span>
+                    <span className="text-sm font-semibold text-amber-700 inline-block mb-1">{t("timetravel.presentDay")}</span>
                     <p className="text-orange-800">
-                      Ongoing conservation efforts continue to preserve this magnificent monument for future generations
+                      {t("timetravel.ongoingConservation")}
                     </p>
                   </div>
                 </div>

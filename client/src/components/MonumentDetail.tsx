@@ -688,17 +688,16 @@ const MonumentDetail = () => {
                         <path d="M8 10h3"></path>
                       </svg>
                     </div>
-                    <h3 className="font-semibold text-lg text-orange-800">Best Time to Visit</h3>
+                    <h3 className="font-semibold text-lg text-orange-800">{t("bestTime.title")}</h3>
                   </div>
                   
                   <div className="bg-white/60 backdrop-blur-sm p-3 rounded-lg border border-amber-100">
                     <p className="text-orange-800">
-                      The best time to visit {selectedMonument.name} is during the months of <span className="font-semibold">October to March</span>
-                      when the weather is pleasant. Early morning visits are recommended to avoid crowds.
+                      {t("bestTime.desc", { name: isHindi && selectedMonument.nameHi ? selectedMonument.nameHi : selectedMonument.name, months: t("bestTime.octToMar") })}
                     </p>
                     
                     <div className="mt-3 grid grid-cols-4 gap-2">
-                      {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, index) => {
+                      {(t("common.months", { returnObjects: true }) as string[]).map((month, index) => {
                         const isRecommended = index < 3 || index > 8;
                         return (
                           <div 
