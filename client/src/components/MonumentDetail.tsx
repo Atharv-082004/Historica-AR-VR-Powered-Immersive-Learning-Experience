@@ -693,12 +693,17 @@ const MonumentDetail = () => {
                   
                   <div className="bg-white/60 backdrop-blur-sm p-3 rounded-lg border border-amber-100">
                     <p className="text-orange-800">
-                      {t("bestTime.desc", { name: isHindi && selectedMonument.nameHi ? selectedMonument.nameHi : selectedMonument.name, months: t("bestTime.octToMar") })}
+                      {isHindi && selectedMonument.bestTimeDescHi
+                        ? selectedMonument.bestTimeDescHi
+                        : selectedMonument.bestTimeDesc
+                        ?? t("bestTime.desc", { name: isHindi && selectedMonument.nameHi ? selectedMonument.nameHi : selectedMonument.name, months: t("bestTime.octToMar") })}
                     </p>
                     
                     <div className="mt-3 grid grid-cols-4 gap-2">
                       {(t("common.months", { returnObjects: true }) as string[]).map((month, index) => {
-                        const isRecommended = index < 3 || index > 8;
+                        const isRecommended = selectedMonument.bestMonths
+                          ? selectedMonument.bestMonths.includes(index)
+                          : index < 3 || index > 8;
                         return (
                           <div 
                             key={month} 
