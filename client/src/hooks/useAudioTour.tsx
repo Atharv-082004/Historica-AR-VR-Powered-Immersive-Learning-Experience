@@ -27,11 +27,19 @@ export function useAudioTour({ text, lang = "en-IN" }: UseAudioTourOptions) {
     utterance.pitch = 1.0;
     utterance.volume = 0.9;
 
-    // Prefer an Indian English voice if available
+    // Prefer a voice that matches the requested language
     const voices = window.speechSynthesis.getVoices();
-    const preferred = voices.find(v => v.lang.startsWith("en-IN")) ||
-      voices.find(v => v.lang.startsWith("en-GB")) ||
-      voices.find(v => v.lang.startsWith("en"));
+    const isHindi = lang.startsWith("hi");
+    const preferred = isHindi
+      ? voices.find(v => v.lang === "hi-IN") ||
+        voices.find(v => v.lang.startsWith("hi-IN")) ||
+        voices.find(v => v.lang.startsWith("hi")) ||
+        voices.find(v => v.lang.startsWith("en-IN")) ||
+        voices.find(v => v.lang.startsWith("en"))
+      : voices.find(v => v.lang === "en-IN") ||
+        voices.find(v => v.lang.startsWith("en-IN")) ||
+        voices.find(v => v.lang.startsWith("en-GB")) ||
+        voices.find(v => v.lang.startsWith("en"));
     if (preferred) utterance.voice = preferred;
 
     utterance.onstart = () => setIsPlaying(true);

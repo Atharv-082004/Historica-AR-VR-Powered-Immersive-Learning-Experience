@@ -185,10 +185,13 @@ const MonumentDetail = () => {
   }, [match, safeParams.id]);
 
   const audioTourText = selectedMonument
-    ? `${selectedMonument.name}. ${selectedMonument.city}, ${selectedMonument.state}. ${selectedMonument.description} ${selectedMonument.facts?.join(". ") || ""}`
+    ? isHindi && selectedMonument.nameHi
+      ? `${selectedMonument.nameHi}. ${selectedMonument.city}, ${selectedMonument.state}. ${selectedMonument.descriptionHi || selectedMonument.description} ${selectedMonument.factsHi?.join("। ") || selectedMonument.facts?.join(". ") || ""}`
+      : `${selectedMonument.name}. ${selectedMonument.city}, ${selectedMonument.state}. ${selectedMonument.description} ${selectedMonument.facts?.join(". ") || ""}`
     : "";
   const { isPlaying: audioPlaying, isSupported: audioSupported, toggle: toggleAudio } = useAudioTour({
     text: audioTourText,
+    lang: isHindi ? "hi-IN" : "en-IN",
   });
 
   const handleARView = () => {
@@ -700,25 +703,31 @@ const MonumentDetail = () => {
                         ?? t("bestTime.desc", { name: isHindi && selectedMonument.nameHi ? selectedMonument.nameHi : selectedMonument.name, months: t("bestTime.octToMar") })}
                     </p>
                     
-                    <div className="mt-3 grid grid-cols-4 gap-2">
+                    <div className="mt-3 grid grid-cols-4 gap-1.5">
                       {(t("common.months", { returnObjects: true }) as string[]).map((month, index) => {
                         const isRecommended = selectedMonument.bestMonths
                           ? selectedMonument.bestMonths.includes(index)
                           : index < 3 || index > 8;
                         return (
-                          <div 
-                            key={month} 
-                            className={`text-center py-2 px-1 rounded flex flex-col items-center justify-center ${isRecommended 
-                              ? 'bg-gradient-to-br from-green-50 to-emerald-100 text-emerald-800 border border-emerald-200' 
-                              : 'bg-gray-50 text-gray-500 border border-gray-200'}`}
+                          <div
+                            key={month}
+                            className={`relative text-center py-2.5 px-1 rounded-lg flex flex-col items-center justify-center gap-0.5 transition-all ${
+                              isRecommended
+                                ? 'bg-emerald-500 text-white border border-emerald-600 shadow-sm'
+                                : 'bg-gray-100 text-gray-400 border border-gray-200'
+                            }`}
                           >
-                            <span className="text-[10px] leading-tight font-medium">{month}</span>
-                            {isRecommended && (
-                              <div className="mt-1 flex justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                  <path d="M20 6 9 17l-5-5"/>
-                                </svg>
-                              </div>
+                            <span className="text-[10px] leading-none font-semibold tracking-wide">
+                              {(month as string).slice(0, 3)}
+                            </span>
+                            {isRecommended ? (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M20 6 9 17l-5-5"/>
+                              </svg>
+                            ) : (
+                              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12"/>
+                              </svg>
                             )}
                           </div>
                         );
