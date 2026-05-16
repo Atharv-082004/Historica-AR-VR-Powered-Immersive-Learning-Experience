@@ -34,6 +34,14 @@ const AVAILABLE_MODEL_PATHS = new Set([
   "/models/golden_temple_ancient.glb",
   "/models/hampi_ancient.glb",
   "/models/ajanta_ellora_ancient.glb",
+  "/models/mysore_palace.glb",
+  "/models/meenakshi_temple.glb",
+  "/models/khajuraho_temples.glb",
+  "/models/sanchi_stupa.glb",
+  "/models/fatehpur_sikri.glb",
+  "/models/victoria_memorial.glb",
+  "/models/amber_fort.glb",
+  "/models/mahabalipuram.glb",
 ]);
 
 const resolveModelUrl = (url: string) => {
