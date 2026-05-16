@@ -409,7 +409,7 @@ const MonumentDetail = () => {
           {/* Decorative header accent */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500"></div>
           
-          <CardHeader className="pb-2">
+          <CardHeader className="pb-2 sticky top-0 z-20 bg-white/95 backdrop-blur-md rounded-t-lg border-b border-amber-100">
             <div>
               <CardTitle className="text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-amber-700 to-orange-700 pr-2">
                 {selectedMonument.name}
