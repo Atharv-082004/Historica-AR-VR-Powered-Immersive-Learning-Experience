@@ -121,13 +121,13 @@ const Navigation = () => {
           <motion.div className="bg-slate-900/95 text-slate-100 border border-slate-700 rounded-2xl p-6 w-[90%] max-w-md shadow-2xl"
             initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} onClick={e => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-1"><span className="text-2xl">🏛️</span><h2 className="text-2xl font-bold">Historica</h2></div>
-            <p className="mb-5 text-slate-400 text-sm">Experience India's rich heritage in 3D, AR and VR.</p>
+            <p className="mb-5 text-slate-400 text-sm">{t("nav.menuDesc")}</p>
 
             {/* Search shortcut */}
             <button onClick={() => { setIsOpen(false); setSearchOpen(true); }}
               className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm mb-4 transition-colors border border-slate-700">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              {t("nav.search")} monuments, facts, quiz…
+              {t("nav.search")} — {t("nav.searchHint")}
               <kbd className="ml-auto text-xs bg-slate-900 border border-slate-600 rounded px-1.5 py-0.5">⌘K</kbd>
             </button>
 

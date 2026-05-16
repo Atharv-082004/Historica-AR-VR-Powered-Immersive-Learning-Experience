@@ -1,5 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { useTranslation } from 'react-i18next';
 import { Icon } from 'leaflet';
 import type { Marker as LeafletMarker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -36,6 +37,7 @@ const TileLayerSwitcher = ({ active }: { active: TileKey }) => {
 const ALL = "All";
 
 const LeafletMap = () => {
+  const { t } = useTranslation();
   const [, setLocation] = useLocation();
   const audio = useAudio();
   const [search, setSearch] = useState("");
@@ -137,13 +139,13 @@ const LeafletMap = () => {
               <div className="text-center">
                 <h3 className="font-bold text-orange-800">{monument.name}</h3>
                 <p className="text-sm text-gray-600">{monument.city}, {monument.state}</p>
-                <p className="text-xs mt-1 text-gray-500">Built: {monument.yearBuilt}</p>
+                <p className="text-xs mt-1 text-gray-500">{t("map.builtLabel")} {monument.yearBuilt}</p>
                 {monument.UNESCO && (
                   <span className="inline-block mt-1 px-2 py-0.5 bg-amber-100 text-amber-800 text-xs rounded-full">
-                    UNESCO Heritage
+                    {t("monument.unesco")}
                   </span>
                 )}
-                <p className="text-[10px] mt-1 text-orange-600 italic">Click marker to explore</p>
+                <p className="text-[10px] mt-1 text-orange-600 italic">{t("map.clickToExplore")}</p>
               </div>
             </Popup>
           </Marker>
@@ -156,13 +158,13 @@ const LeafletMap = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          Search & Filter
+          {t("map.searchFilter")}
         </h3>
         <input
           type="text"
           value={search}
           onChange={e => setSearch(e.target.value)}
-          placeholder="Search by name, city, dynasty…"
+          placeholder={t("map.searchByName")}
           className="w-full px-2 py-1.5 text-sm border border-amber-200 rounded focus:outline-none focus:ring-2 focus:ring-amber-400"
         />
         <div className="grid grid-cols-2 gap-2 mt-2">
@@ -171,14 +173,14 @@ const LeafletMap = () => {
             onChange={e => setStateFilter(e.target.value)}
             className="text-xs px-2 py-1.5 border border-amber-200 rounded bg-white"
           >
-            {states.map(s => <option key={s} value={s}>{s === ALL ? 'All states' : s}</option>)}
+            {states.map(s => <option key={s} value={s}>{s === ALL ? t("map.allStates") : s}</option>)}
           </select>
           <select
             value={eraFilter}
             onChange={e => setEraFilter(e.target.value)}
             className="text-xs px-2 py-1.5 border border-amber-200 rounded bg-white capitalize"
           >
-            {eras.map(e => <option key={e} value={e}>{e === ALL ? 'All eras' : e}</option>)}
+            {eras.map(e => <option key={e} value={e}>{e === ALL ? t("map.allEras") : e}</option>)}
           </select>
         </div>
         <label className="flex items-center mt-2 text-xs text-orange-800 cursor-pointer select-none">
@@ -188,10 +190,10 @@ const LeafletMap = () => {
             onChange={e => setUnescoOnly(e.target.checked)}
             className="mr-1.5 accent-amber-500"
           />
-          UNESCO heritage only
+          {t("map.unescoOnly")}
         </label>
         <p className="text-xs text-amber-700 mt-2">
-          {filtered.length} of {monuments.length} monument{monuments.length === 1 ? '' : 's'}
+          {filtered.length} {t("map.of")} {monuments.length} {t("map.monumentsCount")}
         </p>
       </div>
 
@@ -212,10 +214,10 @@ const LeafletMap = () => {
         ))}
       </div>
 
-      {/* Information overlay */}
-      <div className="absolute bottom-4 right-4 z-[1000] bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow border border-orange-200">
+      {/* Information overlay — moved to left to avoid overlap with layer switcher */}
+      <div className="absolute bottom-4 left-4 z-[1000] bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow border border-orange-200">
         <p className="text-[10px] text-orange-700/80">
-          Gold = UNESCO · Click marker to explore
+          {t("map.gold")} · {t("map.clickToExplore")}
         </p>
       </div>
     </div>

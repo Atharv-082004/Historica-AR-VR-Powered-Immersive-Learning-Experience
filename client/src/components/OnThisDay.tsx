@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { getTodaysEvents } from "../data/onThisDay";
 import { useTranslation } from "react-i18next";
+import i18n from "../i18n/i18n";
 
 const OnThisDay = () => {
   const { t } = useTranslation();
@@ -14,7 +15,9 @@ const OnThisDay = () => {
   if (!event || dismissed) return null;
 
   const today = new Date();
-  const dateStr = today.toLocaleDateString("en-IN", { day: "numeric", month: "long" });
+  const locale = i18n.language === "hi" ? "hi-IN" : "en-IN";
+  const dateStr = today.toLocaleDateString(locale, { day: "numeric", month: "long" });
+  const eventText = i18n.language === "hi" && event.eventHi ? event.eventHi : event.event;
 
   return (
     <AnimatePresence>
@@ -38,7 +41,7 @@ const OnThisDay = () => {
             <button
               onClick={() => setDismissed(true)}
               className="text-amber-100 hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors"
-              aria-label="Dismiss"
+              aria-label={t("onThisDay.dismiss")}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 6 6 18M6 6l12 12"/>
@@ -54,7 +57,7 @@ const OnThisDay = () => {
               </span>
             </div>
             <p className="text-slate-200 text-sm leading-relaxed">
-              {event.event}
+              {eventText}
             </p>
           </div>
 

@@ -299,40 +299,40 @@ const MonumentDetail = () => {
         {/* Canvas backdrop with gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-800/30 to-red-900/30 backdrop-blur-sm z-0 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg m-2 md:ml-2 md:my-2 md:mr-0"></div>
         
-        {/* Time Travel Controls at the top */}
-        <div className="absolute top-6 left-6 right-6 flex justify-center z-20">
-          <div className="inline-flex bg-white/90 backdrop-blur-md rounded-lg border border-amber-200 shadow-md overflow-hidden">
+        {/* Time Travel Controls at the top — pushed below nav bar on mobile */}
+        <div className="absolute top-14 md:top-4 left-0 right-0 flex justify-center z-20 px-4">
+          <div className="inline-flex bg-white/90 backdrop-blur-md rounded-lg border border-amber-200 shadow-md overflow-hidden max-w-full">
             <button 
               onClick={handleTimeTravel}
-              className="px-4 py-2 text-sm font-medium flex items-center bg-white text-amber-800 hover:bg-amber-50"
+              className="px-3 py-2 text-xs sm:text-sm font-medium flex items-center bg-white text-amber-800 hover:bg-amber-50 whitespace-nowrap"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 text-amber-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 text-amber-600 flex-shrink-0">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
-              Ancient (Original)
+              {t("monument.timeTravelAncient")}
             </button>
-            <div className="w-px bg-amber-200"></div>
+            <div className="w-px bg-amber-200 flex-shrink-0"></div>
             <button 
               onClick={handleTimeTravel}
-              className="px-4 py-2 text-sm font-medium flex items-center bg-white text-amber-800 hover:bg-amber-50"
+              className="px-3 py-2 text-xs sm:text-sm font-medium flex items-center bg-white text-amber-800 hover:bg-amber-50 whitespace-nowrap"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 text-amber-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 text-amber-600 flex-shrink-0">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
-              Past Century
+              {t("monument.timeTravelPast")}
             </button>
-            <div className="w-px bg-amber-200"></div>
+            <div className="w-px bg-amber-200 flex-shrink-0"></div>
             <button 
               onClick={handleTimeTravel}
-              className="px-4 py-2 text-sm font-medium flex items-center bg-gradient-to-br from-amber-500 to-orange-600 text-white"
+              className="px-3 py-2 text-xs sm:text-sm font-medium flex items-center bg-gradient-to-br from-amber-500 to-orange-600 text-white whitespace-nowrap"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1 flex-shrink-0">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
-              Present Day
+              {t("monument.timeTravelPresent")}
             </button>
           </div>
         </div>
@@ -348,20 +348,20 @@ const MonumentDetail = () => {
           />
         </Canvas>
 
-        {/* Time-of-day controls */}
-        <div className="absolute top-20 right-6 z-20 flex flex-col gap-1 bg-white/85 backdrop-blur-md border border-amber-200 rounded-lg p-1 shadow-md">
-          {(["dawn", "day", "sunset", "night"] as TimeOfDay[]).map(t => (
+        {/* Time-of-day controls — right side, below nav on mobile */}
+        <div className="absolute top-[7.5rem] md:top-[4rem] right-3 z-20 flex flex-col gap-1 bg-white/85 backdrop-blur-md border border-amber-200 rounded-lg p-1 shadow-md">
+          {(["dawn", "day", "sunset", "night"] as TimeOfDay[]).map(tod => (
             <button
-              key={t}
-              onClick={() => setTimeOfDay(t)}
+              key={tod}
+              onClick={() => setTimeOfDay(tod)}
               className={`text-xs px-2 py-1 rounded capitalize transition-colors ${
-                timeOfDay === t
+                timeOfDay === tod
                   ? "bg-gradient-to-br from-amber-500 to-orange-600 text-white"
                   : "text-amber-800 hover:bg-amber-100"
               }`}
-              title={`Switch lighting to ${t}`}
+              title={`${t("monument.switchLighting")} ${t(`common.${tod}`)}`}
             >
-              {t}
+              {t(`common.${tod}`)}
             </button>
           ))}
         </div>
@@ -381,10 +381,10 @@ const MonumentDetail = () => {
           </div>
         )}
 
-        {/* Hotspot hint */}
+        {/* Hotspot hint — left side, below time-travel bar on mobile */}
         {selectedMonument.hotspots && selectedMonument.hotspots.length > 0 && !activeHotspot && (
-          <div className="absolute top-20 left-6 z-20 bg-white/85 backdrop-blur-md border border-amber-200 rounded-md px-3 py-1.5 shadow-md text-xs text-amber-800">
-            Tip: click the glowing dots to learn more
+          <div className="absolute top-[7.5rem] md:top-[4rem] left-3 z-20 bg-white/85 backdrop-blur-md border border-amber-200 rounded-md px-3 py-1.5 shadow-md text-xs text-amber-800 max-w-[calc(100%-5rem)]">
+            {t("monument.hotspotHint")}
           </div>
         )}
         
@@ -454,8 +454,8 @@ const MonumentDetail = () => {
         </div>
 
         {firstPerson && (
-          <div className="absolute top-[4.5rem] left-6 z-20 bg-indigo-900/80 text-indigo-100 text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm border border-indigo-600/40">
-            WASD / ↑↓←→ to move · Q/E up/down · Click canvas to look
+          <div className="absolute top-[7.5rem] md:top-[4rem] left-3 z-20 bg-indigo-900/80 text-indigo-100 text-xs px-3 py-1.5 rounded-lg backdrop-blur-sm border border-indigo-600/40 max-w-[calc(100%-5rem)]">
+            {t("monument.fpControls")}
           </div>
         )}
       </motion.div>
@@ -521,7 +521,7 @@ const MonumentDetail = () => {
                     <path d="M12 16v-4"/>
                     <path d="M12 8h.01"/>
                   </svg>
-                  Overview
+                  {t("monument.overview")}
                 </TabsTrigger>
                 <TabsTrigger 
                   value="history"
@@ -531,7 +531,7 @@ const MonumentDetail = () => {
                     <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0"/>
                     <path d="M12 8v4l2 2"/>
                   </svg>
-                  History
+                  {t("monument.history")}
                 </TabsTrigger>
                 <TabsTrigger 
                   value="visit"
@@ -542,7 +542,7 @@ const MonumentDetail = () => {
                     <path d="M3 9h18"/>
                     <path d="M9 21V9"/>
                   </svg>
-                  Visit Info
+                  {t("monument.visitInfo")}
                 </TabsTrigger>
               </TabsList>
               
@@ -564,7 +564,7 @@ const MonumentDetail = () => {
                         <path d="M14 20h4"/>
                       </svg>
                     </div>
-                    <h3 className="font-semibold text-lg text-amber-900">Quick Facts</h3>
+                    <h3 className="font-semibold text-lg text-amber-900">{t("monument.quickFacts")}</h3>
                   </div>
                   
                   <div className="space-y-3">
@@ -587,7 +587,7 @@ const MonumentDetail = () => {
                     <path d="M18 15h2a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2"></path>
                     <path d="M18 22V4"></path>
                   </svg>
-                  <p className="text-orange-800 font-medium text-sm">Explore the history tab to discover this monument's heritage!</p>
+                  <p className="text-orange-800 font-medium text-sm">{t("monument.exploreHistory")}</p>
                 </div>
               </TabsContent>
               
@@ -603,7 +603,7 @@ const MonumentDetail = () => {
                           <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
                       </div>
-                      <h3 className="font-semibold text-amber-900">Built During</h3>
+                      <h3 className="font-semibold text-amber-900">{t("monument.builtDuring")}</h3>
                     </div>
                     <p className="text-orange-800 font-medium pl-10">{selectedMonument.yearBuilt}</p>
                   </div>
@@ -619,7 +619,7 @@ const MonumentDetail = () => {
                           <path d="M22 4v16"></path>
                         </svg>
                       </div>
-                      <h3 className="font-semibold text-amber-900">Dynasty</h3>
+                      <h3 className="font-semibold text-amber-900">{t("monument.dynasty")}</h3>
                     </div>
                     <p className="text-orange-800 font-medium pl-10">{selectedMonument.dynasty}</p>
                   </div>
@@ -632,14 +632,12 @@ const MonumentDetail = () => {
                         <path d="M3 12h4l3 8l4-16l3 8h4"/>
                       </svg>
                     </div>
-                    <h3 className="font-semibold text-lg text-amber-900">Historical Significance</h3>
+                    <h3 className="font-semibold text-lg text-amber-900">{t("monument.history")}</h3>
                   </div>
                   
                   <div className="bg-white/60 backdrop-blur-sm p-4 rounded-lg border border-amber-100">
                     <p className="text-orange-800 leading-relaxed">
-                      <span className="font-semibold text-red-800">{selectedMonument.name}</span> stands as a testament to the rich cultural heritage of India.
-                      It represents the architectural brilliance of the <span className="font-semibold text-orange-800">{selectedMonument.dynasty}</span> period and
-                      has witnessed numerous historical events throughout centuries.
+                      {selectedMonument.description}
                     </p>
                     
                     <div className="flex flex-wrap gap-2 mt-4 justify-center">
@@ -648,7 +646,7 @@ const MonumentDetail = () => {
                           <circle cx="12" cy="12" r="10"/>
                           <path d="m12 6 4 6-4 6-4-6 4-6"/>
                         </svg>
-                        Architectural Marvel
+                        {t("monument.timeTravelAncient")}
                       </div>
                       <div className="bg-amber-100/70 border border-amber-200 text-amber-800 px-3 py-1.5 rounded-full text-xs font-medium flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
@@ -658,7 +656,7 @@ const MonumentDetail = () => {
                           <path d="M3 9h18"/>
                           <path d="M3 15h18"/>
                         </svg>
-                        Cultural Heritage
+                        {t("monument.unesco")}
                       </div>
                       <div className="bg-amber-100/70 border border-amber-200 text-amber-800 px-3 py-1.5 rounded-full text-xs font-medium flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1">
@@ -667,7 +665,7 @@ const MonumentDetail = () => {
                           <path d="M5 12v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
                           <circle cx="12" cy="17" r="5"/>
                         </svg>
-                        Historical Significance
+                        {t("monument.dynasty")}
                       </div>
                     </div>
                   </div>
@@ -679,12 +677,9 @@ const MonumentDetail = () => {
                     onClick={handleTimeTravel}
                     className="group relative bg-gradient-to-br from-amber-50 to-orange-100 border-amber-200 hover:border-amber-300 hover:from-amber-100 hover:to-orange-200 text-amber-800 px-8 py-3 rounded-xl overflow-hidden transition-all duration-300"
                   >
-                    {/* Animated background effect */}
                     <div className="absolute inset-0 flex justify-center overflow-hidden opacity-20">
                       <div className="w-24 h-24 rounded-full bg-amber-500 blur-xl absolute group-hover:scale-150 transition-transform duration-700"></div>
                     </div>
-                    
-                    {/* Icon with animated ring */}
                     <div className="relative z-10 flex items-center">
                       <div className="relative mr-3">
                         <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center shadow-inner">
@@ -695,10 +690,8 @@ const MonumentDetail = () => {
                         </div>
                         <div className="absolute inset-0 border-2 border-amber-400 rounded-full animate-ping opacity-40"></div>
                       </div>
-                      
                       <div className="flex flex-col items-start">
-                        <span className="text-sm opacity-70">Discover How It Looked</span>
-                        <span className="text-lg font-bold">Time Travel Experience</span>
+                        <span className="text-lg font-bold">{t("monument.timeTravel")}</span>
                       </div>
                     </div>
                   </Button>
@@ -715,7 +708,7 @@ const MonumentDetail = () => {
                           <polyline points="12 6 12 12 16 14" />
                         </svg>
                       </div>
-                      <h3 className="font-semibold text-amber-900">Visiting Hours</h3>
+                      <h3 className="font-semibold text-amber-900">{t("monument.visitingHours")}</h3>
                     </div>
                     <p className="text-orange-800 font-medium pl-10">{selectedMonument.visitingHours}</p>
                   </div>
@@ -729,9 +722,9 @@ const MonumentDetail = () => {
                           <path d="M7 8h10" />
                         </svg>
                       </div>
-                      <h3 className="font-semibold text-amber-900">Entry Fee</h3>
+                      <h3 className="font-semibold text-amber-900">{t("monument.entryFee")}</h3>
                     </div>
-                    <p className="text-orange-800 font-medium pl-10">{selectedMonument.entryFee || "Free entry"}</p>
+                    <p className="text-orange-800 font-medium pl-10">{selectedMonument.entryFee || t("common.free")}</p>
                   </div>
                 </div>
                 
