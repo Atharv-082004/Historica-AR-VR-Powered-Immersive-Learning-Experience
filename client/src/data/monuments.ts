@@ -77,7 +77,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "6:00 AM to 6:30 PM (Closed on Fridays)",
     visitingHoursHi: "सुबह 6:00 से शाम 6:30 बजे तक (शुक्रवार को बंद)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [10, 11, 0, 1],
     bestTimeDesc: "Winter mornings offer the most magical views — cool mist at sunrise and soft golden afternoon light. Avoid April–June (extreme heat, 45°C+) and the peak monsoon crowds of July–August.",
     bestTimeDescHi: "सर्दियों की सुबह सबसे जादुई नज़ारा देती है — सूर्योदय पर ठंडी धुंध और शाम की सुनहरी रोशनी। अप्रैल–जून (45°C+ तीव्र गर्मी) और जुलाई–अगस्त की चरम भीड़ से बचें।",
     timeline: [
@@ -124,7 +124,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "7:00 AM to 5:00 PM (All days)",
     visitingHoursHi: "सुबह 7:00 से शाम 5:00 बजे तक (सभी दिन)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [10, 11, 0, 1],
     bestTimeDesc: "Delhi's winters (October to March) are ideal — pleasant days and cool evenings perfect for exploring the complex. Summer temperatures can exceed 45°C and the monsoon makes outdoor exploration uncomfortable.",
     bestTimeDescHi: "दिल्ली की सर्दियाँ (अक्तूबर से मार्च) आदर्श हैं — सुहावने दिन और ठंडी शामें परिसर की सैर के लिए बेहतरीन। गर्मियों में तापमान 45°C से अधिक हो सकता है और मानसून में बाहरी सैर असहज हो जाती है।",
     timeline: [
@@ -167,7 +167,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "9:30 AM to 4:30 PM (Closed on Mondays)",
     visitingHoursHi: "सुबह 9:30 से शाम 4:30 बजे तक (सोमवार को बंद)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [9, 10, 11, 0],
     bestTimeDesc: "October to March is ideal for exploring the Red Fort's expansive grounds. Independence Day (15 August) brings a special flag-hoisting ceremony, but visits in summer heat and monsoon humidity are tiring.",
     bestTimeDescHi: "अक्तूबर से मार्च लाल किले के विशाल परिसर की सैर के लिए आदर्श है। स्वतंत्रता दिवस (15 अगस्त) पर विशेष झंडारोहण समारोह होता है, लेकिन गर्मी और मानसून की उमस में यात्रा थकाऊ हो सकती है।",
     timeline: [
@@ -210,7 +210,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "9:00 AM to 5:00 PM (All days)",
     visitingHoursHi: "सुबह 9:00 से शाम 5:00 बजे तक (सभी दिन)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [9, 10, 11, 0, 1],
     bestTimeDesc: "Rajasthan winters are perfect — sunny days, cool nights, and vivid bazaars fill Jaipur's streets. Summers are brutal (up to 48°C); the monsoon brings some relief but also high humidity that fades the palace's vibrant pink facade.",
     bestTimeDescHi: "राजस्थान की सर्दियाँ एकदम सही हैं — धूप भरे दिन, ठंडी रातें और जयपुर की रंग-बिरंगी बाज़ारें। गर्मी क्रूर होती है (48°C तक); मानसून कुछ राहत देता है लेकिन महल की गुलाबी दीवारों की चमक फीकी पड़ जाती है।",
     timeline: [
@@ -302,7 +302,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "9:00 AM to 5:30 PM (Closed on Tuesdays)",
     visitingHoursHi: "सुबह 9:00 से शाम 5:30 बजे तक (मंगलवार को बंद)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [9, 10],
     bestTimeDesc: "October to March is perfect for exploring the caves. The post-monsoon months (October–November) are especially beautiful as the surrounding Sahyadri hills turn lush green. Avoid the hot, humid summer — cave interiors become stifling.",
     bestTimeDescHi: "अक्तूबर से मार्च गुफाओं की सैर के लिए आदर्श है। मानसून के बाद के महीने (अक्तूबर–नवंबर) विशेष रूप से सुंदर होते हैं जब सह्याद्रि पहाड़ियाँ हरी-भरी हो जाती हैं। गर्म, उमस भरी गर्मी से बचें — गुफाओं के अंदर भी बहुत गर्मी होती है।",
     timeline: [
@@ -345,7 +345,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "6:00 AM to 6:00 PM (All days)",
     visitingHoursHi: "सुबह 6:00 से शाम 6:00 बजे तक (सभी दिन)",
-    bestMonths: [9, 10, 11, 0, 1],
+    bestMonths: [9, 10, 11, 0],
     bestTimeDesc: "October to February brings cool, dry weather ideal for the Deccan Plateau. The famous whispering gallery is best experienced in the calm, clear air of early winter mornings. March–May is scorching, and the monsoon can be humid.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी में दक्कन पठार पर ठंडा, शुष्क मौसम रहता है। प्रसिद्ध व्हिस्परिंग गैलरी का अनुभव सर्दियों की शांत, स्वच्छ सुबह में सबसे अच्छा होता है। मार्च–मई में झुलसाने वाली गर्मी, और मानसून में उमस होती है।",
     timeline: [
@@ -393,7 +393,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "6:00 AM to 6:00 PM (All days)",
     visitingHoursHi: "सुबह 6:00 से शाम 6:00 बजे तक (सभी दिन)",
-    bestMonths: [9, 10, 11, 0, 1],
+    bestMonths: [9, 10, 11, 0],
     bestTimeDesc: "October to February is ideal — the vast open ruins are best explored in cool weather. March–May becomes scorching across the boulder-strewn landscape, and the monsoon (June–September) makes rocky terrain slippery.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी आदर्श है — विशाल खुले खंडहरों को ठंडे मौसम में सबसे अच्छे से देखा जा सकता है। मार्च–मई में पत्थरों से भरे परिदृश्य पर चिलचिलाती गर्मी होती है, और मानसून (जून–सितंबर) में चट्टानी भूमि फिसलन भरी हो जाती है।",
     timeline: [
@@ -441,7 +441,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "9:00 AM to 5:30 PM (All days)",
     visitingHoursHi: "सुबह 9:00 से शाम 5:30 बजे तक (सभी दिन)",
-    bestMonths: [9, 10, 11, 0, 1],
+    bestMonths: [9, 10, 11, 0],
     bestTimeDesc: "October to February is ideal for Hyderabad — mild, dry weather and uncrowded streets. Visit at dusk when the Charminar is dramatically lit. If you're lucky to be there during Ramzan, the evening bazaars around it are electric.",
     bestTimeDescHi: "अक्तूबर से फ़रवरी हैदराबाद के लिए आदर्श है — हल्का, शुष्क मौसम और कम भीड़। सूर्यास्त के समय जाएं जब चारमीनार नाटकीय रूप से रोशन होता है। रमज़ान में जाने का मौका मिले तो आसपास के शाम के बाज़ार देखने लायक होते हैं।",
     timeline: [
@@ -488,7 +488,7 @@ export const monuments: Monument[] = [
     ],
     visitingHours: "9:00 AM to 5:30 PM (Closed on Mondays)",
     visitingHoursHi: "सुबह 9:00 से शाम 5:30 बजे तक (सोमवार को बंद)",
-    bestMonths: [9, 10, 11, 0, 1, 2],
+    bestMonths: [9, 10, 11, 0, 1],
     bestTimeDesc: "October to March is best — Delhi's cool winters let you linger in the serene gardens and reflecting pools. Winter sunlight creates a beautiful warm glow on the white marble petals. Arrive early on weekdays to beat the crowds at this hugely popular landmark.",
     bestTimeDescHi: "अक्तूबर से मार्च सबसे अच्छा समय है — दिल्ली की ठंडी सर्दियाँ शांत बगीचों और परावर्तक तालाबों में समय बिताने देती हैं। सर्दियों की धूप सफेद संगमरमर की पंखुड़ियों पर एक सुंदर गर्म चमक पैदा करती है। सप्ताह के दिनों में जल्दी पहुंचें।",
     timeline: [
