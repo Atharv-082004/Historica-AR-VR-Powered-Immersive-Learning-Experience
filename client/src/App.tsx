@@ -247,7 +247,7 @@ function App() {
   return (
     <AppProvider>
       <KeyboardControls map={controls}>
-        <div className="h-screen w-screen overflow-hidden relative">
+        <div className="h-[100dvh] w-screen overflow-hidden relative">
           {/* Welcome Page overlay that only shows on first visit */}
           {isHomeRoute && <WelcomePage onBeginJourney={() => {}} />}
           

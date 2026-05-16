@@ -245,7 +245,7 @@ const MonumentDetail = () => {
   const weatherLabel = weatherType !== "none" ? t(`weather.${weatherType}` as any, weatherType) : "";
 
   return (
-    <div className="flex flex-col md:flex-row h-full w-full bg-gradient-to-tr from-amber-50 via-orange-50 to-amber-100">
+    <div className="flex flex-col md:flex-row h-full w-full min-h-0 bg-gradient-to-tr from-amber-50 via-orange-50 to-amber-100">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden opacity-20 z-0">
         <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-orange-400 blur-3xl"></div>
@@ -256,7 +256,7 @@ const MonumentDetail = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.7, type: "spring" }}
-        className="w-full md:w-1/2 h-[40vh] md:h-full relative overflow-auto"
+        className="w-full md:w-1/2 h-[42vh] md:h-full min-h-0 relative overflow-hidden"
       >
         {/* Canvas backdrop with gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-amber-800/30 to-red-900/30 backdrop-blur-sm z-0 rounded-lg md:rounded-r-none rounded-b-none md:rounded-b-lg m-2 md:ml-2 md:my-2 md:mr-0"></div>
@@ -404,7 +404,7 @@ const MonumentDetail = () => {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
-        className="w-full md:w-1/2 h-[60vh] md:h-full overflow-y-auto p-4 relative z-10"
+        className="w-full md:w-1/2 h-[58vh] md:h-full min-h-0 overflow-y-auto p-4 relative z-10"
       >
         <Card className="h-full border-amber-200 shadow-xl overflow-y-auto bg-white/90 backdrop-blur-md">
           {/* Decorative header accent */}
