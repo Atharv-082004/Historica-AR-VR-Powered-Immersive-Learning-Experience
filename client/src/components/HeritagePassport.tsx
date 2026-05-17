@@ -25,6 +25,16 @@ const STAMP_ICONS: Record<string, string> = {
   "victoria-memorial": "🏛️",
   "gateway-of-india": "🌊",
   "lotus-temple": "🌸",
+  "rani-ki-vav": "💧",
+  "humayuns-tomb": "🕌",
+  "agra-fort": "🏰",
+  "brihadeeswara-temple": "🛕",
+  "mahabodhi-temple": "☸️",
+  "elephanta-caves": "🐘",
+  "jantar-mantar": "🔭",
+  "nalanda-ruins": "📚",
+  "chittor-fort": "⚔️",
+  "kailasa-temple": "⛰️",
 };
 
 const ALL_MONUMENT_IDS = Object.keys(MONUMENT_NAMES);

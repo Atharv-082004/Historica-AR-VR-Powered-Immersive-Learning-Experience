@@ -48,6 +48,16 @@ const AVAILABLE_MODEL_PATHS = new Set([
   "/models/mahabalipuram_ancient.glb",
   "/models/konark_ancient.glb",
   "/models/khajuraho_ancient.glb",
+  "/models/humayuns_tomb.glb",
+  "/models/agra_fort.glb",
+  "/models/brihadeeswara_temple.glb",
+  "/models/mahabodhi_temple.glb",
+  "/models/elephanta_caves.glb",
+  "/models/rani_ki_vav.glb",
+  "/models/jantar_mantar.glb",
+  "/models/nalanda_ruins.glb",
+  "/models/chittor_fort.glb",
+  "/models/kailasa_temple.glb",
 ]);
 
 const resolveModelUrl = (url: string) => {

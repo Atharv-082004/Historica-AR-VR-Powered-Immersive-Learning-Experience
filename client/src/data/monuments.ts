@@ -981,4 +981,471 @@ export const monuments: Monument[] = [
     entryFeeHi: "₹40 (भारतीय), ₹600 (विदेशी)",
     UNESCO: true
   },
+  {
+    id: "humayuns-tomb",
+    name: "Humayun's Tomb",
+    nameHi: "हुमायूँ का मकबरा",
+    city: "Delhi",
+    state: "Delhi",
+    coordinates: [77.2507, 28.5933],
+    description: "Humayun's Tomb is the mausoleum of the Mughal Emperor Humayun in Delhi. Built in 1572 by his widow Bega Begum, it was the first garden-tomb on the Indian subcontinent and the architectural inspiration for the Taj Mahal. The central double dome of white marble rises from a high red sandstone platform, and the tomb is set in a formal Charbagh (four-part) garden.",
+    descriptionHi: "हुमायूँ का मकबरा दिल्ली में मुगल सम्राट हुमायूँ की समाधि है। 1572 में उनकी विधवा बेगा बेगम द्वारा निर्मित, यह भारतीय उपमहाद्वीप पर पहला गार्डन-टॉम्ब था और ताज महल का स्थापत्य प्रेरणास्रोत था। सफेद संगमरमर का केंद्रीय दोहरा गुंबद ऊँचे लाल बलुआ पत्थर के चबूतरे से उठता है।",
+    yearBuilt: "1565–1572",
+    dynasty: "Mughal Empire",
+    dynastyHi: "मुगल साम्राज्य",
+    primaryModel: "/models/humayuns_tomb.glb",
+    historicalModels: { past: "/models/humayuns_tomb.glb", ancient: "/models/humayuns_tomb.glb" },
+    era: "medieval",
+    hotspots: [
+      { name: "Central Dome", description: "The 42.5-metre double dome of white marble — the first true double dome in India — directly inspired the later dome of the Taj Mahal.", position: [0, 1.5, 0] },
+      { name: "Charbagh Garden", description: "The 12-hectare four-part garden divided by water channels is one of the finest surviving Mughal gardens in India.", position: [0, -0.5, 1.8] },
+      { name: "Barber's Tomb", description: "A smaller domed tomb in the garden, said to belong to the royal barber — a rare honour reflecting Mughal affection for trusted servants.", position: [-1.2, 0.2, 1.0] }
+    ],
+    facts: [
+      "Humayun's Tomb is considered the architectural prototype for the Taj Mahal built 80 years later",
+      "It was the first garden-tomb on the Indian subcontinent",
+      "The tomb served as a refuge for the last Mughal Emperor Bahadur Shah Zafar in 1857",
+      "Over 150 Mughal family members are buried here, earning it the nickname 'dormitory of the Mughals'"
+    ],
+    factsHi: [
+      "हुमायूँ का मकबरा ताज महल के लिए स्थापत्य प्रोटोटाइप माना जाता है",
+      "यह भारतीय उपमहाद्वीप पर पहला गार्डन-टॉम्ब था",
+      "1857 में अंतिम मुगल सम्राट बहादुर शाह ज़फ़र ने यहाँ शरण ली थी",
+      "150 से अधिक मुगल परिवार के सदस्य यहाँ दफन हैं, इसे 'मुगलों की शयनशाला' कहा जाता है"
+    ],
+    visitingHours: "Sunrise to Sunset (All days)",
+    visitingHoursHi: "सूर्योदय से सूर्यास्त तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to March is ideal — crisp winters keep the gardens green and the red sandstone glows warmly in low winter sunlight. The symmetrical Charbagh is especially beautiful at sunrise when mist lingers over the water channels.",
+    bestTimeDescHi: "अक्तूबर से मार्च आदर्श समय है — सर्दियों में बगीचे हरे-भरे रहते हैं और लाल बलुआ पत्थर सर्दी की धूप में गर्म चमक लेता है। सूर्योदय के समय धुंध के साथ चारबाग विशेष रूप से सुंदर होता है।",
+    timeline: [
+      { year: "1556", event: "Emperor Humayun dies falling from the steps of his library; his widow Bega Begum commissions the tomb", eventHi: "सम्राट हुमायूँ अपनी लाइब्रेरी की सीढ़ियों से गिरकर मर गए; उनकी विधवा बेगा बेगम ने मकबरा बनवाया" },
+      { year: "1565–1572", event: "Construction completed by Persian architect Mirak Mirza Ghiyas in the new Mughal garden-tomb style", eventHi: "फ़ारसी वास्तुकार मिराक मिर्ज़ा गियास ने नई मुगल शैली में निर्माण पूर्ण किया" },
+      { year: "1857", event: "Last Mughal Emperor Bahadur Shah Zafar takes refuge here during the Sepoy Mutiny before capture by the British", eventHi: "अंतिम मुगल सम्राट बहादुर शाह ज़फ़र ब्रिटिश द्वारा गिरफ्तारी से पहले यहाँ छुपे" },
+      { year: "1993", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹35 (Indians), ₹550 (Foreigners)",
+    entryFeeHi: "₹35 (भारतीय), ₹550 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "agra-fort",
+    name: "Agra Fort",
+    nameHi: "आगरा किला",
+    city: "Agra",
+    state: "Uttar Pradesh",
+    coordinates: [78.0218, 27.1800],
+    description: "Agra Fort is a UNESCO World Heritage site and one of the greatest Mughal fortifications in India. Built primarily by Emperor Akbar from 1565, it served as the main residence of the Mughal emperors until 1638. The fort contains several beautiful palaces, audience halls, and mosques — and from its Musamman Burj tower, the imprisoned Shah Jahan could see the Taj Mahal where his beloved Mumtaz was buried.",
+    descriptionHi: "आगरा किला एक यूनेस्को विश्व धरोहर स्थल और भारत के सबसे महान मुगल किलों में से एक है। मुख्यतः सम्राट अकबर द्वारा 1565 से निर्मित, यह 1638 तक मुगल सम्राटों का मुख्य निवास था। किले में कई सुंदर महल, दरबार हॉल और मस्जिदें हैं — और इसके मुसम्मन बुर्ज से कैद शाहजहाँ उस ताज महल को देख सकते थे जहाँ उनकी प्रिय मुमताज दफन थीं।",
+    yearBuilt: "1565–1573 (Akbar); expanded by Jahangir and Shah Jahan",
+    dynasty: "Mughal Empire",
+    dynastyHi: "मुगल साम्राज्य",
+    primaryModel: "/models/agra_fort.glb",
+    historicalModels: { past: "/models/agra_fort.glb", ancient: "/models/agra_fort.glb" },
+    era: "medieval",
+    hotspots: [
+      { name: "Musamman Burj", description: "The octagonal tower where Shah Jahan was imprisoned by his son Aurangzeb — from here he could gaze at the Taj Mahal where Mumtaz lay.", position: [1.2, 1.0, 0.5] },
+      { name: "Diwan-i-Khas", description: "The Hall of Private Audience, where the emperor received nobles — originally housing the famous Peacock Throne before it was taken to Delhi.", position: [0, 0.5, 1.0] },
+      { name: "Amar Singh Gate", description: "The main public entrance, a double-bend gateway designed so that war elephants could not gain enough momentum to break through.", position: [-1.0, 0, 1.5] }
+    ],
+    facts: [
+      "The fort's walls are 70 feet high and stretch for 2.5 km",
+      "Shah Jahan spent the last 8 years of his life imprisoned in Agra Fort by his son Aurangzeb",
+      "The fort contains over 500 buildings inside its walls",
+      "It was the most important Mughal fort and housed successive emperors for nearly 100 years"
+    ],
+    factsHi: [
+      "किले की दीवारें 70 फीट ऊँची हैं और 2.5 किमी तक फैली हैं",
+      "शाहजहाँ ने अपने बेटे औरंगजेब द्वारा आगरा किले में कैद होकर अपने जीवन के अंतिम 8 साल बिताए",
+      "किले की दीवारों के अंदर 500 से अधिक इमारतें हैं",
+      "यह सबसे महत्वपूर्ण मुगल किला था जो लगभग 100 वर्षों तक उत्तराधिकारी सम्राटों का घर था"
+    ],
+    visitingHours: "6:00 AM to 6:00 PM (Closed on Fridays for the mosque)",
+    visitingHoursHi: "सुबह 6:00 से शाम 6:00 बजे तक (मस्जिद के लिए शुक्रवार को बंद)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to March — the same window as the Taj Mahal just 2 km away. Many visitors combine both in a single Agra day trip. Winter mornings offer the clearest views of the Taj Mahal from the Musamman Burj tower.",
+    bestTimeDescHi: "अक्तूबर से मार्च — ताज महल के समान ही, जो मात्र 2 किमी दूर है। कई पर्यटक एक ही दिन में दोनों को देखते हैं। सर्दियों की सुबह मुसम्मन बुर्ज से ताज महल का सबसे स्पष्ट दृश्य मिलता है।",
+    timeline: [
+      { year: "1526", event: "Babur wins the First Battle of Panipat; Agra becomes the Mughal capital", eventHi: "बाबर ने पानीपत की पहली लड़ाई जीती; आगरा मुगल राजधानी बनी" },
+      { year: "1565", event: "Akbar demolishes the older fort and begins construction of the present red sandstone structure", eventHi: "अकबर ने पुराने किले को ध्वस्त कर लाल बलुआ पत्थर की मौजूदा संरचना का निर्माण शुरू किया" },
+      { year: "1638", event: "Shah Jahan shifts the Mughal capital to Delhi (Shahjahanabad); Agra Fort becomes secondary", eventHi: "शाहजहाँ ने मुगल राजधानी दिल्ली (शाहजहानाबाद) स्थानांतरित की" },
+      { year: "1658–1666", event: "Shah Jahan imprisoned by Aurangzeb; gazes at the Taj from Musamman Burj until his death", eventHi: "शाहजहाँ को औरंगजेब ने कैद किया; मृत्यु तक मुसम्मन बुर्ज से ताज देखते रहे" },
+      { year: "1983", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹40 (Indians), ₹600 (Foreigners)",
+    entryFeeHi: "₹40 (भारतीय), ₹600 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "brihadeeswara-temple",
+    name: "Brihadeeswara Temple",
+    nameHi: "बृहदेश्वर मंदिर",
+    city: "Thanjavur",
+    state: "Tamil Nadu",
+    coordinates: [79.1317, 10.7828],
+    description: "The Brihadeeswara Temple (Big Temple) in Thanjavur is one of the greatest masterpieces of Chola architecture. Built by Emperor Raja Raja Chola I and completed in 1010 CE, its 66-metre vimana tower remains the tallest in India. The entire structure is built from granite without mortar, and the capstone at the apex — a single piece of granite weighing 80 tonnes — was hauled up via a 6-km earthen ramp.",
+    descriptionHi: "तंजावुर का बृहदेश्वर मंदिर (बड़ा मंदिर) चोल वास्तुकला की महानतम कृतियों में से एक है। सम्राट राजराज चोल प्रथम द्वारा निर्मित और 1010 ई. में पूर्ण, इसका 66 मीटर का विमान टॉवर भारत में सबसे ऊँचा है। पूरी संरचना बिना मोर्टार के ग्रेनाइट से बनी है, और शीर्ष पर 80 टन का एकल ग्रेनाइट पत्थर 6 किमी लंबे मिट्टी के रैंप से ऊपर खींचा गया था।",
+    yearBuilt: "1003–1010 CE",
+    dynasty: "Chola Dynasty",
+    dynastyHi: "चोल वंश",
+    primaryModel: "/models/brihadeeswara_temple.glb",
+    historicalModels: { past: "/models/brihadeeswara_temple.glb", ancient: "/models/brihadeeswara_temple.glb" },
+    era: "ancient",
+    hotspots: [
+      { name: "Vimana Tower", description: "The 66-metre tower — the tallest in India at the time of construction — casts no shadow at noon on equinox days, a deliberate feat of Chola astronomical engineering.", position: [0, 1.5, 0] },
+      { name: "Nandi Mandapa", description: "The massive Nandi bull pavilion in the courtyard — carved from a single boulder 6 metres long — is one of the largest monolithic Nandi statues in India.", position: [0, 0, 1.5] },
+      { name: "Shivakami Amman Shrine", description: "The subsidiary shrine to Parvati (Shivakami) within the outer courtyard, added by later Chola rulers as a companion to the main Shiva shrine.", position: [-1.0, 0.2, 0.8] }
+    ],
+    facts: [
+      "The vimana tower casts no shadow at noon on the equinox — a deliberate Chola engineering marvel",
+      "The 80-tonne capstone at the apex was transported via a 6 km earthen ramp",
+      "The entire structure is built without mortar — held together by interlocking granite blocks",
+      "Raja Raja Chola I dedicated the temple in 1010 CE with a grand inscription recording the donation of 600 kg of gold"
+    ],
+    factsHi: [
+      "विषुव के दिन दोपहर को विमान टॉवर कोई छाया नहीं डालता — एक जानबूझकर किया गया चोल इंजीनियरिंग चमत्कार",
+      "शीर्ष पर 80 टन का पत्थर 6 किमी लंबे मिट्टी के रैंप से ले जाया गया",
+      "पूरी संरचना बिना मोर्टार के बनी है — ग्रेनाइट ब्लॉकों को परस्पर बंद करके",
+      "राजराज चोल प्रथम ने 1010 ई. में 600 किलोग्राम सोने के दान का लेख दर्ज करते हुए मंदिर समर्पित किया"
+    ],
+    visitingHours: "6:00 AM to 12:30 PM, 4:00 PM to 8:30 PM",
+    visitingHoursHi: "सुबह 6:00 से दोपहर 12:30 बजे तक, शाम 4:00 से 8:30 बजे तक",
+    bestMonths: [10, 11, 0, 1],
+    bestTimeDesc: "October to February — post-monsoon Tamil Nadu is lush and cool (25–30°C). The Brihadeeswara Festival (Karthigai Deepam) in November is spectacular, when thousands of lamps illuminate the temple complex. Avoid April–June when temperatures cross 40°C.",
+    bestTimeDescHi: "अक्तूबर से फ़रवरी — मानसून के बाद तमिलनाडु हरा-भरा और ठंडा (25–30°C) होता है। नवंबर में बृहदेश्वर महोत्सव (कार्तिगई दीपम) शानदार होता है। अप्रैल–जून से बचें जब तापमान 40°C पार करता है।",
+    timeline: [
+      { year: "985 CE", event: "Raja Raja Chola I ascends the throne and begins planning the grand temple", eventHi: "राजराज चोल प्रथम सिंहासन पर बैठे और भव्य मंदिर की योजना बनाई" },
+      { year: "1003–1010 CE", event: "Brihadeeswara Temple constructed and consecrated — the tallest structure in India at the time", eventHi: "बृहदेश्वर मंदिर बनाया और प्रतिष्ठित किया गया — उस समय भारत की सबसे ऊँची संरचना" },
+      { year: "1987", event: "UNESCO World Heritage Site designation as part of the Great Living Chola Temples", eventHi: "महान जीवित चोल मंदिरों के हिस्से के रूप में यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "Free entry",
+    entryFeeHi: "निःशुल्क प्रवेश",
+    UNESCO: true
+  },
+  {
+    id: "mahabodhi-temple",
+    name: "Mahabodhi Temple",
+    nameHi: "महाबोधि मंदिर",
+    city: "Bodh Gaya",
+    state: "Bihar",
+    coordinates: [84.9912, 24.6961],
+    description: "The Mahabodhi Temple in Bodh Gaya marks the exact spot where Siddhartha Gautama attained enlightenment under the Bodhi tree and became the Buddha, around 500 BCE. One of the holiest Buddhist sites in the world, the current temple dates to the 5th–6th century CE. The Bodhi Tree in the courtyard is a direct descendant of the original tree under which the Buddha sat.",
+    descriptionHi: "बोध गया का महाबोधि मंदिर उस सटीक स्थान को चिह्नित करता है जहाँ सिद्धार्थ गौतम ने लगभग 500 ईसा पूर्व बोधि वृक्ष के नीचे ज्ञान प्राप्त किया और बुद्ध बने। दुनिया के सबसे पवित्र बौद्ध स्थलों में से एक, मौजूदा मंदिर 5वीं–6वीं शताब्दी ई. का है। प्रांगण में बोधि वृक्ष उसी मूल वृक्ष का प्रत्यक्ष वंशज है जिसके नीचे बुद्ध बैठे थे।",
+    yearBuilt: "5th–6th century CE (original shrine ~250 BCE by Ashoka)",
+    dynasty: "Gupta Era (temple); Mauryan (original shrine)",
+    dynastyHi: "गुप्त काल (मंदिर); मौर्य (मूल मंदिर)",
+    primaryModel: "/models/mahabodhi_temple.glb",
+    historicalModels: { past: "/models/mahabodhi_temple.glb", ancient: "/models/mahabodhi_temple.glb" },
+    era: "ancient",
+    hotspots: [
+      { name: "Bodhi Tree", description: "A Ficus religiosa tree — a direct descendant of the original tree under which the Buddha sat for 49 days in meditation before attaining enlightenment.", position: [0.8, 0.5, 0.8] },
+      { name: "Vajrasana (Diamond Throne)", description: "The stone slab placed by Emperor Ashoka marking the exact spot where the Buddha sat during enlightenment — considered the navel of the earth in Buddhist cosmology.", position: [0, 0, 0.5] },
+      { name: "Main Spire", description: "The 55-metre tapering shikhara tower covered with carved niches of seated Buddha figures, one of the finest examples of Gupta-era brick temple architecture.", position: [0, 1.5, 0] }
+    ],
+    facts: [
+      "Bodh Gaya is the most holy of the four main Buddhist pilgrimage sites in the world",
+      "The original Bodhi tree was destroyed and the current tree is a 4th-generation descendant",
+      "Emperor Ashoka visited Bodh Gaya around 260 BCE and built the first memorial shrine",
+      "Pilgrims from over 100 countries visit Bodh Gaya every year"
+    ],
+    factsHi: [
+      "बोध गया दुनिया के चार मुख्य बौद्ध तीर्थ स्थलों में सबसे पवित्र है",
+      "मूल बोधि वृक्ष नष्ट हो गया था और वर्तमान वृक्ष चौथी पीढ़ी का वंशज है",
+      "सम्राट अशोक ने लगभग 260 ईसा पूर्व बोध गया का दौरा किया और पहला स्मारक मंदिर बनाया",
+      "100 से अधिक देशों के तीर्थयात्री हर साल बोध गया आते हैं"
+    ],
+    visitingHours: "5:00 AM to 9:00 PM (All days)",
+    visitingHoursHi: "सुबह 5:00 से रात 9:00 बजे तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to March — Bihar winters are mild and pleasant (15–25°C). The Buddha Purnima festival in April/May draws massive pilgrim gatherings. Avoid June–September when monsoon rains can be heavy.",
+    bestTimeDescHi: "अक्तूबर से मार्च — बिहार की सर्दियाँ हल्की और सुखद (15–25°C) होती हैं। अप्रैल/मई में बुद्ध पूर्णिमा उत्सव में बड़ी तीर्थयात्री भीड़ होती है।",
+    timeline: [
+      { year: "~500 BCE", event: "Siddhartha Gautama attains enlightenment under the Bodhi tree and becomes the Buddha", eventHi: "सिद्धार्थ गौतम बोधि वृक्ष के नीचे ज्ञान प्राप्त कर बुद्ध बने" },
+      { year: "~260 BCE", event: "Emperor Ashoka visits Bodh Gaya and builds the first Vajrasana shrine", eventHi: "सम्राट अशोक ने बोध गया का दौरा किया और पहला वज्रासन मंदिर बनाया" },
+      { year: "5th–6th century CE", event: "Current Mahabodhi Temple structure built during the Gupta period", eventHi: "गुप्त काल में मौजूदा महाबोधि मंदिर संरचना बनाई गई" },
+      { year: "2002", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "Free entry",
+    entryFeeHi: "निःशुल्क प्रवेश",
+    UNESCO: true
+  },
+  {
+    id: "elephanta-caves",
+    name: "Elephanta Caves",
+    nameHi: "एलिफेंटा गुफाएँ",
+    city: "Mumbai",
+    state: "Maharashtra",
+    coordinates: [72.9314, 18.9633],
+    description: "The Elephanta Caves are a UNESCO World Heritage site on Elephanta Island in Mumbai Harbour. Carved into basalt rock between the 5th and 8th centuries CE, the caves contain extraordinary Hindu rock-cut sculptures — most notably the Trimurti, a magnificent 6-metre three-headed bust of Shiva representing his roles as creator, preserver, and destroyer, considered one of the finest works of Indian art.",
+    descriptionHi: "एलिफेंटा गुफाएँ मुंबई हार्बर में एलिफेंटा द्वीप पर स्थित एक यूनेस्को विश्व धरोहर स्थल हैं। 5वीं से 8वीं शताब्दी ई. के बीच बेसाल्ट चट्टान में उकेरी गई इन गुफाओं में असाधारण हिंदू रॉक-कट मूर्तिकलाएँ हैं — विशेष रूप से त्रिमूर्ति, शिव का एक शानदार 6 मीटर तीन सिर वाला वक्षप्रतिमा।",
+    yearBuilt: "5th–8th century CE",
+    dynasty: "Kalachuri / early Chalukya period",
+    dynastyHi: "कलचुरी / प्रारंभिक चालुक्य काल",
+    primaryModel: "/models/elephanta_caves.glb",
+    historicalModels: { past: "/models/elephanta_caves.glb", ancient: "/models/elephanta_caves.glb" },
+    era: "ancient",
+    hotspots: [
+      { name: "Trimurti", description: "The iconic 6-metre three-headed bust of Shiva — his benevolent face at centre, fierce Bhairava on the left, and serene Vamadeva on the right — considered one of the greatest sculptures ever created.", position: [0, 0.8, 0.5] },
+      { name: "Shiva-Parvati Panel", description: "A huge relief depicting Shiva's marriage to Parvati with the entire divine assembly present — one of the most narrative and detailed carvings in the caves.", position: [1.0, 0.5, 0.8] },
+      { name: "Main Cave Entrance", description: "The rock-cut portico with two massive pillared mandapas — each column with a square base, pot-shaped shaft, and cushion capital — creates a forest-like interior.", position: [0, 0, 1.5] }
+    ],
+    facts: [
+      "The famous Trimurti sculpture is 6 metres tall and took decades to carve from living rock",
+      "The island was named 'Elephanta' by Portuguese colonisers after a large stone elephant they found there",
+      "There are seven cave temples in total on the island — five Hindu and two Buddhist",
+      "The island can only be reached by a 1-hour ferry from the Gateway of India"
+    ],
+    factsHi: [
+      "प्रसिद्ध त्रिमूर्ति मूर्तिकला 6 मीटर ऊँची है और जीवित चट्टान से तराशने में दशकों लगे",
+      "पुर्तगाली उपनिवेशकों ने वहाँ मिले एक बड़े पत्थर के हाथी के नाम पर द्वीप का नाम 'एलिफेंटा' रखा",
+      "द्वीप पर कुल सात गुफा मंदिर हैं — पाँच हिंदू और दो बौद्ध",
+      "गेटवे ऑफ इंडिया से 1 घंटे की फेरी द्वारा ही द्वीप तक पहुँचा जा सकता है"
+    ],
+    visitingHours: "9:00 AM to 5:30 PM (Closed on Mondays)",
+    visitingHoursHi: "सुबह 9:00 से शाम 5:30 बजे तक (सोमवार को बंद)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to February — Mumbai winters are mild and breezy (20–30°C), and the ferry ride across the harbour is pleasant. Avoid the monsoon (June–September) when ferry services are often suspended due to rough seas.",
+    bestTimeDescHi: "अक्तूबर से फ़रवरी — मुंबई की सर्दियाँ हल्की और हवादार (20–30°C) होती हैं और हार्बर की नाव यात्रा सुखद होती है। मानसून (जून–सितंबर) से बचें जब समुद्री तूफान के कारण फेरी सेवाएँ अक्सर बंद रहती हैं।",
+    timeline: [
+      { year: "5th–6th century CE", event: "Main cave temples carved during the Kalachuri period; Trimurti sculpture created", eventHi: "कलचुरी काल में मुख्य गुफा मंदिर बनाए गए; त्रिमूर्ति मूर्तिकला निर्मित" },
+      { year: "1534", event: "Portuguese arrive and use the cave sculptures for target practice, damaging many reliefs", eventHi: "पुर्तगाली आए और गुफा मूर्तियों का निशानेबाज़ी अभ्यास के लिए उपयोग किया, कई राहतें क्षतिग्रस्त हुईं" },
+      { year: "1987", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹40 (Indians), ₹600 (Foreigners) + ferry charges",
+    entryFeeHi: "₹40 (भारतीय), ₹600 (विदेशी) + फेरी शुल्क",
+    UNESCO: true
+  },
+  {
+    id: "rani-ki-vav",
+    name: "Rani ki Vav",
+    nameHi: "रानी की वाव",
+    city: "Patan",
+    state: "Gujarat",
+    coordinates: [72.1022, 23.8586],
+    description: "Rani ki Vav (Queen's Stepwell) in Patan, Gujarat is one of the most extraordinary examples of subterranean architecture and sculpture in the world. Built in the 11th century CE by Queen Udayamati in memory of her husband King Bhimdev I of the Solanki dynasty, this inverted-temple stepwell descends seven storeys underground and is decorated with over 500 major sculptures and more than 1,000 minor ones.",
+    descriptionHi: "पाटण, गुजरात में रानी की वाव (रानी का बावड़ी) दुनिया में भूमिगत वास्तुकला और मूर्तिकला के सबसे असाधारण उदाहरणों में से एक है। 11वीं शताब्दी ई. में रानी उदयामती द्वारा सोलंकी राजवंश के अपने पति राजा भीमदेव प्रथम की स्मृति में निर्मित, यह उलटे मंदिर की बावड़ी सात मंजिल भूमिगत उतरती है।",
+    yearBuilt: "1063 CE (Solanki dynasty)",
+    dynasty: "Solanki Dynasty",
+    dynastyHi: "सोलंकी राजवंश",
+    primaryModel: "/models/rani_ki_vav.glb",
+    historicalModels: { past: "/models/rani_ki_vav.glb", ancient: "/models/rani_ki_vav.glb" },
+    era: "medieval",
+    hotspots: [
+      { name: "Vishnu Panels", description: "The walls are lined with over 500 sculptures of Vishnu in his ten avatars (Dashavatar) — the most comprehensive Dashavatar sculptural programme in India.", position: [0, 0.5, 0.8] },
+      { name: "Seven Tiers", description: "The stepwell descends through seven elaborately carved tiers — each level a different architectural style — to reach the water at the bottom.", position: [0, -0.8, 0] },
+      { name: "Apsara Sculptures", description: "Hundreds of graceful celestial maiden (apsara) figures are carved in niches — each unique in pose and adornment, representing the highest point of Solanki decorative art.", position: [1.0, 0.3, 0.6] }
+    ],
+    facts: [
+      "Rani ki Vav contains over 500 major sculptures and more than 1,000 minor ones",
+      "The stepwell was silted over and forgotten for 700 years before being excavated by the Archaeological Survey of India",
+      "The Rani ki Vav image appears on the reverse of the Indian ₹100 note",
+      "It is the only stepwell in India that has been awarded UNESCO World Heritage status"
+    ],
+    factsHi: [
+      "रानी की वाव में 500 से अधिक प्रमुख मूर्तियाँ और 1,000 से अधिक छोटी मूर्तियाँ हैं",
+      "बावड़ी 700 वर्षों तक गाद से ढकी और भुला दी गई थी, फिर भारतीय पुरातत्व सर्वेक्षण ने इसे खोदा",
+      "रानी की वाव की छवि भारतीय ₹100 नोट के पिछले भाग पर है",
+      "यह भारत की एकमात्र बावड़ी है जिसे यूनेस्को विश्व धरोहर का दर्जा मिला है"
+    ],
+    visitingHours: "8:00 AM to 6:00 PM (All days)",
+    visitingHoursHi: "सुबह 8:00 से शाम 6:00 बजे तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to February — Gujarat winters are comfortable (15–25°C) and the golden sandstone sculptures are beautifully lit in the low winter sun. Avoid May–June when temperatures in Patan can reach 45°C.",
+    bestTimeDescHi: "अक्तूबर से फ़रवरी — गुजरात की सर्दियाँ आरामदायक (15–25°C) होती हैं और सोने जैसे बलुआ पत्थर की मूर्तियाँ सर्दियों की धूप में खूबसूरती से जगमगाती हैं।",
+    timeline: [
+      { year: "1063 CE", event: "Queen Udayamati builds Rani ki Vav in memory of her husband King Bhimdev I of the Solanki dynasty", eventHi: "रानी उदयामती ने अपने पति सोलंकी राजा भीमदेव प्रथम की स्मृति में रानी की वाव बनाई" },
+      { year: "~1300 CE", event: "The stepwell is silted over by floods of the Saraswati river and buried for centuries", eventHi: "सरस्वती नदी की बाढ़ से बावड़ी गाद से ढक गई और सदियों तक दबी रही" },
+      { year: "1980s", event: "Archaeological Survey of India excavates and restores the stepwell", eventHi: "भारतीय पुरातत्व सर्वेक्षण ने बावड़ी की खुदाई और जीर्णोद्धार किया" },
+      { year: "2014", event: "UNESCO World Heritage Site designation; image added to ₹100 note", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित; ₹100 नोट पर चित्र जोड़ा गया" }
+    ],
+    entryFee: "₹25 (Indians), ₹300 (Foreigners)",
+    entryFeeHi: "₹25 (भारतीय), ₹300 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "jantar-mantar",
+    name: "Jantar Mantar",
+    nameHi: "जंतर मंतर",
+    city: "Jaipur",
+    state: "Rajasthan",
+    coordinates: [75.8245, 26.9247],
+    description: "Jantar Mantar in Jaipur is a collection of 19 astronomical instruments built by the Rajput king Maharaja Jai Singh II between 1724 and 1735. The largest instrument — the Samrat Yantra — is a sundial 27 metres tall that can measure time to within 2 seconds of accuracy. This UNESCO World Heritage site represents the last great observatory of the classical astronomical tradition.",
+    descriptionHi: "जयपुर का जंतर मंतर राजपूत राजा महाराजा जय सिंह द्वितीय द्वारा 1724 से 1735 के बीच बनाए गए 19 खगोलीय यंत्रों का संग्रह है। सबसे बड़ा यंत्र — सम्राट यंत्र — 27 मीटर ऊँची धूप घड़ी है जो 2 सेकंड की सटीकता के साथ समय माप सकती है।",
+    yearBuilt: "1724–1735",
+    dynasty: "Rajput (Kachwaha)",
+    dynastyHi: "राजपूत (कछवाहा)",
+    primaryModel: "/models/jantar_mantar.glb",
+    historicalModels: { past: "/models/jantar_mantar.glb", ancient: "/models/jantar_mantar.glb" },
+    era: "modern",
+    hotspots: [
+      { name: "Samrat Yantra", description: "The world's largest sundial — a 27-metre triangular gnomon whose shadow moves at 1 mm per second, allowing time measurement accurate to 2 seconds.", position: [0, 1.2, 0] },
+      { name: "Jai Prakash Yantra", description: "Two hemispherical marble bowls sunk into the ground, with a web of cross-wires inside — used to observe the sun's position and verify the other instruments.", position: [0.8, -0.3, 0.8] },
+      { name: "Ram Yantra", description: "Two large open cylindrical structures with a vertical rod at the centre — used to measure the altitude and azimuth of celestial bodies.", position: [-0.8, 0, 1.0] }
+    ],
+    facts: [
+      "The Samrat Yantra is the world's largest sundial — accurate to within 2 seconds",
+      "Maharaja Jai Singh II built five Jantar Mantar observatories across India — in Delhi, Jaipur, Ujjain, Mathura, and Varanasi",
+      "All instruments are built from local pink sandstone, lime plaster, and marble — no metal or glass",
+      "The observatory still produces accurate astronomical measurements today"
+    ],
+    factsHi: [
+      "सम्राट यंत्र दुनिया की सबसे बड़ी धूप घड़ी है — 2 सेकंड की सटीकता के साथ",
+      "महाराजा जय सिंह द्वितीय ने भारत भर में पाँच जंतर मंतर वेधशालाएँ बनाईं — दिल्ली, जयपुर, उज्जैन, मथुरा और वाराणसी में",
+      "सभी यंत्र स्थानीय गुलाबी बलुआ पत्थर, चूने के प्लास्टर और संगमरमर से बने हैं — कोई धातु या काँच नहीं",
+      "वेधशाला आज भी सटीक खगोलीय माप देती है"
+    ],
+    visitingHours: "9:00 AM to 4:30 PM (All days)",
+    visitingHoursHi: "सुबह 9:00 से शाम 4:30 बजे तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to March — Jaipur winters are clear and sunny, perfect for watching the sundials in action. Visit at solar noon to see the Samrat Yantra at maximum precision. Summer can be brutal at 45°C+.",
+    bestTimeDescHi: "अक्तूबर से मार्च — जयपुर की सर्दियाँ साफ और धूपदार होती हैं, धूप घड़ियों को काम करते देखने के लिए आदर्श। सौर दोपहर पर जाएँ।",
+    timeline: [
+      { year: "1699", event: "Maharaja Jai Singh II ascends the throne of Amer at age 13 and develops deep interest in astronomy", eventHi: "महाराजा जय सिंह द्वितीय 13 वर्ष की आयु में आमेर के सिंहासन पर बैठे और खगोल विज्ञान में गहरी रुचि विकसित की" },
+      { year: "1724–1735", event: "Jantar Mantar observatory built in Jaipur with 19 precision masonry instruments", eventHi: "जयपुर में 19 सटीक यंत्रों के साथ जंतर मंतर वेधशाला बनाई गई" },
+      { year: "2010", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹50 (Indians), ₹200 (Foreigners)",
+    entryFeeHi: "₹50 (भारतीय), ₹200 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "nalanda-ruins",
+    name: "Nalanda Ruins",
+    nameHi: "नालंदा",
+    city: "Nalanda",
+    state: "Bihar",
+    coordinates: [85.4437, 25.1358],
+    description: "Nalanda was the world's first residential university, flourishing from the 5th to 12th century CE in Bihar. At its peak, Nalanda accommodated 10,000 students and 2,000 teachers from across Asia, offering courses in logic, grammar, medicine, and Buddhist philosophy. The university was destroyed by the forces of Bakhtiyar Khilji around 1193 CE; the ruins that remain are a UNESCO World Heritage site.",
+    descriptionHi: "नालंदा दुनिया का पहला आवासीय विश्वविद्यालय था, जो बिहार में 5वीं से 12वीं शताब्दी ई. तक फला-फूला। अपने चरम पर नालंदा में एशिया भर से 10,000 छात्र और 2,000 शिक्षक थे। विश्वविद्यालय को लगभग 1193 ई. में बख्तियार खिलजी की सेना ने नष्ट कर दिया था।",
+    yearBuilt: "5th century CE (founded); destroyed ~1193 CE",
+    dynasty: "Gupta to Pala dynasty patronage",
+    dynastyHi: "गुप्त से पाल वंश संरक्षण",
+    primaryModel: "/models/nalanda_ruins.glb",
+    historicalModels: { past: "/models/nalanda_ruins.glb", ancient: "/models/nalanda_ruins.glb" },
+    era: "ancient",
+    hotspots: [
+      { name: "Stupa 3 (Sariputta Stupa)", description: "The largest excavated stupa at Nalanda — a multi-tiered brick tower once holding relics of Sariputta, one of the Buddha's chief disciples.", position: [0, 1.0, 0] },
+      { name: "Monastery 1", description: "The largest of the excavated monasteries — a rectangular quadrangle with rows of small monk cells on all four sides, revealing how thousands of students lived and studied.", position: [-0.8, 0, 1.0] },
+      { name: "Temple Site 12", description: "One of the main teaching temples, with layers of successive construction visible — each Gupta or Pala king added a new outer layer over the previous structure.", position: [1.0, 0.5, 0.5] }
+    ],
+    facts: [
+      "At its peak, Nalanda had a library of 9 million manuscripts spread across three buildings",
+      "The university library burned for three months when set alight by Bakhtiyar Khilji's forces",
+      "Students came from China, Korea, Japan, Tibet, Mongolia, Sri Lanka, and Southeast Asia",
+      "Chinese traveller Xuanzang spent 5 years at Nalanda in the 7th century CE and left detailed accounts"
+    ],
+    factsHi: [
+      "अपने चरम पर नालंदा में तीन इमारतों में फैले 90 लाख पांडुलिपियों का पुस्तकालय था",
+      "बख्तियार खिलजी की सेना द्वारा आग लगाने पर विश्वविद्यालय का पुस्तकालय तीन महीने तक जलता रहा",
+      "चीन, कोरिया, जापान, तिब्बत, मंगोलिया, श्रीलंका और दक्षिण-पूर्व एशिया से छात्र आते थे",
+      "चीनी यात्री ह्वेनसांग ने 7वीं शताब्दी ई. में नालंदा में 5 साल बिताए"
+    ],
+    visitingHours: "Sunrise to Sunset (All days)",
+    visitingHoursHi: "सूर्योदय से सूर्यास्त तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to February — Bihar winters are pleasant and ideal for archaeological exploration. The Buddha Jayanti season (April/May) sees increased pilgrimage activity at nearby Bodh Gaya, making a combined trip worthwhile.",
+    bestTimeDescHi: "अक्तूबर से फ़रवरी — बिहार की सर्दियाँ पुरातात्विक अन्वेषण के लिए सुखद और आदर्श हैं।",
+    timeline: [
+      { year: "~450 CE", event: "Nalanda University founded under Gupta Emperor Kumaragupta I's patronage", eventHi: "गुप्त सम्राट कुमारगुप्त प्रथम के संरक्षण में नालंदा विश्वविद्यालय की स्थापना" },
+      { year: "629–645 CE", event: "Chinese scholar Xuanzang studies at Nalanda and documents its 10,000 students and vast library", eventHi: "चीनी विद्वान ह्वेनसांग ने नालंदा में अध्ययन किया और इसके 10,000 छात्रों और विशाल पुस्तकालय का दस्तावेज़ीकरण किया" },
+      { year: "~1193 CE", event: "Nalanda sacked and burned by Bakhtiyar Khilji's forces; its library burns for months", eventHi: "बख्तियार खिलजी की सेना ने नालंदा को लूटा और जलाया; पुस्तकालय महीनों तक जलता रहा" },
+      { year: "2016", event: "UNESCO World Heritage Site designation", eventHi: "यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹15 (Indians), ₹200 (Foreigners)",
+    entryFeeHi: "₹15 (भारतीय), ₹200 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "chittor-fort",
+    name: "Chittor Fort",
+    nameHi: "चित्तौड़गढ़ किला",
+    city: "Chittorgarh",
+    state: "Rajasthan",
+    coordinates: [74.6444, 24.8887],
+    description: "Chittorgarh Fort is the largest fort in India, sprawling across a 180-metre-high mesa plateau in Rajasthan. It has been the scene of three legendary sieges and three Jauhar (mass self-immolation) by Rajput women who chose death over dishonour. The fort contains the iconic Vijay Stambha (Tower of Victory), the Kirti Stambha, numerous palaces and temples, and is a UNESCO World Heritage site.",
+    descriptionHi: "चित्तौड़गढ़ किला राजस्थान में 180 मीटर ऊँचे पठार पर भारत का सबसे बड़ा किला है। यह तीन महान घेराबंदियों और तीन जौहर (सामूहिक आत्मदाह) का स्थल रहा है जब राजपूत महिलाओं ने अपमान के बजाय मृत्यु को चुना।",
+    yearBuilt: "7th century CE (founded); 15th–16th century (peak)",
+    dynasty: "Mewar Rajput (Sisodia clan)",
+    dynastyHi: "मेवाड़ राजपूत (सिसोदिया वंश)",
+    primaryModel: "/models/chittor_fort.glb",
+    historicalModels: { past: "/models/chittor_fort.glb", ancient: "/models/chittor_fort.glb" },
+    era: "medieval",
+    hotspots: [
+      { name: "Vijay Stambha", description: "The 37-metre Tower of Victory built by Rana Kumbha in 1448 to commemorate his victory over Mahmud Khilji — nine storeys of intricately carved Hindu iconography.", position: [0, 1.5, 0.5] },
+      { name: "Rani Padmini's Palace", description: "The palace of the legendary Rajput queen Rani Padmavati, whose beauty is said to have sparked Alauddin Khilji's 1303 siege — the first great Jauhar took place here.", position: [-0.8, 0.3, 1.0] },
+      { name: "Kirti Stambha", description: "A 22-metre Jain tower of fame from the 12th century, covered with Jain Tirthankaras — predating the Vijay Stambha and equally ornate.", position: [1.0, 0.8, 0.5] }
+    ],
+    facts: [
+      "Chittorgarh Fort is the largest fort in India at 700 acres",
+      "The fort has been sacked three times — by Alauddin Khilji (1303), Bahadur Shah of Gujarat (1535), and Akbar (1568)",
+      "Three Jauhars (mass self-immolation) took place here, each time to preserve Rajput honour",
+      "The Vijay Stambha tower is inscribed with a virtual encyclopaedia of Hindu iconography"
+    ],
+    factsHi: [
+      "चित्तौड़गढ़ किला 700 एकड़ में भारत का सबसे बड़ा किला है",
+      "किले पर तीन बार आक्रमण हुआ — अलाउद्दीन खिलजी (1303), गुजरात के बहादुर शाह (1535) और अकबर (1568) द्वारा",
+      "राजपूत सम्मान बचाने के लिए यहाँ तीन जौहर (सामूहिक आत्मदाह) हुए",
+      "विजय स्तंभ हिंदू प्रतीकात्मकता का एक आभासी विश्वकोश है"
+    ],
+    visitingHours: "9:45 AM to 5:00 PM (All days)",
+    visitingHoursHi: "सुबह 9:45 से शाम 5:00 बजे तक (सभी दिन)",
+    bestMonths: [10, 11, 0, 1],
+    bestTimeDesc: "October to February — Rajasthan winters are clear and dry (10–25°C) and the fort's beige sandstone glows in the low winter sun. The Jauhar Mela (March) is an annual cultural festival commemorating the Rajput sacrifices.",
+    bestTimeDescHi: "अक्तूबर से फ़रवरी — राजस्थान की सर्दियाँ साफ और सूखी (10–25°C) होती हैं। मार्च में जौहर मेला राजपूत बलिदानों को स्मरण करता वार्षिक सांस्कृतिक उत्सव है।",
+    timeline: [
+      { year: "7th century CE", event: "Fort founded by Chitrangada Mori of the Maurya clan on the mesa plateau", eventHi: "मौर्य वंश के चित्रांगद मोरी ने पठार पर किले की स्थापना की" },
+      { year: "1303", event: "Alauddin Khilji besieges the fort; first great Jauhar led by Rani Padmavati", eventHi: "अलाउद्दीन खिलजी ने किले की घेराबंदी की; रानी पद्मावती के नेतृत्व में पहला महान जौहर" },
+      { year: "1568", event: "Akbar captures the fort after a great siege; third and final Jauhar", eventHi: "अकबर ने महान घेराबंदी के बाद किले पर कब्ज़ा किया; तीसरा और अंतिम जौहर" },
+      { year: "2013", event: "UNESCO World Heritage Site as part of Hill Forts of Rajasthan", eventHi: "राजस्थान के पर्वतीय किलों के हिस्से के रूप में यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹40 (Indians), ₹600 (Foreigners)",
+    entryFeeHi: "₹40 (भारतीय), ₹600 (विदेशी)",
+    UNESCO: true
+  },
+  {
+    id: "kailasa-temple",
+    name: "Kailasa Temple, Ellora",
+    nameHi: "कैलाश मंदिर, एलोरा",
+    city: "Aurangabad",
+    state: "Maharashtra",
+    coordinates: [75.1797, 20.0260],
+    description: "The Kailasa Temple (Cave 16) at Ellora is the world's largest monolithic rock-cut structure. Built by the Rashtrakuta king Krishna I in the 8th century CE, the entire temple was carved top-down from a single basalt cliff face — an estimated 400,000 tonnes of rock removed by hammer and chisel. Dedicated to Shiva as Mount Kailash, it features a 32-metre-tall main shikhara and elaborate sculptural galleries.",
+    descriptionHi: "एलोरा का कैलाश मंदिर (गुफा 16) दुनिया की सबसे बड़ी अखंड रॉक-कट संरचना है। 8वीं शताब्दी ई. में राष्ट्रकूट राजा कृष्ण प्रथम द्वारा निर्मित, पूरा मंदिर एक ही बेसाल्ट चट्टान के सामने से ऊपर से नीचे तक तराशा गया था — हथौड़े और छेनी से लगभग 4 लाख टन चट्टान निकाली गई।",
+    yearBuilt: "756–773 CE",
+    dynasty: "Rashtrakuta Dynasty",
+    dynastyHi: "राष्ट्रकूट वंश",
+    primaryModel: "/models/kailasa_temple.glb",
+    historicalModels: { past: "/models/kailasa_temple.glb", ancient: "/models/kailasa_temple.glb" },
+    era: "ancient",
+    hotspots: [
+      { name: "Main Shikhara", description: "The 32-metre Dravidian shikhara tower carved from the living rock — it stands free from the cliff entirely, defying any modern understanding of how it was engineered.", position: [0, 1.5, 0] },
+      { name: "Ravana Shaking Kailash", description: "A massive sculpted panel showing the demon king Ravana lifting Mount Kailash — Shiva calmly pins it down with his toe. One of the greatest narrative sculptures in India.", position: [0.8, 0, 0.8] },
+      { name: "Elephants at the Base", description: "The entire lower plinth of the temple is supported by life-sized carved stone elephants — appearing to carry the entire mountain on their backs.", position: [0, -0.5, 1.0] }
+    ],
+    facts: [
+      "Kailasa Temple is the world's largest monolithic rock excavation — carved from a single cliff",
+      "An estimated 400,000 tonnes of rock was removed to create it using only hand tools",
+      "Construction was completed in approximately 18 years under a single king",
+      "The temple was originally painted brilliant white to resemble snow-capped Mount Kailash"
+    ],
+    factsHi: [
+      "कैलाश मंदिर दुनिया का सबसे बड़ा अखंड रॉक उत्खनन है — एकल चट्टान से तराशा गया",
+      "इसे बनाने के लिए केवल हाथ के औज़ारों से अनुमानित 4 लाख टन चट्टान निकाली गई",
+      "एक ही राजा के शासनकाल में लगभग 18 वर्षों में निर्माण पूर्ण हुआ",
+      "मंदिर मूल रूप से बर्फ से ढके कैलाश पर्वत जैसा दिखने के लिए चमकीले सफेद रंग में रंगा गया था"
+    ],
+    visitingHours: "9:00 AM to 5:30 PM (Closed on Tuesdays)",
+    visitingHoursHi: "सुबह 9:00 से शाम 5:30 बजे तक (मंगलवार को बंद)",
+    bestMonths: [10, 11, 0, 1, 2],
+    bestTimeDesc: "October to March — Maharashtra winters are cool and dry (15–28°C), ideal for exploring the rock-cut complex. The caves are often combined with Ajanta Caves in a 2-day excursion from Aurangabad. Avoid monsoon months when access roads can flood.",
+    bestTimeDescHi: "अक्तूबर से मार्च — महाराष्ट्र की सर्दियाँ ठंडी और सूखी (15–28°C) होती हैं। गुफाओं को अक्सर औरंगाबाद से 2 दिन की यात्रा में अजंता गुफाओं के साथ जोड़ा जाता है।",
+    timeline: [
+      { year: "756 CE", event: "Rashtrakuta king Krishna I commissions the Kailasa Temple carved from a single cliff face", eventHi: "राष्ट्रकूट राजा कृष्ण प्रथम ने एकल चट्टान से तराशे जाने वाले कैलाश मंदिर का निर्माण शुरू करवाया" },
+      { year: "773 CE", event: "Temple completed in approximately 18 years; originally painted brilliant white", eventHi: "लगभग 18 वर्षों में मंदिर पूर्ण हुआ; मूल रूप से चमकीले सफेद रंग में रंगा गया" },
+      { year: "1983", event: "Ellora Caves (including Kailasa Temple) designated UNESCO World Heritage Site", eventHi: "एलोरा गुफाएँ (कैलाश मंदिर सहित) यूनेस्को विश्व धरोहर स्थल घोषित" }
+    ],
+    entryFee: "₹40 (Indians), ₹600 (Foreigners)",
+    entryFeeHi: "₹40 (भारतीय), ₹600 (विदेशी)",
+    UNESCO: true
+  },
 ];

@@ -14,14 +14,14 @@ export const REGIONS: PassportRegion[] = [
     id: "north",
     label: "North India",
     emoji: "🏔️",
-    monumentIds: ["taj-mahal", "qutub-minar", "red-fort", "hawa-mahal", "golden-temple", "fatehpur-sikri", "amber-fort"],
+    monumentIds: ["taj-mahal", "qutub-minar", "red-fort", "hawa-mahal", "golden-temple", "fatehpur-sikri", "amber-fort", "humayuns-tomb", "agra-fort", "jantar-mantar", "chittor-fort"],
     badgeColor: "from-blue-500 to-indigo-600",
   },
   {
     id: "south-deccan",
     label: "South & Deccan",
     emoji: "🌴",
-    monumentIds: ["hampi", "gol-gumbaz", "charminar", "ajanta-ellora", "mysore-palace", "meenakshi-temple", "mahabalipuram"],
+    monumentIds: ["hampi", "gol-gumbaz", "charminar", "ajanta-ellora", "mysore-palace", "meenakshi-temple", "mahabalipuram", "brihadeeswara-temple", "elephanta-caves", "kailasa-temple"],
     badgeColor: "from-green-500 to-emerald-600",
   },
   {
@@ -35,14 +35,14 @@ export const REGIONS: PassportRegion[] = [
     id: "east",
     label: "East India",
     emoji: "🌅",
-    monumentIds: ["konark-sun-temple", "victoria-memorial"],
+    monumentIds: ["konark-sun-temple", "victoria-memorial", "mahabodhi-temple", "nalanda-ruins"],
     badgeColor: "from-orange-500 to-amber-600",
   },
   {
     id: "west",
     label: "West India",
     emoji: "🌊",
-    monumentIds: ["gateway-of-india", "lotus-temple"],
+    monumentIds: ["gateway-of-india", "lotus-temple", "rani-ki-vav"],
     badgeColor: "from-purple-500 to-pink-600",
   },
 ];
@@ -68,6 +68,16 @@ export const MONUMENT_NAMES: Record<string, string> = {
   "victoria-memorial": "Victoria Memorial",
   "gateway-of-india": "Gateway of India",
   "lotus-temple": "Lotus Temple",
+  "rani-ki-vav": "Rani ki Vav",
+  "humayuns-tomb": "Humayun's Tomb",
+  "agra-fort": "Agra Fort",
+  "brihadeeswara-temple": "Brihadeeswara",
+  "mahabodhi-temple": "Mahabodhi Temple",
+  "elephanta-caves": "Elephanta Caves",
+  "jantar-mantar": "Jantar Mantar",
+  "nalanda-ruins": "Nalanda",
+  "chittor-fort": "Chittor Fort",
+  "kailasa-temple": "Kailasa Temple",
 };
 
 interface PassportStore {
