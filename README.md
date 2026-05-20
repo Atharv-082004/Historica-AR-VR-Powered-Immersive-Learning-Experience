@@ -88,3 +88,4 @@ shared/
 - If UI shows stale behavior after code changes, hard refresh the browser.
 - If port `5000` is busy, stop the running process and restart `npm run dev`.
 
+# Historica
